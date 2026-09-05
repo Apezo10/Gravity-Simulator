@@ -1,0 +1,14 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/System/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Main/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Window/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Graphics/cmake_install.cmake",
+		"C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/freetype-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

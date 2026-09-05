@@ -1,0 +1,55 @@
+{
+	"abstract" : true,
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"find_package"
+		],
+		"files" : 
+		[
+			"C:/Program Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake",
+			"build-ninja/_deps/sfml-src/src/SFML/System/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 69,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 292,
+				"parent" : 2
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 11
+	},
+	"id" : "Threads::Threads::@8cb1db2982443611e568",
+	"imported" : true,
+	"local" : true,
+	"name" : "Threads::Threads",
+	"paths" : 
+	{
+		"build" : "_deps/sfml-build/src/SFML/System",
+		"source" : "build-ninja/_deps/sfml-src/src/SFML/System"
+	},
+	"sources" : [],
+	"type" : "INTERFACE_LIBRARY"
+}

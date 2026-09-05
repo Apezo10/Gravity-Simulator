@@ -1,0 +1,678 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "_deps/sfml-build/lib/libsfml-system-s-d.a"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"sfml_add_library",
+			"install",
+			"target_link_libraries",
+			"target_compile_options",
+			"set_target_warnings",
+			"target_compile_definitions",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"build-ninja/_deps/sfml-src/cmake/Macros.cmake",
+			"build-ninja/_deps/sfml-src/src/SFML/System/CMakeLists.txt",
+			"build-ninja/_deps/sfml-src/cmake/CompilerWarnings.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 72,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 74,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 234,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 87,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 92,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 87,
+				"parent" : 1
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 43,
+				"parent" : 6
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 68,
+				"parent" : 6
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 286,
+				"parent" : 1
+			},
+			{
+				"command" : 6,
+				"file" : 2,
+				"line" : 85,
+				"parent" : 6
+			},
+			{
+				"command" : 6,
+				"file" : 2,
+				"line" : 86,
+				"parent" : 6
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 274,
+				"parent" : 1
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 11
+	},
+	"compileDependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "Threads::Threads::@8cb1db2982443611e568"
+		}
+	],
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -fvisibility=hidden -fno-keep-inline-dllexport"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wextra"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wshadow"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wnon-virtual-dtor"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wcast-align"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wunused"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Woverloaded-virtual"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wconversion"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wsign-conversion"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wdouble-promotion"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wformat=2"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wimplicit-fallthrough"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wsuggest-override"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wnull-dereference"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wold-style-cast"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wpedantic"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-Wmisleading-indentation"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-Wduplicated-cond"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-Wlogical-op"
+				},
+				{
+					"backtrace" : 8,
+					"fragment" : "-Wduplicated-branches"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "SFML_STATIC"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "_WINSOCK_DEPRECATED_NO_WARNINGS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 12,
+					"path" : "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/src"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				2,
+				5,
+				11,
+				13,
+				21,
+				22,
+				25,
+				28,
+				30,
+				33
+			]
+		}
+	],
+	"folder" : 
+	{
+		"name" : "SFML"
+	},
+	"id" : "sfml-system::@8cb1db2982443611e568",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 3,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "C:/Program Files (x86)/VectorsPractice"
+		}
+	},
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "Threads::Threads::@8cb1db2982443611e568"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "winmm"
+		}
+	],
+	"linkLibraries" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "Threads::Threads::@8cb1db2982443611e568"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "winmm"
+		}
+	],
+	"name" : "sfml-system",
+	"nameOnDisk" : "libsfml-system-s-d.a",
+	"paths" : 
+	{
+		"build" : "_deps/sfml-build/src/SFML/System",
+		"source" : "build-ninja/_deps/sfml-src/src/SFML/System"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32
+			]
+		},
+		{
+			"name" : "windows",
+			"sourceIndexes" : 
+			[
+				33,
+				34
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Angle.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Angle.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Clock.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Clock.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/EnumArray.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Err.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Err.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Exception.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Export.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/InputStream.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/NativeActivity.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Sleep.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Sleep.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/String.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/String.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/String.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Time.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Time.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Utf.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Utf.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Utils.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Utils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Vector2.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Vector2.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Vector2.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Vector3.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Vector3.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/Vector3.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/FileInputStream.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/FileInputStream.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/MemoryInputStream.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/MemoryInputStream.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/include/SFML/System/SuspendAwareClock.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"compileGroupIndex" : 0,
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Win32/SleepImpl.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"backtraces" : 
+			[
+				2
+			],
+			"path" : "build-ninja/_deps/sfml-src/src/SFML/System/Win32/SleepImpl.hpp",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

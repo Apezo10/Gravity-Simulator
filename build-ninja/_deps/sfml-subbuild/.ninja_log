@@ -1,0 +1,21 @@
+# ninja log v6
+4	186	8102792191617629	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir	83e72f65881448c6
+4833	5001	8102792775229213	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install	6af92c59b771d05e
+4	186	8102792191617629	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir	83e72f65881448c6
+4316	4483	8102792770036774	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch	80cf6fa743836b73
+5	4139	8102792766578485	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download	33b0ff26bdba61c7
+4140	4315	8102792768292498	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update	143c85b379a72e70
+5	4139	8102792766578485	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download	33b0ff26bdba61c7
+4140	4315	8102792768292498	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update	143c85b379a72e70
+4316	4483	8102792770036774	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch	80cf6fa743836b73
+4484	4665	8102792771805763	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure	ee99750b3da2f63f
+4484	4665	8102792771805763	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure	ee99750b3da2f63f
+4666	4833	8102792773540254	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build	10799fcf87e9af48
+4666	4833	8102792773540254	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build	10799fcf87e9af48
+4833	5001	8102792775229213	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install	6af92c59b771d05e
+5002	5179	8102792776994608	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test	60be0819a7b0e6f
+5002	5179	8102792776994608	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test	60be0819a7b0e6f
+5180	5421	8102792779416499	CMakeFiles/sfml-populate-complete	f939926f2d196c20
+5180	5421	8102792779416499	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-done	f939926f2d196c20
+5180	5421	8102792779416499	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/CMakeFiles/sfml-populate-complete	f939926f2d196c20
+5180	5421	8102792779416499	C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-done	f939926f2d196c20
