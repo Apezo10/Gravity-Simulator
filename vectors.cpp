@@ -17,7 +17,7 @@ class Planet {
     double radius{};
     double xAccel{0};
     double yAccel{0};
-    double dt{0.001};
+    double dt{0.01};
     double mass{};
     
     public: 
@@ -26,7 +26,7 @@ class Planet {
     }
 
     double getY() const {
-        return 600 - yPos;
+        return yPos;
     }
 
     double getXvel() const {
@@ -81,12 +81,13 @@ class Planet {
     }
 
     void update() {
-        //Updates xy by integrating velocity
+        //Updates xy by integrating accel and velocity (accel first ALWAYS)
+        xVel += xAccel * dt;
+        yVel += yAccel * dt;
+
         xPos += xVel * dt;
         yPos += yVel * dt;
 
-        xVel += xAccel * dt;
-        yVel += yAccel * dt;
 
         //Checks if x goes past display width and moves it accordingly
         if (xPos > 800) {
@@ -251,7 +252,7 @@ while (window.isOpen()) {
         planet.setFillColor(sf::Color(135, 206, 235));
         //sf::Shape::Line( lineSpaceingX(), );
 
-        planet.setPosition({static_cast<float>(Planet.getX()), static_cast<float>(Planet.getY())});
+        planet.setPosition({static_cast<float>(Planet.getX()), static_cast<float>(600.0 - Planet.getY())});
 
         window.draw(planet);
         }
