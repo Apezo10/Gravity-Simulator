@@ -140,7 +140,7 @@ class PlanetSystem {
     //Updates the x and y position of the planet based on velocity input
     void update() {
 
-        //Nested loop (Every planet is eventually represented by planets[i])
+        //Nested loop, claculate accel for every planet
         for (int i=0; i<planets.size(); i++) {
             
             double ax = 0.0;
@@ -177,6 +177,10 @@ class PlanetSystem {
             }
 
             planets[i].setAccel(ax, ay);
+        }
+    
+        //Now update every planet
+        for (int i = 0; i<planets.size(); i++) {
             planets[i].update();
         }
     }
@@ -187,15 +191,66 @@ class PlanetSystem {
     }
 };
 
+//draws grid by incrementing x and y values and drawing lines between them rather than 1 long line
+class getGrid {
+    private:
+    vector<vector<sf::Vertex>> VectorOfLinesV;
+    vector<vector<sf::Vertex>> VectorOfLinesH;
+
+
+    public:
+    void iterateLinesV() {
+
+        //Nested loop to iterate through each of the verticle grid lines
+        for (float j=0.0; j<800.0; j+=50.0) {
+
+            vector<sf::Vertex> lineV;
+
+            for (float i=0.0; i<600.0; i+=5.0) {
+                lineV.push_back(sf::Vertex{{j, i}});
+            }
+    
+            VectorOfLinesV.push_back(lineV);
+        }
+    }
+
+    void iterateLinesH() {
+        
+        //Nested loop to iterate through each of the verticle grid lines
+        for (float i=0.0; i<600.0; i+=50.0) {
+
+            vector<sf::Vertex> lineH;
+
+            for (float j=0.0; j<800.0; j+=5.0) {
+                lineH.push_back(sf::Vertex{{j, i}});
+            }
+
+            VectorOfLinesH.push_back(lineH);
+        }
+    }
+
+    const vector<vector<sf::Vertex>>& getLinesV() const {
+        return VectorOfLinesV;
+    }
+
+    const vector<vector<sf::Vertex>>& getLinesH() const {
+        return VectorOfLinesH;
+    }
+};
+
 
 int main() {
 
 //Create PlanetSystem class
 PlanetSystem p;
+getGrid g;
 
 //Initialize the values in the vector
 p.getPlanets();
 p.printPlanet();
+
+
+
 
 sf::RenderWindow window(sf::VideoMode({800, 600}), "Gravity Sim");
 
@@ -213,22 +268,17 @@ while (window.isOpen()) {
 
         //________________________________________________________________________
     //THIS DRAWS THE GRID
-    for (int x = 0; x < 800; x += 50) {
+    g.iterateLinesV();
+    g.iterateLinesH();
 
-        sf::RectangleShape lineX;
-        lineX.setSize({1.0f, 600.0f});
-        lineX.setPosition({static_cast<float>(x),0.0f});
-
-        window.draw(lineX);
+    //Draw all the verticle lines
+    for (const auto& line : g.getLinesV()) {
+        window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
     }
 
-    for (int y = 0; y < 600; y += 50) {
-
-        sf::RectangleShape lineY;
-        lineY.setSize({800.0f, 1.0f});
-        lineY.setPosition({0,static_cast<float>(y)});
-
-        window.draw(lineY);
+    //Draw all the horizontal lines
+    for (const auto& line : g.getLinesH()) {
+        window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
     }
 
     //______________________________________________________________________________
@@ -256,6 +306,7 @@ while (window.isOpen()) {
     //Displays the drawing
     window.display();
     }
-return 0;
+    
+    return 0;
 }
 
