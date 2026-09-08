@@ -184,6 +184,15 @@ class PlanetSystem {
             planets[i].update();
         }
     }
+
+    struct StelarPreset {
+        double x{};
+        double y{};
+        double vx{};
+        double vy{};
+        double radius{};
+        sf::Color color{};
+    };
     
     //VERY IMPORTANT LINE - GETTER FOR THE VECTOR and allows it to be reffered to by reference
     const vector<Planet>& getParSystem() {
@@ -287,12 +296,16 @@ while (window.isOpen()) {
 
         float mass = static_cast<float> (Planet.getMass());
 
+        int yellow[3] = {255,255,0};
+        int blue[3] = {135,206,235};
+
         float r = 10.0f;
         if (mass > 1e29) {
             r = 30.0f;
         }
         float x = 400.0 + static_cast<float> (Planet.getX()/SCALE);
         float y = 300.0f - static_cast<float> (Planet.getY()/SCALE);
+
 
         sf::CircleShape planet(r);
         planet.setOrigin({r,r});
@@ -306,7 +319,7 @@ while (window.isOpen()) {
     //Displays the drawing
     window.display();
     }
-    
+
     return 0;
 }
 
