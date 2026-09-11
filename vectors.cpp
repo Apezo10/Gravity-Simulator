@@ -201,6 +201,7 @@ class PlanetSystem {
 };
 
 //draws grid by incrementing x and y values and drawing lines between them rather than 1 long line
+//Creates 2 vectors filled with vectors
 class getGrid {
     private:
     vector<vector<sf::Vertex>> VectorOfLinesV;
@@ -238,6 +239,60 @@ class getGrid {
         }
     }
 
+
+
+    sf::Vector2f distortPoints(float x, float y, const vector<Planet>& planets) {
+
+        float dxTotal = 0.0f;
+        float dyTotal = 0.0f;
+
+        for (const Planet& p : planets) {
+
+            float px = 400.0f + static_cast<float> (p.getX()/SCALE);
+            float py = 300.0f - static_cast<float> (p.getY()/SCALE);
+
+            float dx = px - x;
+            float dy = py - y;
+
+            float r = sqrt(dx*dx + dy*dy);
+
+            r = max(r,10.0f);
+
+            float massFactor = static_cast<float> (std::log1p(p.getMass() / 5.972e24)/std::log(2.0));
+            float strength = 15.0f * massFactor / (1.0f + massFactor)/(1.0f + r/40.0f);
+
+            dxTotal += strength * dx/r;
+            dyTotal += strength * dy/r;
+        }
+
+        return {
+            x + dxTotal,
+            y + dyTotal
+        };
+    }
+
+    void updateGrid(const vector<Planet>& planets) {
+        VectorOfLinesV.clear();
+        VectorOfLinesH.clear();
+
+        iterateLinesV();
+        iterateLinesH();
+
+        for (auto& line : VectorOfLinesV) {
+            for (auto& vertex : line) {
+                vertex.position = distortPoints(vertex.position.x, vertex.position.y, planets);
+            }
+        }
+
+        for (auto& line : VectorOfLinesH) {
+            for (auto& vertex : line) {
+                vertex.position = distortPoints(vertex.position.x, vertex.position.y, planets);
+            }
+        }
+    }
+
+
+    //Returns the vector as a vector
     const vector<vector<sf::Vertex>>& getLinesV() const {
         return VectorOfLinesV;
     }
@@ -277,8 +332,7 @@ while (window.isOpen()) {
 
         //________________________________________________________________________
     //THIS DRAWS THE GRID
-    g.iterateLinesV();
-    g.iterateLinesH();
+    g.updateGrid(p.getParSystem());
 
     //Draw all the verticle lines
     for (const auto& line : g.getLinesV()) {
