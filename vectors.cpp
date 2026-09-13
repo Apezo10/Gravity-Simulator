@@ -50,12 +50,17 @@ class Planet {
     double yAccel{0};
     double dt{3600};
     double mass{};
+    sf::Color color{135, 206, 235};
+    bool blackHole = false;
     
     public: 
     Planet() = default;
 
-    Planet(double x, double y, double vx, double vy, double r, double m)
-        : xPos(x), yPos(y), xVel(vx), yVel(vy), radius(r), mass(m) {}
+    Planet(double x, double y, double vx, double vy, double r, double m, sf::Color tint = sf::Color(135, 206, 235), bool isBlackHole = false)
+        : xPos(x), yPos(y), xVel(vx), yVel(vy), radius(r), mass(m), color(tint), blackHole(isBlackHole) {}
+
+    sf::Color getColor() const { return color; }
+    bool isBlackHole() const { return blackHole; }
 
     double getX() const {
         return xPos;
@@ -169,33 +174,44 @@ class PlanetSystem {
 
         // Reuse these starting bodies in the solar presets.
         const Planet sun(-separation * earthFraction, 0, 0,
-                         -orbitalSpeed * earthFraction, 6.957e8, sunMass);
-        const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass);
+                         -orbitalSpeed * earthFraction, 6.957e8, sunMass, sf::Color(255, 220, 80));
+        const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass, sf::Color(80, 160, 255));
 
         // Equal stars are half the separation from their shared center.
         const double binarySpeed = sqrt(G * sunMass / (2 * separation));
 
+        const double blackHoleMass = 10 * sunMass;
+        const double c = 299792458.0;
+        const double horizonRadius = 2 * G * blackHoleMass / (c * c);
+
         // Planet arguments: x, y, x velocity, y velocity, radius, mass (SI units).
-        // These are approximate circular starting orbits, not date-specific positions.
+        // Solar presets use approximate circular orbits, not date-specific positions.
         const vector<StellarPreset> presets = {
             {"Sun-Earth", {sun, earth}},
             {"Sun-Earth-Moon", {
                 sun, earth,
                 // The Moon shares Earth's motion, plus its own orbital velocity.
                 Planet(earthX + moonDistance, 0, 0,
-                       earthSpeed + moonSpeed, 1.7374e6, 7.342e22)
+                       earthSpeed + moonSpeed, 1.7374e6, 7.342e22, sf::Color(210, 210, 210))
             }},
             {"Mini solar system (Sun, Mercury, Venus, Earth, Mars)", {
                 sun,
                 // Circular speed = sqrt(G * central mass / orbital distance).
-                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23),
-                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24),
+                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23, sf::Color(160, 150, 140)),
+                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24, sf::Color(235, 190, 100)),
                 earth,
-                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23)
+                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23, sf::Color(225, 95, 65))
             }},
             {"Binary stars (two Sun-like stars)", {
-                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass),
-                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass)
+                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass, sf::Color(255, 200, 90)),
+                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass, sf::Color(255, 245, 190))
+            }},
+            {"Black hole flyby (Newtonian approximation)", {
+                // This distant flyby stays well outside the relativistic region.
+                // The black disk is an enlarged marker, not the true horizon size.
+                Planet(0, 0, 0, 0, horizonRadius, blackHoleMass, sf::Color::Black, true),
+                Planet(-3.0e11, 1.5e11, 120000, 0, 6.371e6, earthMass,
+                       sf::Color(80, 220, 255))
             }}
         };
 
@@ -476,24 +492,23 @@ while (window.isOpen()) {
     // GO THROUGH EVERY PLAET IN ParSystem and DRAW
     for (const Planet& Planet : p.getParSystem()) {
 
-        float mass = static_cast<float> (Planet.getMass());
-
-        int yellow[3] = {255,255,0};
-        int blue[3] = {135,206,235};
-
-        float r = 10.0f;
-        if (mass > 1e29) {
-            r = 30.0f;
-        }
-
-
+        double mass = Planet.getMass();
+        // Fixed pixel radii keep small bodies visible without changing physics.
+        float r = 3.0f;
+        if (mass > 1e29) r = 30.0f;
+        else if (mass > 1e26) r = 16.0f;
+        else if (mass > 1e24) r = 10.0f;
+        else if (mass > 1e23) r = 6.0f;
         auto position = camera.toScreen(Planet.getX(), Planet.getY());
 
 
 
         planet.setRadius(r);
         planet.setOrigin({r,r});
-        planet.setFillColor(sf::Color(135, 206, 235));
+        planet.setFillColor(Planet.getColor());
+        // Outline makes the black marker visible against the black background.
+        planet.setOutlineThickness(Planet.isBlackHole() ? 2.0f : 0.0f);
+        planet.setOutlineColor(sf::Color(180, 120, 255));
 
         planet.setPosition(position);
 
