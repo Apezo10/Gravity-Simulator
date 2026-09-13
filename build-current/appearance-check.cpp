@@ -456,155 +456,31 @@ class getGrid {
 };
 
 
-// A circular buffer overwrites the oldest point instead of growing forever.
-struct OrbitTrail {
-    static constexpr size_t capacity = 1024;
-    array<sf::Vector2<double>, capacity> points{};
-    size_t next = 0;
-    size_t count = 0;
-
-    void add(const Planet& body) {
-        points[next] = {body.getX(), body.getY()};
-        next = (next + 1) % capacity;
-        if (count < capacity) ++count;
-    }
-};
-
 int main() {
-
-//Create PlanetSystem class
-PlanetSystem p;
-getGrid g;
-Camera camera;
-
-//Initialize the values in the vector
-if (!p.chooseSetup()) return 0;
-p.printPlanet();
-
-vector<OrbitTrail> trails(p.getParSystem().size());
-for (size_t i = 0; i < trails.size(); ++i) trails[i].add(p.getParSystem()[i]);
-// One drawing buffer is shared by every trail. No per-frame allocations.
-vector<sf::Vertex> trailVertices((OrbitTrail::capacity + 1) * 2);
-int trailStep = 0;
-
-
-
-
-sf::RenderWindow window(sf::VideoMode({800, 600}), "Gravity Sim");
-
-// Reuse the shape instead of allocating its vertices for every body each frame.
-sf::CircleShape planet;
-while (window.isOpen()) {
-
-    while (const auto event = window.pollEvent()) {
-        if (const auto* button = event->getIf<sf::Event::MouseButtonPressed>()) {
-            if (button->button == sf::Mouse::Button::Left) {
-                camera.dragging = true;
-                camera.lastMouse = window.mapPixelToCoords(button->position);
-            }
-        }
-        if (const auto* button = event->getIf<sf::Event::MouseButtonReleased>()) {
-            if (button->button == sf::Mouse::Button::Left) camera.dragging = false;
-        }
-        // Prevent a stuck drag when the mouse is released outside the window.
-        if (event->is<sf::Event::FocusLost>() || event->is<sf::Event::MouseLeft>())
-            camera.dragging = false;
-        if (const auto* mouse = event->getIf<sf::Event::MouseMoved>()) {
-            if (camera.dragging) camera.drag(window.mapPixelToCoords(mouse->position));
-        }
-        if (const auto* wheel = event->getIf<sf::Event::MouseWheelScrolled>()) {
-            if (wheel->wheel == sf::Mouse::Wheel::Vertical)
-                camera.scroll(wheel->delta, window.mapPixelToCoords(wheel->position));
-        }
-        if (event->is<sf::Event::Closed>()) {
-            window.close();
-        }
-    }
-
-    p.update();
-
-    // One point every four physics steps gives longer trails with bounded memory.
-    if (++trailStep == 4) {
-        for (size_t i = 0; i < trails.size(); ++i) trails[i].add(p.getParSystem()[i]);
-        trailStep = 0;
-    }
-
-    window.clear();
-
-        //________________________________________________________________________
-    //THIS DRAWS THE GRID
-    g.updateGrid(p.getParSystem(), camera);
-
-    //Draw all the verticle lines
-    for (const auto& line : g.getLinesV()) {
-        window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
-    }
-
-    //Draw all the horizontal lines
-    for (const auto& line : g.getLinesH()) {
-        window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
-    }
-
-    //______________________________________________________________________________
-    // Store world positions so existing trails move correctly when zooming/panning.
-    for (size_t i = 0; i < trails.size(); ++i) {
-        const OrbitTrail& trail = trails[i];
-        sf::Color color = p.getParSystem()[i].isBlackHole()
-            ? sf::Color(180, 120, 255) : p.getParSystem()[i].getColor();
-        size_t oldest = (trail.next + OrbitTrail::capacity - trail.count) % OrbitTrail::capacity;
-        const Planet& body = p.getParSystem()[i];
-        float radius = body.getDisplayRadius();
-        auto screenPoint = [&](size_t j) {
-            // End the ribbon at the body, including between stored samples.
-            if (j == trail.count) return camera.toScreen(body.getX(), body.getY());
-            const auto& point = trail.points[(oldest + j) % OrbitTrail::capacity];
-            return camera.toScreen(point.x, point.y);
-        };
-        sf::Vector2f normal(0.0f, radius);
-        for (size_t j = 0; j <= trail.count; ++j) {
-            auto position = screenPoint(j);
-            auto before = screenPoint(j == 0 ? 0 : j - 1);
-            auto after = screenPoint(min(j + 1, trail.count));
-            auto direction = after - before;
-            float length = sqrt(direction.x * direction.x + direction.y * direction.y);
-            if (length > 0.0001f)
-                normal = {-direction.y * radius / length, direction.x * radius / length};
-
-            // Fade by age, reaching transparency four times sooner than before.
-            float age = static_cast<float>((trail.count - j) * 4 + trailStep);
-            float opacity = max(0.0f, 1.0f - age / (OrbitTrail::capacity * 4.0f));
-            color.a = static_cast<unsigned char>(160 * opacity * opacity);
-            // Two edges form a continuous ribbon with width equal to the diameter.
-            trailVertices[2 * j] = sf::Vertex{position + normal, color};
-            trailVertices[2 * j + 1] = sf::Vertex{position - normal, color};
-        }
-        if (trail.count > 0)
-            window.draw(trailVertices.data(), (trail.count + 1) * 2, sf::PrimitiveType::TriangleStrip);
-    }
-
-    // GO THROUGH EVERY PLAET IN ParSystem and DRAW
-    for (const Planet& Planet : p.getParSystem()) {
-
-        float r = Planet.getDisplayRadius();
-        auto position = camera.toScreen(Planet.getX(), Planet.getY());
-
-
-
-        planet.setRadius(r);
-        planet.setOrigin({r,r});
-        planet.setFillColor(Planet.getColor());
-        // Outline makes the black marker visible against the black background.
-        planet.setOutlineThickness(Planet.isBlackHole() ? 2.0f : 0.0f);
-        planet.setOutlineColor(sf::Color(180, 120, 255));
-
-        planet.setPosition(position);
-
-        window.draw(planet);
-        }
-
-    //Displays the drawing
-    window.display();
-    }
-
-    return 0;
+    Planet sun(0, 0, 0, 0, 6.957e8, 1.9885e30);
+    Planet hole(0, 0, 0, 0, 29533, 1.9885e31);
+    Planet massiveStar(0, 0, 0, 0, 6.957e8, 1.9885e31);
+    Planet earth(0, 0, 0, 0, 6.371e6, 5.972e24);
+    if (sun.isBlackHole() || massiveStar.isBlackHole() || !hole.isBlackHole()) return 1;
+    if (sun.getColor() != sf::Color(255, 220, 80) ||
+        hole.getColor() != sf::Color::Black ||
+        earth.getColor() != sf::Color(80, 160, 255)) return 2;
+    getGrid grid;
+    Camera camera;
+    auto ordinary = grid.distortPoints(500, 300, {sun}, camera);
+    auto deep = grid.distortPoints(500, 300, {hole}, camera);
+    if (!(deep.x < ordinary.x && deep.x > 400)) return 3;
+    vector<Planet> bodies(20, hole);
+    grid.updateGrid(bodies, camera);
+    auto outside = [](sf::Vector2f p) {
+        return p.x < 0 || p.x > 800 || p.y < 0 || p.y > 600;
+    };
+    for (const auto& line : grid.getLinesV())
+        if (!outside(line.front().position) || !outside(line.back().position)) return 4;
+    for (const auto& line : grid.getLinesH())
+        if (!outside(line.front().position) || !outside(line.back().position)) return 5;
+    const auto* storage = grid.getLinesV()[0].data();
+    grid.updateGrid(bodies, camera);
+    if (storage != grid.getLinesV()[0].data()) return 6;
+    cout << "Appearance, inward distortion, hidden endpoints, and buffer reuse passed.\n";
 }
