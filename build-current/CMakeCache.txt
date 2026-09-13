@@ -169,7 +169,7 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 CMAKE_LINKER:FILEPATH=C:/msys64/ucrt64/bin/ld.exe
 
 //make program
-CMAKE_MAKE_PROGRAM:FILEPATH=C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/.tools/ninja/ninja.exe
+CMAKE_MAKE_PROGRAM:FILEPATH=C:/Users/Adins/OneDrive/DOCUME~1/VSCODE~1/LEARNI~1/GRAVIT~1/GRAVIT~1/TOOLS~1/ninja/ninja.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.

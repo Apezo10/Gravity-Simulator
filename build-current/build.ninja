@@ -51,7 +51,7 @@ build cmake_object_order_depends_target_vectors: phony || cmake_object_order_dep
 
 build CMakeFiles/vectors.dir/vectors.cpp.obj: CXX_COMPILER__vectors_unscanned_Debug C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Learning$ c++/Gravity$ Sim/Gravity-Simulator/vectors.cpp || cmake_object_order_depends_target_vectors
   CONFIG = Debug
-  DEFINES = -DSFML_STATIC
+  DEFINES = -DSFML_STATIC -DSIM_FONT_PATH="\"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/assets/tuffy.ttf\""
   DEP_FILE = CMakeFiles\vectors.dir\vectors.cpp.obj.d
   FLAGS = -g
   INCLUDES = -I"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/_deps/sfml-src/include"

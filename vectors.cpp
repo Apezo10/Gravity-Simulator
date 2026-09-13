@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <array>
 #include <cmath>
 #include <algorithm>
 #include <string>
+#include <cstdio>
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -39,6 +39,7 @@ struct Camera {
         y -= (mouse.y - 300) * (oldScale - newScale);
     }
 };
+
 //Simple class which describes the state of a single particle
 class Planet {
     private:
@@ -49,38 +50,40 @@ class Planet {
     double radius{};
     double xAccel{0};
     double yAccel{0};
-    double dt{3600};
+    double dt{1800};
     double mass{};
-    // One shared style rule is used for manual bodies, presets, and trails.
-    struct Appearance {
-        sf::Color color;
-        float radius;
-        bool blackHole = false;
-    };
-
-    Appearance appearance() const {
-        const double c = 299792458.0;
-        double horizon = 2 * G * mass / (c * c);
-        // Mass alone cannot distinguish a star from a black hole.
-        // A 1% tolerance accepts rounded horizon radii entered by the user.
-        if (mass > 0 && radius > 0 && radius <= horizon * 1.01)
-            return {sf::Color::Black, 30.0f, true};
-        if (mass >= 1.59e29) return {sf::Color(255, 220, 80), 30.0f};
-        if (mass >= 1e26) return {sf::Color(220, 170, 110), 16.0f};
-        if (mass >= 1e24) return {sf::Color(80, 160, 255), 10.0f};
-        if (mass >= 1e23) return {sf::Color(225, 130, 90), 6.0f};
-        return {sf::Color(210, 210, 210), 3.0f};
-    }
+    sf::Color color{135, 206, 235};
+    bool blackHole = false;
+    string name;
 
     public:
     Planet() = default;
 
-    Planet(double x, double y, double vx, double vy, double r, double m)
-        : xPos(x), yPos(y), xVel(vx), yVel(vy), radius(r), mass(m) {}
+    Planet(double x, double y, double vx, double vy, double r, double m,
+           sf::Color tint = sf::Color(135, 206, 235), bool isBlackHole = false,
+           string bodyName = "")
+        : xPos(x), yPos(y), xVel(vx), yVel(vy), radius(r), mass(m),
+          color(tint), blackHole(isBlackHole), name(bodyName) {}
 
-    sf::Color getColor() const { return appearance().color; }
-    float getDisplayRadius() const { return appearance().radius; }
-    bool isBlackHole() const { return appearance().blackHole; }
+    sf::Color getColor() const { return color; }
+    bool isBlackHole() const { return blackHole; }
+    string getName() const {
+        if (!name.empty()) return name;
+        if (blackHole) return "Black hole";
+        if (mass >= 1.59e29) return "Star";
+        if (mass >= 1e26) return "Giant planet";
+        if (mass >= 1e24) return "Terrestrial planet";
+        if (mass >= 1e23) return "Small planet";
+        return "Moon or small body";
+    }
+    float getDisplayRadius() const {
+        if (mass > 1e29) return 30.0f;
+        if (mass > 1e26) return 16.0f;
+        if (mass > 1e24) return 10.0f;
+        if (mass > 1e23) return 6.0f;
+        return 3.0f;
+    }
+
     double getX() const {
         return xPos;
     }
@@ -105,7 +108,7 @@ class Planet {
         return mass;
     }
 
-    
+
     public:
     void getInfo() {
       cout << "Initial X position (m): ";
@@ -134,7 +137,7 @@ class Planet {
         cout << "Y vel: " << yVel << " (m/s)\n";
         cout << "Radius: " << radius << "(m)\n";
         }
-    
+
     void setAccel(double ax, double ay) {
         xAccel = ax;
         yAccel = ay;
@@ -148,13 +151,13 @@ class Planet {
         xPos += xVel * dt;
         yPos += yVel * dt;
     }
-    
+
 
 };
 
 //Create class so user can choose particle #
 class PlanetSystem {
-    private: 
+    private:
     vector<Planet> planets;
 
     public:
@@ -193,8 +196,8 @@ class PlanetSystem {
 
         // Reuse these starting bodies in the solar presets.
         const Planet sun(-separation * earthFraction, 0, 0,
-                         -orbitalSpeed * earthFraction, 6.957e8, sunMass);
-        const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass);
+                         -orbitalSpeed * earthFraction, 6.957e8, sunMass, sf::Color(255, 220, 80), false, "Sun");
+        const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass, sf::Color(80, 160, 255), false, "Earth");
 
         // Equal stars are half the separation from their shared center.
         const double binarySpeed = sqrt(G * sunMass / (2 * separation));
@@ -211,25 +214,26 @@ class PlanetSystem {
                 sun, earth,
                 // The Moon shares Earth's motion, plus its own orbital velocity.
                 Planet(earthX + moonDistance, 0, 0,
-                       earthSpeed + moonSpeed, 1.7374e6, 7.342e22)
+                       earthSpeed + moonSpeed, 1.7374e6, 7.342e22, sf::Color(210, 210, 210), false, "Moon")
             }},
             {"Mini solar system (Sun, Mercury, Venus, Earth, Mars)", {
                 sun,
                 // Circular speed = sqrt(G * central mass / orbital distance).
-                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23),
-                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24),
+                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23, sf::Color(160, 150, 140), false, "Mercury"),
+                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24, sf::Color(235, 190, 100), false, "Venus"),
                 earth,
-                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23)
+                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23, sf::Color(225, 95, 65), false, "Mars")
             }},
             {"Binary stars (two Sun-like stars)", {
-                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass),
-                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass)
+                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass, sf::Color(255, 200, 90), false, "Star A"),
+                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass, sf::Color(255, 245, 190), false, "Star B")
             }},
             {"Black hole flyby (Newtonian approximation)", {
                 // This distant flyby stays well outside the relativistic region.
                 // The black disk is an enlarged marker, not the true horizon size.
-                Planet(0, 0, 0, 0, horizonRadius, blackHoleMass),
-                Planet(-3.0e11, 1.5e11, 120000, 0, 6.371e6, earthMass)
+                Planet(0, 0, 0, 0, horizonRadius, blackHoleMass, sf::Color::Black, true, "Black hole"),
+                Planet(-3.0e11, 1.5e11, 120000, 0, 6.371e6, earthMass,
+                       sf::Color(80, 220, 255), false, "Passing body")
             }}
         };
 
@@ -275,14 +279,14 @@ class PlanetSystem {
         for (int i=0; i<size; i++) {
             cout << "\nPlanet " << i+1 << ":\n";
             planets[i].getInfo();
-        }   
+        }
     }
 
     void printPlanet() const {
         cout << "You have " << planets.size() << " planets in the sim\n";
 
         for (int i=0; i<planets.size(); i++) {
-            cout << "\nPlanet " << i +1 << ":\n";
+            cout << "\n" << planets[i].getName() << ":\n";
             //By adding the [i] to particles class, allows us to look into each memeber of the class, which gives us access to the particle class containing the printInfo function
             planets[i].printInfo();
         }
@@ -293,7 +297,7 @@ class PlanetSystem {
 
         //Nested loop, claculate accel for every planet
         for (int i=0; i<planets.size(); i++) {
-            
+
             double ax = 0.0;
             double ay = 0.0;
             double totalAccel = 0.0;
@@ -303,7 +307,7 @@ class PlanetSystem {
                 if (i==j) {
                     continue;
                 }
-                
+
                 //Get x and y coord differences between planets
                 double dx = planets[j].getX() - planets[i].getX();
                 double dy = planets[j].getY() - planets[i].getY();
@@ -316,7 +320,7 @@ class PlanetSystem {
 
                 //Compute force based on planets masses and distances from each other
                 double F = G * (planets[i].getMass() * planets[j].getMass()) / (distance * distance);
-                
+
                 //Plnet i accel
                 double x = dx/distance;
                 double y = dy/distance;
@@ -329,14 +333,14 @@ class PlanetSystem {
 
             planets[i].setAccel(ax, ay);
         }
-    
+
         //Now update every planet
         for (int i = 0; i<planets.size(); i++) {
             planets[i].update();
         }
     }
 
-    
+
     //VERY IMPORTANT LINE - GETTER FOR THE VECTOR and allows it to be reffered to by reference
     const vector<Planet>& getParSystem() {
     return planets;
@@ -347,9 +351,6 @@ class PlanetSystem {
 //Creates 2 vectors filled with vectors
 class getGrid {
     private:
-    // Padding exceeds the maximum combined displacement, keeping endpoints offscreen.
-    static constexpr float padding = 200.0f;
-    static constexpr float maxDisplacement = 150.0f;
     vector<vector<sf::Vertex>> VectorOfLinesV;
     vector<vector<sf::Vertex>> VectorOfLinesH;
 
@@ -358,11 +359,11 @@ class getGrid {
     void iterateLinesV() {
 
         //Nested loop to iterate through each of the verticle grid lines
-        for (float j=-padding; j<=800.0f + padding; j+=50.0f) {
+        for (float j=0.0; j<800.0; j+=50.0) {
 
             vector<sf::Vertex> lineV;
 
-            for (float i=-padding; i<=600.0f + padding; i+=5.0f) {
+            for (float i=0.0; i<600.0; i+=5.0) {
                 lineV.push_back(sf::Vertex{{j, i}});
             }
 
@@ -373,11 +374,11 @@ class getGrid {
     void iterateLinesH() {
 
         //Nested loop to iterate through each of the verticle grid lines
-        for (float i=-padding; i<=600.0f + padding; i+=50.0f) {
+        for (float i=0.0; i<600.0; i+=50.0) {
 
             vector<sf::Vertex> lineH;
 
-            for (float j=-padding; j<=800.0f + padding; j+=5.0f) {
+            for (float j=0.0; j<800.0; j+=5.0) {
                 lineH.push_back(sf::Vertex{{j, i}});
             }
 
@@ -389,45 +390,41 @@ class getGrid {
 
     sf::Vector2f distortPoints(float x, float y, const vector<Planet>& planets, const Camera& camera) {
 
-        // Convert this screen sample to metres before calculating distortion.
-        double worldX = camera.x + (x - 400.0) * SCALE / camera.zoom;
-        double worldY = camera.y - (y - 300.0) * SCALE / camera.zoom;
+        // Convert the screen sample to world metres before doing any physics-like math.
+        const double worldX = camera.x + (x - 400.0) * SCALE / camera.zoom;
+        const double worldY = camera.y - (y - 300.0) * SCALE / camera.zoom;
         double dxTotal = 0.0;
         double dyTotal = 0.0;
 
         for (const Planet& p : planets) {
-            double dx = p.getX() - worldX;
-            double dy = p.getY() - worldY;
-            double distance = max(hypot(dx, dy), 10.0 * SCALE);
 
-            // Fixed world distances: the well's size no longer depends on zoom.
-            // This remains an illustrative effect, separate from orbital physics.
-            double massFactor = log1p(max(0.0, p.getMass()) / 5.972e24) / log(2.0);
+            const double dx = p.getX() - worldX;
+            const double dy = p.getY() - worldY;
+            const double distance = max(hypot(dx, dy), 10.0 * SCALE);
+
+            // The grid well has a fixed physical size. Black holes are deeper only
+            // as a visual cue; this does not alter the orbital calculations.
+            const double massFactor = log1p(max(0.0, p.getMass()) / 5.972e24) / log(2.0);
             double depth = 15.0 * SCALE * massFactor / (1.0 + massFactor);
             if (p.isBlackHole()) depth *= 10.0;
-            double strength = depth / (1.0 + distance / (80.0 * SCALE));
-            strength = min(strength, 0.9 * distance);
+            const double strength = min(depth / (1.0 + distance / (80.0 * SCALE)),
+                                        0.9 * distance);
+
             dxTotal += strength * dx / distance;
             dyTotal += strength * dy / distance;
         }
 
-        double displacement = hypot(dxTotal, dyTotal);
-        double worldLimit = maxDisplacement * SCALE;
-        if (displacement > worldLimit) {
-            dxTotal *= worldLimit / displacement;
-            dyTotal *= worldLimit / displacement;
+        const double displacement = hypot(dxTotal, dyTotal);
+        const double limit = 150.0 * SCALE;
+        if (displacement > limit) {
+            dxTotal *= limit / displacement;
+            dyTotal *= limit / displacement;
         }
 
-        auto screen = camera.toScreen(worldX + dxTotal, worldY + dyTotal);
-
-        // At extreme zoom, limit only the drawing displacement to retain offscreen
-        // grid endpoints. Normal and zoomed-out views use the world result directly.
-        sf::Vector2f offset = screen - sf::Vector2f(x, y);
-        float screenDistance = hypot(offset.x, offset.y);
-        if (screenDistance > maxDisplacement)
-            offset *= maxDisplacement / screenDistance;
-        return sf::Vector2f(x, y) + offset;
+        // Project the distorted world position back through the camera.
+        return camera.toScreen(worldX + dxTotal, worldY + dyTotal);
     }
+
     void updateGrid(const vector<Planet>& planets, const Camera& camera) {
         // Allocate the grid once, then update each vertex in place.
         if (VectorOfLinesV.empty()) iterateLinesV();
@@ -436,13 +433,13 @@ class getGrid {
         for (size_t line = 0; line < VectorOfLinesV.size(); ++line) {
             for (size_t point = 0; point < VectorOfLinesV[line].size(); ++point) {
                 VectorOfLinesV[line][point].position =
-                    distortPoints(line * 50.0f - padding, point * 5.0f - padding, planets, camera);
+                    distortPoints(line * 50.0f, point * 5.0f, planets, camera);
             }
         }
         for (size_t line = 0; line < VectorOfLinesH.size(); ++line) {
             for (size_t point = 0; point < VectorOfLinesH[line].size(); ++point) {
                 VectorOfLinesH[line][point].position =
-                    distortPoints(point * 5.0f - padding, line * 50.0f - padding, planets, camera);
+                    distortPoints(point * 5.0f, line * 50.0f, planets, camera);
             }
         }
     }
@@ -456,20 +453,44 @@ class getGrid {
     }
 };
 
-
-// A circular buffer overwrites the oldest point instead of growing forever.
+// Fixed-size history prevents trails from using unlimited memory.
 struct OrbitTrail {
     static constexpr size_t capacity = 1024;
     array<sf::Vector2<double>, capacity> points{};
-    size_t next = 0;
-    size_t count = 0;
-
+    size_t next = 0, count = 0;
     void add(const Planet& body) {
         points[next] = {body.getX(), body.getY()};
         next = (next + 1) % capacity;
         if (count < capacity) ++count;
     }
 };
+
+class VelocityDisplay {
+    sf::Text text;
+    sf::RectangleShape background;
+    sf::Clock refresh;
+    string contents;
+public:
+    explicit VelocityDisplay(const sf::Font& font) : text(font, "", 14) {
+        contents.reserve(2048); text.setPosition({12, 10});
+        background.setPosition({6, 6}); background.setFillColor(sf::Color(12, 16, 24, 220));
+    }
+    void draw(sf::RenderWindow& window, const vector<Planet>& bodies) {
+        if (contents.empty() || refresh.getElapsedTime().asSeconds() >= 0.1f) {
+            contents = "Velocity (km/s)\n"; char row[180];
+            for (const Planet& body : bodies) {
+                snprintf(row, sizeof(row), "%s: %.2f km/s\n",
+                    body.getName().c_str(), hypot(body.getXvel(), body.getYvel()) / 1000.0);
+                contents += row;
+            }
+            text.setString(contents);
+            auto bounds = text.getLocalBounds(); background.setSize({bounds.size.x + 18, bounds.size.y + 18});
+            refresh.restart();
+        }
+        window.draw(background); window.draw(text);
+    }
+};
+
 
 int main() {
 
@@ -484,14 +505,17 @@ p.printPlanet();
 
 vector<OrbitTrail> trails(p.getParSystem().size());
 for (size_t i = 0; i < trails.size(); ++i) trails[i].add(p.getParSystem()[i]);
-// One drawing buffer is shared by every trail. No per-frame allocations.
 vector<sf::Vertex> trailVertices((OrbitTrail::capacity + 1) * 2);
+array<sf::Vertex, 14> trailCapVertices{}; // center + 12 semicircle segments
 int trailStep = 0;
 
 
 
 
 sf::RenderWindow window(sf::VideoMode({800, 600}), "Gravity Sim");
+sf::Font font;
+if (!font.openFromFile(SIM_FONT_PATH)) return 1;
+VelocityDisplay velocityDisplay(font);
 
 // Reuse the shape instead of allocating its vertices for every body each frame.
 sf::CircleShape planet;
@@ -524,7 +548,6 @@ while (window.isOpen()) {
 
     p.update();
 
-    // One point every four physics steps gives longer trails with bounded memory.
     if (++trailStep == 4) {
         for (size_t i = 0; i < trails.size(); ++i) trails[i].add(p.getParSystem()[i]);
         trailStep = 0;
@@ -546,46 +569,63 @@ while (window.isOpen()) {
         window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
     }
 
-    //______________________________________________________________________________
-    // Store world positions so existing trails move correctly when zooming/panning.
+    // Draw each body's fading, full-width orbit ribbon.
     for (size_t i = 0; i < trails.size(); ++i) {
         const OrbitTrail& trail = trails[i];
-        sf::Color color = p.getParSystem()[i].isBlackHole()
-            ? sf::Color(180, 120, 255) : p.getParSystem()[i].getColor();
-        size_t oldest = (trail.next + OrbitTrail::capacity - trail.count) % OrbitTrail::capacity;
         const Planet& body = p.getParSystem()[i];
+        sf::Color color = body.isBlackHole() ? sf::Color(180, 120, 255) : body.getColor();
+        // Dim the trail's RGB values as well as its alpha, leaving the body bright.
+        color.r = static_cast<unsigned char>(color.r * 0.55f);
+        color.g = static_cast<unsigned char>(color.g * 0.55f);
+        color.b = static_cast<unsigned char>(color.b * 0.55f);
+        size_t oldest = (trail.next + OrbitTrail::capacity - trail.count) % OrbitTrail::capacity;
         float radius = body.getDisplayRadius();
-        auto screenPoint = [&](size_t j) {
-            // End the ribbon at the body, including between stored samples.
-            if (j == trail.count) return camera.toScreen(body.getX(), body.getY());
-            const auto& point = trail.points[(oldest + j) % OrbitTrail::capacity];
-            return camera.toScreen(point.x, point.y);
-        };
-        sf::Vector2f normal(0.0f, radius);
         for (size_t j = 0; j <= trail.count; ++j) {
-            auto position = screenPoint(j);
-            auto before = screenPoint(j == 0 ? 0 : j - 1);
-            auto after = screenPoint(min(j + 1, trail.count));
-            auto direction = after - before;
-            float length = sqrt(direction.x * direction.x + direction.y * direction.y);
-            if (length > 0.0001f)
-                normal = {-direction.y * radius / length, direction.x * radius / length};
-
-            // Fade by age, reaching transparency four times sooner than before.
-            float age = static_cast<float>((trail.count - j) * 4 + trailStep);
-            float opacity = max(0.0f, 1.0f - age / (OrbitTrail::capacity * 4.0f));
-            color.a = static_cast<unsigned char>(160 * opacity * opacity);
-            // Two edges form a continuous ribbon with width equal to the diameter.
-            trailVertices[2 * j] = sf::Vertex{position + normal, color};
-            trailVertices[2 * j + 1] = sf::Vertex{position - normal, color};
+            auto point = j == trail.count ? camera.toScreen(body.getX(), body.getY())
+                : camera.toScreen(trail.points[(oldest + j) % OrbitTrail::capacity].x,
+                                  trail.points[(oldest + j) % OrbitTrail::capacity].y);
+            auto before = j == 0 ? point : trailVertices[2 * (j - 1)].position;
+            auto direction = point - before;
+            float length = hypot(direction.x, direction.y);
+            sf::Vector2f normal = length > 0.001f ? sf::Vector2f(-direction.y * radius / length, direction.x * radius / length) : sf::Vector2f(0, radius);
+            float opacity = 160.0f * (1.0f - static_cast<float>(trail.count - j) / OrbitTrail::capacity);
+            color.a = static_cast<unsigned char>(max(0.0f, opacity));
+            trailVertices[2 * j] = sf::Vertex{point + normal, color};
+            trailVertices[2 * j + 1] = sf::Vertex{point - normal, color};
         }
-        if (trail.count > 0)
-            window.draw(trailVertices.data(), (trail.count + 1) * 2, sf::PrimitiveType::TriangleStrip);
+        if (trail.count > 0) window.draw(trailVertices.data(), (trail.count + 1) * 2, sf::PrimitiveType::TriangleStrip);
+
+        // Round the oldest end with a half-circle matching the ribbon diameter.
+        if (trail.count > 1) {
+            auto first = camera.toScreen(trail.points[oldest].x, trail.points[oldest].y);
+            auto second = camera.toScreen(trail.points[(oldest + 1) % OrbitTrail::capacity].x,
+                                          trail.points[(oldest + 1) % OrbitTrail::capacity].y);
+            auto tangent = second - first;
+            float length = hypot(tangent.x, tangent.y);
+            if (length > 0.001f) {
+                tangent /= length;
+                color.a = 30; // The oldest end is faint, like the ribbon behind it.
+                trailCapVertices[0] = sf::Vertex{first, color};
+                constexpr int segments = 12;
+                for (int segment = 0; segment <= segments; ++segment) {
+                    float angle = atan2(tangent.y, tangent.x) + 0.5f * 3.14159265f
+                                + 3.14159265f * segment / segments;
+                    sf::Vector2f edge(first.x + radius * cos(angle),
+                                      first.y + radius * sin(angle));
+                    trailCapVertices[segment + 1] = sf::Vertex{edge, color};
+                }
+                window.draw(trailCapVertices.data(), segments + 2, sf::PrimitiveType::TriangleFan);
+            }
+        }
     }
 
-    // GO THROUGH EVERY PLAET IN ParSystem and DRAW
+    //______________________________________________________________________________
+    // GO THROUGH EVERY PLANET IN THE SYSTEM AND DRAW
     for (const Planet& Planet : p.getParSystem()) {
 
+        double mass = Planet.getMass();
+
+        // Fixed pixel radii keep small bodies visible without changing physics.
         float r = Planet.getDisplayRadius();
         auto position = camera.toScreen(Planet.getX(), Planet.getY());
 
@@ -602,6 +642,8 @@ while (window.isOpen()) {
 
         window.draw(planet);
         }
+
+    velocityDisplay.draw(window, p.getParSystem());
 
     //Displays the drawing
     window.display();
