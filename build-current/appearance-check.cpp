@@ -389,44 +389,45 @@ class getGrid {
 
     sf::Vector2f distortPoints(float x, float y, const vector<Planet>& planets, const Camera& camera) {
 
-        float dxTotal = 0.0f;
-        float dyTotal = 0.0f;
+        // Convert this screen sample to metres before calculating distortion.
+        double worldX = camera.x + (x - 400.0) * SCALE / camera.zoom;
+        double worldY = camera.y - (y - 300.0) * SCALE / camera.zoom;
+        double dxTotal = 0.0;
+        double dyTotal = 0.0;
 
         for (const Planet& p : planets) {
+            double dx = p.getX() - worldX;
+            double dy = p.getY() - worldY;
+            double distance = max(hypot(dx, dy), 10.0 * SCALE);
 
-            auto screen = camera.toScreen(p.getX(), p.getY()); float px = screen.x;
-            float py = screen.y;
-
-            float dx = px - x;
-            float dy = py - y;
-
-            float r = sqrt(dx*dx + dy*dy);
-
-            r = max(r,10.0f);
-
-            // Restore the compact inward distortion; black holes get deeper wells.
-            // This is a visual cue, not a relativistic spacetime calculation.
+            // Fixed world distances: the well's size no longer depends on zoom.
+            // This remains an illustrative effect, separate from orbital physics.
             double massFactor = log1p(max(0.0, p.getMass()) / 5.972e24) / log(2.0);
-            double depth = 15.0 * massFactor / (1.0 + massFactor);
+            double depth = 15.0 * SCALE * massFactor / (1.0 + massFactor);
             if (p.isBlackHole()) depth *= 10.0;
-            float strength = static_cast<float>(depth / (1.0 + r / 80.0));
-            strength = min(strength, 0.9f * r);
-            dxTotal += strength * dx/r;
-            dyTotal += strength * dy/r;
+            double strength = depth / (1.0 + distance / (80.0 * SCALE));
+            strength = min(strength, 0.9 * distance);
+            dxTotal += strength * dx / distance;
+            dyTotal += strength * dy / distance;
         }
 
-        // Bound the combined pull even when several massive bodies overlap.
-        float displacement = sqrt(dxTotal * dxTotal + dyTotal * dyTotal);
-        if (displacement > maxDisplacement) {
-            dxTotal *= maxDisplacement / displacement;
-            dyTotal *= maxDisplacement / displacement;
+        double displacement = hypot(dxTotal, dyTotal);
+        double worldLimit = maxDisplacement * SCALE;
+        if (displacement > worldLimit) {
+            dxTotal *= worldLimit / displacement;
+            dyTotal *= worldLimit / displacement;
         }
-        return {
-            x + dxTotal,
-            y + dyTotal
-        };
+
+        auto screen = camera.toScreen(worldX + dxTotal, worldY + dyTotal);
+
+        // At extreme zoom, limit only the drawing displacement to retain offscreen
+        // grid endpoints. Normal and zoomed-out views use the world result directly.
+        sf::Vector2f offset = screen - sf::Vector2f(x, y);
+        float screenDistance = hypot(offset.x, offset.y);
+        if (screenDistance > maxDisplacement)
+            offset *= maxDisplacement / screenDistance;
+        return sf::Vector2f(x, y) + offset;
     }
-
     void updateGrid(const vector<Planet>& planets, const Camera& camera) {
         // Allocate the grid once, then update each vertex in place.
         if (VectorOfLinesV.empty()) iterateLinesV();
@@ -482,5 +483,14 @@ int main() {
     const auto* storage = grid.getLinesV()[0].data();
     grid.updateGrid(bodies, camera);
     if (storage != grid.getLinesV()[0].data()) return 6;
+    auto full = grid.distortPoints(500, 300, {hole}, camera);
+    camera.zoom = 0.1;
+    auto reduced = grid.distortPoints(410, 300, {hole}, camera);
+    if (abs((500 - full.x) * 0.1 - (410 - reduced.x)) > 0.001) return 7;
+    camera.x = 20 * SCALE;
+    auto moved = grid.distortPoints(408, 300, {hole}, camera);
+    if (abs(moved.x - (reduced.x - 2)) > 0.001) return 8;
+    cout << "Zoom scaling and camera translation passed.\n";
     cout << "Appearance, inward distortion, hidden endpoints, and buffer reuse passed.\n";
 }
+
