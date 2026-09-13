@@ -1,0 +1,3 @@
+C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-local/_deps/freetype-subbuild/CMakeFiles/freetype-populate.dir
+C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-local/_deps/freetype-subbuild/CMakeFiles/edit_cache.dir
+C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-local/_deps/freetype-subbuild/CMakeFiles/rebuild_cache.dir

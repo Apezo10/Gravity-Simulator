@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <algorithm>
+#include <string>
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -10,6 +12,32 @@ const double G = 6.67430e-11;
 //Scale metres to pixals
 const double SCALE = 2.0e9;
 
+// Camera position is in metres; screen coordinates stay in pixels.
+struct Camera {
+    double x = 0, y = 0, zoom = 1;
+    bool dragging = false;
+    sf::Vector2f lastMouse;
+
+    sf::Vector2f toScreen(double px, double py) const {
+        return {400.0f + static_cast<float>((px - x) * zoom / SCALE),
+                300.0f - static_cast<float>((py - y) * zoom / SCALE)};
+    }
+
+    void drag(sf::Vector2f mouse) {
+        x -= (mouse.x - lastMouse.x) * SCALE / zoom;
+        y += (mouse.y - lastMouse.y) * SCALE / zoom;
+        lastMouse = mouse;
+    }
+
+    void scroll(float delta, sf::Vector2f mouse) {
+        double oldScale = SCALE / zoom;
+        zoom = clamp(zoom * pow(1.25, delta), 0.01, 10000.0);
+        double newScale = SCALE / zoom;
+        // Keep the world point under the cursor stationary while zooming.
+        x += (mouse.x - 400) * (oldScale - newScale);
+        y -= (mouse.y - 300) * (oldScale - newScale);
+    }
+};
 //Simple class which describes the state of a single particle
 class Planet {
     private:
@@ -24,6 +52,11 @@ class Planet {
     double mass{};
     
     public: 
+    Planet() = default;
+
+    Planet(double x, double y, double vx, double vy, double r, double m)
+        : xPos(x), yPos(y), xVel(vx), yVel(vy), radius(r), mass(m) {}
+
     double getX() const {
         return xPos;
     }
@@ -101,6 +134,90 @@ class PlanetSystem {
     vector<Planet> planets;
 
     public:
+    bool chooseSetup() {
+        string answer;
+        while (true) {
+            cout << "Would you like to use a stellar preset? (yes/no): ";
+            if (!getline(cin, answer)) return false;
+
+            if (answer == "no" || answer == "n" || answer == "No" || answer == "N") {
+                getPlanets();
+                return true;
+            }
+            if (answer == "yes" || answer == "y" || answer == "Yes" || answer == "Y") {
+                break;
+            }
+            cout << "Please enter yes or no.\n";
+        }
+
+        // Each preset stores a name and the bodies used to initialize the system.
+        struct StellarPreset {
+            string name;
+            vector<Planet> bodies;
+        };
+
+        const double sunMass = 1.9885e30;
+        const double earthMass = 5.972e24;
+        const double separation = 1.496e11;
+        const double orbitalSpeed = sqrt(G * (sunMass + earthMass) / separation);
+        const double earthFraction = earthMass / (sunMass + earthMass);
+        const double sunFraction = sunMass / (sunMass + earthMass);
+        const double earthX = separation * sunFraction;
+        const double earthSpeed = orbitalSpeed * sunFraction;
+        const double moonDistance = 3.844e8;
+        const double moonSpeed = sqrt(G * earthMass / moonDistance);
+
+        // Reuse these starting bodies in the solar presets.
+        const Planet sun(-separation * earthFraction, 0, 0,
+                         -orbitalSpeed * earthFraction, 6.957e8, sunMass);
+        const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass);
+
+        // Equal stars are half the separation from their shared center.
+        const double binarySpeed = sqrt(G * sunMass / (2 * separation));
+
+        // Planet arguments: x, y, x velocity, y velocity, radius, mass (SI units).
+        // These are approximate circular starting orbits, not date-specific positions.
+        const vector<StellarPreset> presets = {
+            {"Sun-Earth", {sun, earth}},
+            {"Sun-Earth-Moon", {
+                sun, earth,
+                // The Moon shares Earth's motion, plus its own orbital velocity.
+                Planet(earthX + moonDistance, 0, 0,
+                       earthSpeed + moonSpeed, 1.7374e6, 7.342e22)
+            }},
+            {"Mini solar system (Sun, Mercury, Venus, Earth, Mars)", {
+                sun,
+                // Circular speed = sqrt(G * central mass / orbital distance).
+                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23),
+                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24),
+                earth,
+                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23)
+            }},
+            {"Binary stars (two Sun-like stars)", {
+                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass),
+                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass)
+            }}
+        };
+
+        cout << "\nWhich preset would you like to use?\n";
+        for (size_t i = 0; i < presets.size(); ++i) {
+            cout << i + 1 << ". " << presets[i].name << '\n';
+        }
+
+        while (true) {
+            cout << "Enter preset number: ";
+            if (!getline(cin, answer)) return false;
+            for (size_t i = 0; i < presets.size(); ++i) {
+                if (answer == to_string(i + 1)) {
+                    planets = presets[i].bodies;
+                    cout << "Loaded " << presets[i].name << ".\n";
+                    return true;
+                }
+            }
+            cout << "Invalid preset. Choose a number from the list.\n";
+        }
+    }
+
     void getPlanets() {
         int size{};
 
@@ -185,14 +302,6 @@ class PlanetSystem {
         }
     }
 
-    struct StelarPreset {
-        double x{};
-        double y{};
-        double vx{};
-        double vy{};
-        double radius{};
-        sf::Color color{};
-    };
     
     //VERY IMPORTANT LINE - GETTER FOR THE VECTOR and allows it to be reffered to by reference
     const vector<Planet>& getParSystem() {
@@ -219,13 +328,13 @@ class getGrid {
             for (float i=0.0; i<600.0; i+=5.0) {
                 lineV.push_back(sf::Vertex{{j, i}});
             }
-    
+
             VectorOfLinesV.push_back(lineV);
         }
     }
 
     void iterateLinesH() {
-        
+
         //Nested loop to iterate through each of the verticle grid lines
         for (float i=0.0; i<600.0; i+=50.0) {
 
@@ -241,15 +350,15 @@ class getGrid {
 
 
 
-    sf::Vector2f distortPoints(float x, float y, const vector<Planet>& planets) {
+    sf::Vector2f distortPoints(float x, float y, const vector<Planet>& planets, const Camera& camera) {
 
         float dxTotal = 0.0f;
         float dyTotal = 0.0f;
 
         for (const Planet& p : planets) {
 
-            float px = 400.0f + static_cast<float> (p.getX()/SCALE);
-            float py = 300.0f - static_cast<float> (p.getY()/SCALE);
+            auto screen = camera.toScreen(p.getX(), p.getY()); float px = screen.x;
+            float py = screen.y;
 
             float dx = px - x;
             float dy = py - y;
@@ -271,27 +380,24 @@ class getGrid {
         };
     }
 
-    void updateGrid(const vector<Planet>& planets) {
-        VectorOfLinesV.clear();
-        VectorOfLinesH.clear();
+    void updateGrid(const vector<Planet>& planets, const Camera& camera) {
+        // Allocate the grid once, then update each vertex in place.
+        if (VectorOfLinesV.empty()) iterateLinesV();
+        if (VectorOfLinesH.empty()) iterateLinesH();
 
-        iterateLinesV();
-        iterateLinesH();
-
-        for (auto& line : VectorOfLinesV) {
-            for (auto& vertex : line) {
-                vertex.position = distortPoints(vertex.position.x, vertex.position.y, planets);
+        for (size_t line = 0; line < VectorOfLinesV.size(); ++line) {
+            for (size_t point = 0; point < VectorOfLinesV[line].size(); ++point) {
+                VectorOfLinesV[line][point].position =
+                    distortPoints(line * 50.0f, point * 5.0f, planets, camera);
             }
         }
-
-        for (auto& line : VectorOfLinesH) {
-            for (auto& vertex : line) {
-                vertex.position = distortPoints(vertex.position.x, vertex.position.y, planets);
+        for (size_t line = 0; line < VectorOfLinesH.size(); ++line) {
+            for (size_t point = 0; point < VectorOfLinesH[line].size(); ++point) {
+                VectorOfLinesH[line][point].position =
+                    distortPoints(point * 5.0f, line * 50.0f, planets, camera);
             }
         }
     }
-
-
     //Returns the vector as a vector
     const vector<vector<sf::Vertex>>& getLinesV() const {
         return VectorOfLinesV;
@@ -308,9 +414,10 @@ int main() {
 //Create PlanetSystem class
 PlanetSystem p;
 getGrid g;
+Camera camera;
 
 //Initialize the values in the vector
-p.getPlanets();
+if (!p.chooseSetup()) return 0;
 p.printPlanet();
 
 
@@ -318,9 +425,30 @@ p.printPlanet();
 
 sf::RenderWindow window(sf::VideoMode({800, 600}), "Gravity Sim");
 
+// Reuse the shape instead of allocating its vertices for every body each frame.
+sf::CircleShape planet;
 while (window.isOpen()) {
 
     while (const auto event = window.pollEvent()) {
+        if (const auto* button = event->getIf<sf::Event::MouseButtonPressed>()) {
+            if (button->button == sf::Mouse::Button::Left) {
+                camera.dragging = true;
+                camera.lastMouse = window.mapPixelToCoords(button->position);
+            }
+        }
+        if (const auto* button = event->getIf<sf::Event::MouseButtonReleased>()) {
+            if (button->button == sf::Mouse::Button::Left) camera.dragging = false;
+        }
+        // Prevent a stuck drag when the mouse is released outside the window.
+        if (event->is<sf::Event::FocusLost>() || event->is<sf::Event::MouseLeft>())
+            camera.dragging = false;
+        if (const auto* mouse = event->getIf<sf::Event::MouseMoved>()) {
+            if (camera.dragging) camera.drag(window.mapPixelToCoords(mouse->position));
+        }
+        if (const auto* wheel = event->getIf<sf::Event::MouseWheelScrolled>()) {
+            if (wheel->wheel == sf::Mouse::Wheel::Vertical)
+                camera.scroll(wheel->delta, window.mapPixelToCoords(wheel->position));
+        }
         if (event->is<sf::Event::Closed>()) {
             window.close();
         }
@@ -332,7 +460,7 @@ while (window.isOpen()) {
 
         //________________________________________________________________________
     //THIS DRAWS THE GRID
-    g.updateGrid(p.getParSystem());
+    g.updateGrid(p.getParSystem(), camera);
 
     //Draw all the verticle lines
     for (const auto& line : g.getLinesV()) {
@@ -357,15 +485,17 @@ while (window.isOpen()) {
         if (mass > 1e29) {
             r = 30.0f;
         }
-        float x = 400.0 + static_cast<float> (Planet.getX()/SCALE);
-        float y = 300.0f - static_cast<float> (Planet.getY()/SCALE);
 
 
-        sf::CircleShape planet(r);
+        auto position = camera.toScreen(Planet.getX(), Planet.getY());
+
+
+
+        planet.setRadius(r);
         planet.setOrigin({r,r});
         planet.setFillColor(sf::Color(135, 206, 235));
 
-        planet.setPosition({x,y});
+        planet.setPosition(position);
 
         window.draw(planet);
         }
@@ -376,4 +506,3 @@ while (window.isOpen()) {
 
     return 0;
 }
-

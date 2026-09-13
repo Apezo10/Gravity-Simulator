@@ -1,0 +1,325 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 6,
+					"id" : "Git::Git::@893330504bf6e80d5dc6",
+					"jsonFile" : "target-Git__Git-Debug-6aedd4aaf1a8d9e36e9c.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "OpenGL::GL::@c6ce6ff42096da5569ec",
+					"jsonFile" : "target-OpenGL__GL-Debug-e74f114ae7cd86ab77f4.json",
+					"name" : "OpenGL::GL",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "OpenGL::GLU::@c6ce6ff42096da5569ec",
+					"jsonFile" : "target-OpenGL__GLU-Debug-7e8cd54f02ebbe3db6fc.json",
+					"name" : "OpenGL::GLU",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Threads::Threads::@7cd60416d6f7c2eb69ad",
+					"jsonFile" : "target-Threads__Threads-Debug-b81877e8077553ae391d.json",
+					"name" : "Threads::Threads",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "freetype-interface::@ff97b760e215edbc3eac",
+					"jsonFile" : "target-freetype-interface-Debug-29e7608a7585d6d59899.json",
+					"name" : "freetype-interface",
+					"projectIndex" : 2
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "dependencies/sfml-build",
+					"childIndexes" : 
+					[
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.sfml-build-Debug-ae5a246f0f591f2ab1b7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "build-ninja/_deps/sfml-src"
+				},
+				{
+					"build" : "dependencies/sfml-build/src/SFML",
+					"childIndexes" : 
+					[
+						3,
+						4,
+						5,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.sfml-build.src.SFML-Debug-f78fbe9b2c199c1fadb7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "build-ninja/_deps/sfml-src/src/SFML"
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						3
+					],
+					"build" : "dependencies/sfml-build/src/SFML/System",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.sfml-build.src.SFML.System-Debug-b45f4af4e845a7f7bd50.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 1,
+					"source" : "build-ninja/_deps/sfml-src/src/SFML/System",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "dependencies/sfml-build/src/SFML/Main",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.sfml-build.src.SFML.Main-Debug-222c423a06340a6f2c2e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 1,
+					"source" : "build-ninja/_deps/sfml-src/src/SFML/Main",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						1,
+						2
+					],
+					"build" : "dependencies/sfml-build/src/SFML/Window",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.sfml-build.src.SFML.Window-Debug-5c28d41170fe48c20eea.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 1,
+					"source" : "build-ninja/_deps/sfml-src/src/SFML/Window",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "dependencies/sfml-build/src/SFML/Graphics",
+					"childIndexes" : 
+					[
+						7
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.sfml-build.src.SFML.Graphics-Debug-63d027507c98ed03ab68.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 1,
+					"source" : "build-ninja/_deps/sfml-src/src/SFML/Graphics",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						4
+					],
+					"build" : "dependencies/freetype-build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-dependencies.freetype-build-Debug-2429276ce6cd0165e0dd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 2,
+					"source" : "build-ninja/dependencies/freetype-src",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "VectorsPractice",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"name" : "SFML",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						4
+					],
+					"directoryIndexes" : 
+					[
+						7
+					],
+					"name" : "freetype",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 7,
+					"id" : "freetype::@ff97b760e215edbc3eac",
+					"jsonFile" : "target-freetype-Debug-be533c2a6e31984ec322.json",
+					"name" : "freetype",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "sfml-graphics::@893330504bf6e80d5dc6",
+					"jsonFile" : "target-sfml-graphics-Debug-789bfc53baa98950a6ff.json",
+					"name" : "sfml-graphics",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "sfml-main::@f06df295dec9b220eb23",
+					"jsonFile" : "target-sfml-main-Debug-93818cafb9a220e313c9.json",
+					"name" : "sfml-main",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "sfml-system::@7cd60416d6f7c2eb69ad",
+					"jsonFile" : "target-sfml-system-Debug-f711fa77c48cdcedbe37.json",
+					"name" : "sfml-system",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "sfml-window::@c6ce6ff42096da5569ec",
+					"jsonFile" : "target-sfml-window-Debug-fe2de1e823ad002144e8.json",
+					"name" : "sfml-window",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vectors::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vectors-Debug-f58053b3285f23dd42d1.json",
+					"name" : "vectors",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja",
+		"source" : "C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	}
+}

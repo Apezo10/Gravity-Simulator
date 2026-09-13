@@ -1,0 +1,21 @@
+# ninja log v6
+3	84	8110093720148301	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-mkdir	e008434f15926963
+3	84	8110093720148301	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-mkdir	e008434f15926963
+84	17890	8110093898152883	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-download	5509e4985e337f9
+84	17890	8110093898152883	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-download	5509e4985e337f9
+17890	18047	8110093898307760	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-update	45f99c54c93f406e
+17890	18047	8110093898307760	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-update	45f99c54c93f406e
+18047	18127	8110093900602025	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-patch	5c80367e3f65d642
+18047	18127	8110093900602025	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-patch	5c80367e3f65d642
+18127	18193	8110093901254008	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-configure	e3c6a1d19fbec901
+18127	18193	8110093901254008	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-configure	e3c6a1d19fbec901
+18193	18261	8110093901930408	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-build	a20d065d1f0c55a1
+18193	18261	8110093901930408	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-build	a20d065d1f0c55a1
+18261	18330	8110093902625362	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-install	59e09c801787f062
+18261	18330	8110093902625362	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-install	59e09c801787f062
+18330	18398	8110093903303412	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-test	9199d150ffecd8a2
+18330	18398	8110093903303412	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-test	9199d150ffecd8a2
+18398	18490	8110093904193933	CMakeFiles/freetype-populate-complete	7f772d4e3c968152
+18398	18490	8110093904193933	freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-done	7f772d4e3c968152
+18398	18490	8110093904193933	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/CMakeFiles/freetype-populate-complete	7f772d4e3c968152
+18398	18490	8110093904193933	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-ninja/dependencies/freetype-subbuild/freetype-populate-prefix/src/freetype-populate-stamp/freetype-populate-done	7f772d4e3c968152

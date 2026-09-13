@@ -1,0 +1,21 @@
+# ninja log v6
+1	66	8110098732889138	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir	d65a8cad77159ea9
+1	66	8110098732889138	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir	d65a8cad77159ea9
+66	2981	8110098762040110	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download	4a008bc838cc346b
+66	2981	8110098762040110	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download	4a008bc838cc346b
+2982	3046	8110098762674513	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update	9e9cb52ea1c86260
+2982	3046	8110098762674513	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update	9e9cb52ea1c86260
+3046	3117	8110098763399476	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch	a891ad14e746fdf3
+3046	3117	8110098763399476	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch	a891ad14e746fdf3
+3118	3178	8110098764013035	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure	e6978dc0bde85862
+3118	3178	8110098764013035	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure	e6978dc0bde85862
+3178	3269	8110098764880687	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build	61327a72a553864e
+3178	3269	8110098764880687	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build	61327a72a553864e
+3269	3345	8110098765669515	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install	2c835b19cb3c3dad
+3269	3345	8110098765669515	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install	2c835b19cb3c3dad
+3345	3426	8110098766460561	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test	d3e4367b484c9d2b
+3345	3426	8110098766460561	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test	d3e4367b484c9d2b
+3426	3524	8110098767468271	CMakeFiles/sfml-populate-complete	2dc6f32f4a2dee0c
+3426	3524	8110098767468271	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-done	2dc6f32f4a2dee0c
+3426	3524	8110098767468271	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/CMakeFiles/sfml-populate-complete	2dc6f32f4a2dee0c
+3426	3524	8110098767468271	C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-done	2dc6f32f4a2dee0c

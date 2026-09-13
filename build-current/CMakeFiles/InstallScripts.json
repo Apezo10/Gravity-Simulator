@@ -1,0 +1,14 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-build/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-build/src/SFML/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-build/src/SFML/System/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-build/src/SFML/Main/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-build/src/SFML/Window/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/sfml-build/src/SFML/Graphics/cmake_install.cmake",
+		"C:/Users/Adins/OneDrive/Documents/VScode Projects/Learning c++/Gravity Sim/Gravity-Simulator/build-current/_deps/freetype-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
