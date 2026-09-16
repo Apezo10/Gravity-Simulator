@@ -5,13 +5,6 @@
 			"abstractTargets" : 
 			[
 				{
-					"directoryIndex" : 6,
-					"id" : "Git::Git::@98af38147d5fa7e70f61",
-					"jsonFile" : "target-Git__Git-Debug-41d20b60e000c4d33994.json",
-					"name" : "Git::Git",
-					"projectIndex" : 1
-				},
-				{
 					"directoryIndex" : 5,
 					"id" : "OpenGL::GL::@5730451e331e3690ae65",
 					"jsonFile" : "target-OpenGL__GL-Debug-cb2a367fa2b2da2b8234.json",
@@ -99,7 +92,7 @@
 				{
 					"abstractTargetIndexes" : 
 					[
-						3
+						2
 					],
 					"build" : "_deps/sfml-build/src/SFML/System",
 					"hasInstallRule" : true,
@@ -135,8 +128,8 @@
 				{
 					"abstractTargetIndexes" : 
 					[
-						1,
-						2
+						0,
+						1
 					],
 					"build" : "_deps/sfml-build/src/SFML/Window",
 					"hasInstallRule" : true,
@@ -154,10 +147,6 @@
 					]
 				},
 				{
-					"abstractTargetIndexes" : 
-					[
-						0
-					],
 					"build" : "_deps/sfml-build/src/SFML/Graphics",
 					"childIndexes" : 
 					[
@@ -180,11 +169,11 @@
 				{
 					"abstractTargetIndexes" : 
 					[
-						4
+						3
 					],
 					"build" : "_deps/freetype-build",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.freetype-build-Debug-755b4ae5e2e3be215e7c.json",
+					"jsonFile" : "directory-_deps.freetype-build-Debug-e80d26dd2d9aec58c80b.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -221,8 +210,7 @@
 					[
 						0,
 						1,
-						2,
-						3
+						2
 					],
 					"childIndexes" : 
 					[
@@ -250,7 +238,7 @@
 				{
 					"abstractTargetIndexes" : 
 					[
-						4
+						3
 					],
 					"directoryIndexes" : 
 					[
@@ -304,7 +292,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "vectors::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-vectors-Debug-043844dafad612f9a3f7.json",
+					"jsonFile" : "target-vectors-Debug-fd065130fdc479f0c8b5.json",
 					"name" : "vectors",
 					"projectIndex" : 0
 				}

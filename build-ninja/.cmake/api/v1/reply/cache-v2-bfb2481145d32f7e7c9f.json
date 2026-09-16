@@ -1787,7 +1787,7 @@
 				}
 			],
 			"type" : "BOOL",
-			"value" : "OFF"
+			"value" : "ON"
 		},
 		{
 			"name" : "FETCHCONTENT_QUIET",

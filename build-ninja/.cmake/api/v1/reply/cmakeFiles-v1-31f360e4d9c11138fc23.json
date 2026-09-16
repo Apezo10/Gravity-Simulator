@@ -152,11 +152,6 @@
 			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/ExternalProject/shared_internal_commands.cmake"
 		},
 		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent/CMakeLists.cmake.in"
-		},
-		{
 			"isGenerated" : true,
 			"path" : "build-ninja/_deps/sfml-src/CMakeLists.txt"
 		},
@@ -440,26 +435,6 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/ExternalProject/shared_internal_commands.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/FindGit.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/FindPackageHandleStandardArgs.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/FindPackageMessage.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent/CMakeLists.cmake.in"
 		},
 		{
 			"isGenerated" : true,

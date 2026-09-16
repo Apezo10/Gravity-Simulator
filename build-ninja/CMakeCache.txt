@@ -335,7 +335,7 @@ FETCHCONTENT_BASE_DIR:PATH=C:/Users/Adins/Downloads/Learning-cpp/Practice/build-
 
 //Disables all attempts to download or update content and assumes
 // source dirs already exist
-FETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF
+FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON
 
 //Enables QUIET option for all content population
 FETCHCONTENT_QUIET:BOOL=ON

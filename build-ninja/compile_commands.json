@@ -1,7 +1,7 @@
 [
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\vectors.dir\\vectors.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\vectors.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -DSIM_FONT_PATH=\\\"C:/Users/Adins/Downloads/Learning-cpp/Practice/assets/tuffy.ttf\\\" -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\vectors.dir\\vectors.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\vectors.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/vectors.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/vectors.dir/vectors.cpp.obj"
 },
