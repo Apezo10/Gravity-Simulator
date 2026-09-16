@@ -1,0 +1,94 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"build-ninja/dependencies/freetype-src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 631,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 639,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 644,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"dependencies/sfml-build/lib/libfreetyped.a"
+			],
+			"targetId" : "freetype::@ff97b760e215edbc3eac",
+			"targetIndex" : 0,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "headers",
+			"destination" : "lib/cmake/freetype",
+			"exportName" : "freetype-targets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "freetype::@ff97b760e215edbc3eac",
+					"index" : 0
+				},
+				{
+					"id" : "freetype-interface::@ff97b760e215edbc3eac",
+					"index" : 4
+				}
+			],
+			"paths" : 
+			[
+				"dependencies/freetype-build/CMakeFiles/Export/778b4f54a68e80ec034bf381f364ca2c/freetype-config.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "headers",
+			"destination" : "lib/cmake/freetype",
+			"paths" : 
+			[
+				"build-ninja/dependencies/freetype-build/freetype-config-version.cmake"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "dependencies/freetype-build",
+		"source" : "build-ninja/dependencies/freetype-src"
+	}
+}
