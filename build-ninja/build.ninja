@@ -81,6 +81,213 @@ build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Debug CMakeFiles/vectors.dir/v
 
 
 #############################################
+# Utility command for Experimental
+
+build Experimental: phony CMakeFiles/Experimental
+
+
+#############################################
+# Utility command for Nightly
+
+build Nightly: phony CMakeFiles/Nightly
+
+
+#############################################
+# Utility command for Continuous
+
+build Continuous: phony CMakeFiles/Continuous
+
+
+#############################################
+# Utility command for NightlyMemoryCheck
+
+build NightlyMemoryCheck: phony CMakeFiles/NightlyMemoryCheck
+
+
+#############################################
+# Utility command for NightlyStart
+
+build NightlyStart: phony CMakeFiles/NightlyStart
+
+
+#############################################
+# Utility command for NightlyUpdate
+
+build NightlyUpdate: phony CMakeFiles/NightlyUpdate
+
+
+#############################################
+# Utility command for NightlyConfigure
+
+build NightlyConfigure: phony CMakeFiles/NightlyConfigure
+
+
+#############################################
+# Utility command for NightlyBuild
+
+build NightlyBuild: phony CMakeFiles/NightlyBuild
+
+
+#############################################
+# Utility command for NightlyTest
+
+build NightlyTest: phony CMakeFiles/NightlyTest
+
+
+#############################################
+# Utility command for NightlyCoverage
+
+build NightlyCoverage: phony CMakeFiles/NightlyCoverage
+
+
+#############################################
+# Utility command for NightlyMemCheck
+
+build NightlyMemCheck: phony CMakeFiles/NightlyMemCheck
+
+
+#############################################
+# Utility command for NightlySubmit
+
+build NightlySubmit: phony CMakeFiles/NightlySubmit
+
+
+#############################################
+# Utility command for ExperimentalStart
+
+build ExperimentalStart: phony CMakeFiles/ExperimentalStart
+
+
+#############################################
+# Utility command for ExperimentalUpdate
+
+build ExperimentalUpdate: phony CMakeFiles/ExperimentalUpdate
+
+
+#############################################
+# Utility command for ExperimentalConfigure
+
+build ExperimentalConfigure: phony CMakeFiles/ExperimentalConfigure
+
+
+#############################################
+# Utility command for ExperimentalBuild
+
+build ExperimentalBuild: phony CMakeFiles/ExperimentalBuild
+
+
+#############################################
+# Utility command for ExperimentalTest
+
+build ExperimentalTest: phony CMakeFiles/ExperimentalTest
+
+
+#############################################
+# Utility command for ExperimentalCoverage
+
+build ExperimentalCoverage: phony CMakeFiles/ExperimentalCoverage
+
+
+#############################################
+# Utility command for ExperimentalMemCheck
+
+build ExperimentalMemCheck: phony CMakeFiles/ExperimentalMemCheck
+
+
+#############################################
+# Utility command for ExperimentalSubmit
+
+build ExperimentalSubmit: phony CMakeFiles/ExperimentalSubmit
+
+
+#############################################
+# Utility command for ContinuousStart
+
+build ContinuousStart: phony CMakeFiles/ContinuousStart
+
+
+#############################################
+# Utility command for ContinuousUpdate
+
+build ContinuousUpdate: phony CMakeFiles/ContinuousUpdate
+
+
+#############################################
+# Utility command for ContinuousConfigure
+
+build ContinuousConfigure: phony CMakeFiles/ContinuousConfigure
+
+
+#############################################
+# Utility command for ContinuousBuild
+
+build ContinuousBuild: phony CMakeFiles/ContinuousBuild
+
+
+#############################################
+# Utility command for ContinuousTest
+
+build ContinuousTest: phony CMakeFiles/ContinuousTest
+
+
+#############################################
+# Utility command for ContinuousCoverage
+
+build ContinuousCoverage: phony CMakeFiles/ContinuousCoverage
+
+
+#############################################
+# Utility command for ContinuousMemCheck
+
+build ContinuousMemCheck: phony CMakeFiles/ContinuousMemCheck
+
+
+#############################################
+# Utility command for ContinuousSubmit
+
+build ContinuousSubmit: phony CMakeFiles/ContinuousSubmit
+
+# =============================================================================
+# Object build statements for EXECUTABLE target input_validation_tests
+
+
+#############################################
+# Order-only phony target for input_validation_tests
+
+build cmake_object_order_depends_target_input_validation_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+
+build CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj: CXX_COMPILER__input_validation_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/input_validation.cpp || cmake_object_order_depends_target_input_validation_tests
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\input_validation_tests.dir\tests\input_validation.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\input_validation_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\input_validation_tests.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\input_validation_tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target input_validation_tests
+
+
+#############################################
+# Link the executable input_validation_tests.exe
+
+build input_validation_tests.exe: CXX_EXECUTABLE_LINKER__input_validation_tests_Debug CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\input_validation_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = input_validation_tests.exe
+  TARGET_IMPLIB = libinput_validation_tests.dll.a
+  TARGET_PDB = input_validation_tests.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\input_validation_tests.dir
+
+
+#############################################
 # Utility command for package
 
 build CMakeFiles/package.util: CUSTOM_COMMAND all
@@ -102,6 +309,18 @@ build CMakeFiles/package_source.util: CUSTOM_COMMAND
   restat = 1
 
 build package_source: phony CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for test
+
+build CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build test: phony CMakeFiles/test.util
 
 
 #############################################
@@ -169,6 +388,230 @@ build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
 
 build install/strip: phony CMakeFiles/install/strip.util
 
+
+#############################################
+# Custom command for CMakeFiles\Experimental
+
+build CMakeFiles/Experimental | ${cmake_ninja_workdir}CMakeFiles/Experimental: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\Nightly
+
+build CMakeFiles/Nightly | ${cmake_ninja_workdir}CMakeFiles/Nightly: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\Continuous
+
+build CMakeFiles/Continuous | ${cmake_ninja_workdir}CMakeFiles/Continuous: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyMemoryCheck
+
+build CMakeFiles/NightlyMemoryCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemoryCheck: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=NightlyMemoryCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyStart
+
+build CMakeFiles/NightlyStart | ${cmake_ninja_workdir}CMakeFiles/NightlyStart: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Start -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyUpdate
+
+build CMakeFiles/NightlyUpdate | ${cmake_ninja_workdir}CMakeFiles/NightlyUpdate: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Update -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyConfigure
+
+build CMakeFiles/NightlyConfigure | ${cmake_ninja_workdir}CMakeFiles/NightlyConfigure: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Configure -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyBuild
+
+build CMakeFiles/NightlyBuild | ${cmake_ninja_workdir}CMakeFiles/NightlyBuild: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Build -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyTest
+
+build CMakeFiles/NightlyTest | ${cmake_ninja_workdir}CMakeFiles/NightlyTest: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Test -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyCoverage
+
+build CMakeFiles/NightlyCoverage | ${cmake_ninja_workdir}CMakeFiles/NightlyCoverage: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Coverage -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyMemCheck
+
+build CMakeFiles/NightlyMemCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemCheck: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlySubmit
+
+build CMakeFiles/NightlySubmit | ${cmake_ninja_workdir}CMakeFiles/NightlySubmit: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Nightly -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalStart
+
+build CMakeFiles/ExperimentalStart | ${cmake_ninja_workdir}CMakeFiles/ExperimentalStart: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Start -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalUpdate
+
+build CMakeFiles/ExperimentalUpdate | ${cmake_ninja_workdir}CMakeFiles/ExperimentalUpdate: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Update -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalConfigure
+
+build CMakeFiles/ExperimentalConfigure | ${cmake_ninja_workdir}CMakeFiles/ExperimentalConfigure: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Configure -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalBuild
+
+build CMakeFiles/ExperimentalBuild | ${cmake_ninja_workdir}CMakeFiles/ExperimentalBuild: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Build -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalTest
+
+build CMakeFiles/ExperimentalTest | ${cmake_ninja_workdir}CMakeFiles/ExperimentalTest: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Test -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalCoverage
+
+build CMakeFiles/ExperimentalCoverage | ${cmake_ninja_workdir}CMakeFiles/ExperimentalCoverage: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Coverage -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalMemCheck
+
+build CMakeFiles/ExperimentalMemCheck | ${cmake_ninja_workdir}CMakeFiles/ExperimentalMemCheck: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalSubmit
+
+build CMakeFiles/ExperimentalSubmit | ${cmake_ninja_workdir}CMakeFiles/ExperimentalSubmit: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Experimental -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousStart
+
+build CMakeFiles/ContinuousStart | ${cmake_ninja_workdir}CMakeFiles/ContinuousStart: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Start -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousUpdate
+
+build CMakeFiles/ContinuousUpdate | ${cmake_ninja_workdir}CMakeFiles/ContinuousUpdate: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Update -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousConfigure
+
+build CMakeFiles/ContinuousConfigure | ${cmake_ninja_workdir}CMakeFiles/ContinuousConfigure: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Configure -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousBuild
+
+build CMakeFiles/ContinuousBuild | ${cmake_ninja_workdir}CMakeFiles/ContinuousBuild: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Build -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousTest
+
+build CMakeFiles/ContinuousTest | ${cmake_ninja_workdir}CMakeFiles/ContinuousTest: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Test -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousCoverage
+
+build CMakeFiles/ContinuousCoverage | ${cmake_ninja_workdir}CMakeFiles/ContinuousCoverage: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Coverage -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousMemCheck
+
+build CMakeFiles/ContinuousMemCheck | ${cmake_ninja_workdir}CMakeFiles/ContinuousMemCheck: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousSubmit
+
+build CMakeFiles/ContinuousSubmit | ${cmake_ninja_workdir}CMakeFiles/ContinuousSubmit: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja && "C:\Program Files\CMake\bin\ctest.exe" -DMODEL=Continuous -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt
@@ -197,6 +640,18 @@ build _deps/sfml-build/CMakeFiles/package_source.util: CUSTOM_COMMAND
   restat = 1
 
 build _deps/sfml-build/package_source: phony _deps/sfml-build/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for test
+
+build _deps/sfml-build/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\sfml-build && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/sfml-build/test: phony _deps/sfml-build/CMakeFiles/test.util
 
 
 #############################################
@@ -292,6 +747,18 @@ build _deps/sfml-build/src/SFML/CMakeFiles/package_source.util: CUSTOM_COMMAND
   restat = 1
 
 build _deps/sfml-build/src/SFML/package_source: phony _deps/sfml-build/src/SFML/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for test
+
+build _deps/sfml-build/src/SFML/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\sfml-build\src\SFML && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/sfml-build/src/SFML/test: phony _deps/sfml-build/src/SFML/CMakeFiles/test.util
 
 
 #############################################
@@ -517,6 +984,18 @@ build _deps/sfml-build/src/SFML/System/package_source: phony _deps/sfml-build/sr
 
 
 #############################################
+# Utility command for test
+
+build _deps/sfml-build/src/SFML/System/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\sfml-build\src\SFML\System && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/sfml-build/src/SFML/System/test: phony _deps/sfml-build/src/SFML/System/CMakeFiles/test.util
+
+
+#############################################
 # Utility command for edit_cache
 
 build _deps/sfml-build/src/SFML/System/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
@@ -646,6 +1125,18 @@ build _deps/sfml-build/src/SFML/Main/CMakeFiles/package_source.util: CUSTOM_COMM
   restat = 1
 
 build _deps/sfml-build/src/SFML/Main/package_source: phony _deps/sfml-build/src/SFML/Main/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for test
+
+build _deps/sfml-build/src/SFML/Main/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\sfml-build\src\SFML\Main && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/sfml-build/src/SFML/Main/test: phony _deps/sfml-build/src/SFML/Main/CMakeFiles/test.util
 
 
 #############################################
@@ -1028,6 +1519,18 @@ build _deps/sfml-build/src/SFML/Window/CMakeFiles/package_source.util: CUSTOM_CO
   restat = 1
 
 build _deps/sfml-build/src/SFML/Window/package_source: phony _deps/sfml-build/src/SFML/Window/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for test
+
+build _deps/sfml-build/src/SFML/Window/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\sfml-build\src\SFML\Window && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/sfml-build/src/SFML/Window/test: phony _deps/sfml-build/src/SFML/Window/CMakeFiles/test.util
 
 
 #############################################
@@ -1420,6 +1923,18 @@ build _deps/sfml-build/src/SFML/Graphics/CMakeFiles/package_source.util: CUSTOM_
   restat = 1
 
 build _deps/sfml-build/src/SFML/Graphics/package_source: phony _deps/sfml-build/src/SFML/Graphics/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for test
+
+build _deps/sfml-build/src/SFML/Graphics/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\sfml-build\src\SFML\Graphics && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/sfml-build/src/SFML/Graphics/test: phony _deps/sfml-build/src/SFML/Graphics/CMakeFiles/test.util
 
 
 #############################################
@@ -1974,6 +2489,18 @@ build _deps/freetype-build/package_source: phony _deps/freetype-build/CMakeFiles
 
 
 #############################################
+# Utility command for test
+
+build _deps/freetype-build/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\Adins\Downloads\Learning-cpp\Practice\build-ninja\_deps\freetype-build && "C:\Program Files\CMake\bin\ctest.exe" "
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build _deps/freetype-build/test: phony _deps/freetype-build/CMakeFiles/test.util
+
+
+#############################################
 # Utility command for edit_cache
 
 build _deps/freetype-build/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
@@ -2043,6 +2570,8 @@ build _deps/freetype-build/install/strip: phony _deps/freetype-build/CMakeFiles/
 
 build freetype: phony _deps/sfml-build/lib/libfreetyped.a
 
+build input_validation_tests: phony input_validation_tests.exe
+
 build libfreetyped.a: phony _deps/sfml-build/lib/libfreetyped.a
 
 build libsfml-graphics-s-d.a: phony _deps/sfml-build/lib/libsfml-graphics-s-d.a
@@ -2071,7 +2600,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
 
-build all: phony vectors.exe _deps/sfml-build/all
+build all: phony vectors.exe input_validation_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 
@@ -2129,14 +2658,14 @@ build _deps/sfml-build/src/SFML/Window/all: phony _deps/sfml-build/lib/libsfml-w
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/System/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Main/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Window/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Graphics/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/freetype-build/cmake_install.cmake: RERUN_CMAKE | C$:/Program$ Files/CMake/share/cmake-4.4/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeDependentOption.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeParseArguments.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeRCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPack.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPackComponent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCXXSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFileCXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckLibraryExists.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/ExternalProject/shared_internal_commands.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindOpenGL.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageMessage.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPkgConfig.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/GNUInstallDirs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckCommon.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Templates/CPackConfig.cmake.in C$:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt CMakeCache.txt CMakeFiles/4.4.3/CMakeCCompiler.cmake CMakeFiles/4.4.3/CMakeCXXCompiler.cmake CMakeFiles/4.4.3/CMakeRCCompiler.cmake CMakeFiles/4.4.3/CMakeSystem.cmake _deps/freetype-src/CMakeLists.txt _deps/sfml-src/CMakeLists.txt _deps/sfml-src/cmake/CompilerWarnings.cmake _deps/sfml-src/cmake/Config.cmake _deps/sfml-src/cmake/Macros.cmake _deps/sfml-src/cmake/Mesa3D.cmake _deps/sfml-src/cmake/SFMLConfig.cmake.in _deps/sfml-src/src/SFML/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/Dependencies.cmake.in _deps/sfml-src/src/SFML/Main/CMakeLists.txt _deps/sfml-src/src/SFML/System/CMakeLists.txt _deps/sfml-src/src/SFML/System/Dependencies.cmake.in _deps/sfml-src/src/SFML/Window/CMakeLists.txt _deps/sfml-src/src/SFML/Window/Dependencies.cmake.in
+build build.ninja C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/System/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Main/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Window/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/Graphics/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/freetype-build/cmake_install.cmake C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CTestTestfile.cmake: RERUN_CMAKE | C$:/Program$ Files/CMake/share/cmake-4.4/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeDependentOption.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeParseArguments.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeRCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPack.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPackComponent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CTest.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CTestTargets.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CTestUseLaunchers.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCXXSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFileCXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckLibraryExists.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/DartConfiguration.tcl.in C$:/Program$ Files/CMake/share/cmake-4.4/Modules/ExternalProject/shared_internal_commands.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindOpenGL.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageMessage.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPkgConfig.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/GNUInstallDirs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckCommon.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Templates/CPackConfig.cmake.in C$:/Program$ Files/CMake/share/cmake-4.4/Templates/CTestScript.cmake.in C$:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt CMakeCache.txt CMakeFiles/4.4.3/CMakeCCompiler.cmake CMakeFiles/4.4.3/CMakeCXXCompiler.cmake CMakeFiles/4.4.3/CMakeRCCompiler.cmake CMakeFiles/4.4.3/CMakeSystem.cmake _deps/freetype-src/CMakeLists.txt _deps/sfml-src/CMakeLists.txt _deps/sfml-src/cmake/CompilerWarnings.cmake _deps/sfml-src/cmake/Config.cmake _deps/sfml-src/cmake/Macros.cmake _deps/sfml-src/cmake/Mesa3D.cmake _deps/sfml-src/cmake/SFMLConfig.cmake.in _deps/sfml-src/src/SFML/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/Dependencies.cmake.in _deps/sfml-src/src/SFML/Main/CMakeLists.txt _deps/sfml-src/src/SFML/System/CMakeLists.txt _deps/sfml-src/src/SFML/System/Dependencies.cmake.in _deps/sfml-src/src/SFML/Window/CMakeLists.txt _deps/sfml-src/src/SFML/Window/Dependencies.cmake.in
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Program$ Files/CMake/share/cmake-4.4/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeDependentOption.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeParseArguments.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeRCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPack.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPackComponent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCXXSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFileCXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckLibraryExists.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/ExternalProject/shared_internal_commands.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindOpenGL.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageMessage.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPkgConfig.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/GNUInstallDirs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckCommon.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Templates/CPackConfig.cmake.in C$:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt CMakeCache.txt CMakeFiles/4.4.3/CMakeCCompiler.cmake CMakeFiles/4.4.3/CMakeCXXCompiler.cmake CMakeFiles/4.4.3/CMakeRCCompiler.cmake CMakeFiles/4.4.3/CMakeSystem.cmake _deps/freetype-src/CMakeLists.txt _deps/sfml-src/CMakeLists.txt _deps/sfml-src/cmake/CompilerWarnings.cmake _deps/sfml-src/cmake/Config.cmake _deps/sfml-src/cmake/Macros.cmake _deps/sfml-src/cmake/Mesa3D.cmake _deps/sfml-src/cmake/SFMLConfig.cmake.in _deps/sfml-src/src/SFML/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/Dependencies.cmake.in _deps/sfml-src/src/SFML/Main/CMakeLists.txt _deps/sfml-src/src/SFML/System/CMakeLists.txt _deps/sfml-src/src/SFML/System/Dependencies.cmake.in _deps/sfml-src/src/SFML/Window/CMakeLists.txt _deps/sfml-src/src/SFML/Window/Dependencies.cmake.in: phony
+build C$:/Program$ Files/CMake/share/cmake-4.4/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeDependentOption.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeParseArguments.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeRCInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPack.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CPackComponent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CTest.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CTestTargets.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CTestUseLaunchers.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckCXXSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckIncludeFileCXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/CheckLibraryExists.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Compiler/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/DartConfiguration.tcl.in C$:/Program$ Files/CMake/share/cmake-4.4/Modules/ExternalProject/shared_internal_commands.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindOpenGL.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPackageMessage.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindPkgConfig.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/GNUInstallDirs.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckCommon.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Linker/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/Windows.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Modules/WriteBasicConfigVersionFile.cmake C$:/Program$ Files/CMake/share/cmake-4.4/Templates/CPackConfig.cmake.in C$:/Program$ Files/CMake/share/cmake-4.4/Templates/CTestScript.cmake.in C$:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt CMakeCache.txt CMakeFiles/4.4.3/CMakeCCompiler.cmake CMakeFiles/4.4.3/CMakeCXXCompiler.cmake CMakeFiles/4.4.3/CMakeRCCompiler.cmake CMakeFiles/4.4.3/CMakeSystem.cmake _deps/freetype-src/CMakeLists.txt _deps/sfml-src/CMakeLists.txt _deps/sfml-src/cmake/CompilerWarnings.cmake _deps/sfml-src/cmake/Config.cmake _deps/sfml-src/cmake/Macros.cmake _deps/sfml-src/cmake/Mesa3D.cmake _deps/sfml-src/cmake/SFMLConfig.cmake.in _deps/sfml-src/src/SFML/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/CMakeLists.txt _deps/sfml-src/src/SFML/Graphics/Dependencies.cmake.in _deps/sfml-src/src/SFML/Main/CMakeLists.txt _deps/sfml-src/src/SFML/System/CMakeLists.txt _deps/sfml-src/src/SFML/System/Dependencies.cmake.in _deps/sfml-src/src/SFML/Window/CMakeLists.txt _deps/sfml-src/src/SFML/Window/Dependencies.cmake.in: phony
 
 
 #############################################

@@ -1,0 +1,8 @@
+Would you like to use a stellar preset? (yes/no): 
+Which preset would you like to use?
+1. Sun-Earth
+2. Sun-Earth-Moon
+3. Mini solar system (Sun, Mercury, Venus, Earth, Mars)
+4. Binary stars (two Sun-like stars)
+5. Black hole flyby (Newtonian approximation)
+Enter preset number: 

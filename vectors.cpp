@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <random>
 #include <array>
+#include <sstream>
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -22,6 +23,27 @@ const double G = 6.67430e-11;
 
 //Scale metres to pixals
 const double SCALE = 2.0e9;
+
+// Read a complete line so malformed values cannot spill into the next field.
+// A closed input stream cancels setup instead of retrying forever.
+template <typename T, typename Validator>
+bool readNumber(const char* prompt, T& value, Validator valid, const char* error) {
+    string line;
+    while (true) {
+        cout << prompt;
+        if (!getline(cin, line)) return false;
+        istringstream input(line);
+        T candidate{};
+        if (input >> candidate) {
+            input >> ws;
+            if (input.eof() && valid(candidate)) {
+                value = candidate;
+                return true;
+            }
+        }
+        cout << error << '\n';
+    }
+}
 
 //______________________________________________________________________________
 // CAMERA: PANNING, ZOOMING AND SCREEN POSITIONS
@@ -123,24 +145,19 @@ class Planet {
     }
 
     public:
-    void getInfo() {
-      cout << "Initial X position (m): ";
-      cin >> xPos;
-
-      cout << "Initial Y position (m): ";
-      cin >> yPos;
-
-      cout << "Initial X velocity (m/s): ";
-      cin >> xVel;
-
-      cout << "Initial Y velocity (m/s): ";
-      cin >> yVel;
-
-      cout << "What is your planets radius: ";
-      cin >> radius;
-
-      cout << "What is your planets mass: ";
-      cin >> mass;
+    bool getInfo() {
+        const auto finite = [](double v) { return isfinite(v); };
+        const auto positive = [](double v) { return isfinite(v) && v > 0; };
+        Planet candidate = *this;
+        if (!readNumber("Initial X position (m): ", candidate.xPos, finite, "Enter a finite number.") ||
+            !readNumber("Initial Y position (m): ", candidate.yPos, finite, "Enter a finite number.") ||
+            !readNumber("Initial X velocity (m/s): ", candidate.xVel, finite, "Enter a finite number.") ||
+            !readNumber("Initial Y velocity (m/s): ", candidate.yVel, finite, "Enter a finite number.") ||
+            !readNumber("Planet radius (m): ", candidate.radius, positive, "Enter a finite number greater than zero.") ||
+            !readNumber("Planet mass (kg): ", candidate.mass, positive, "Enter a finite number greater than zero."))
+            return false;
+        *this = candidate;
+        return true;
     }
 
     void printInfo() const {
@@ -208,8 +225,7 @@ class PlanetSystem {
             if (!getline(cin, answer)) return false;
 
             if (answer == "no" || answer == "n" || answer == "No" || answer == "N") {
-                getPlanets();
-                return true;
+                return getPlanets();
             }
             if (answer == "yes" || answer == "y" || answer == "Yes" || answer == "Y") {
                 break;
@@ -296,30 +312,19 @@ class PlanetSystem {
         }
     }
 
-    void getPlanets() {
+    bool getPlanets() {
         int size{};
-
-        cout << "How many planets would you like in the sim: ";
-
-        cin >> size;
-
-        //Consider invalid input
-        while (size <= 0 || cin.fail()) {
-
-            cin.clear();
-            cin.ignore(1000, '\n');
-
-            cout << "Invalid input. Try again: ";
-            cin >> size;
-        }
-
-        planets.resize(size);
-
-        //This function allows the user to enter the size of the vector storing the amount of particles
+        // Bound manual allocation and the quadratic gravity workload.
+        if (!readNumber("How many planets would you like in the sim (1-1000): ", size,
+                        [](int count) { return count >= 1 && count <= 1000; },
+                        "Enter a whole number from 1 to 1000.")) return false;
+        vector<Planet> candidates(size);
         for (int i=0; i<size; i++) {
             cout << "\nPlanet " << i+1 << ":\n";
-            planets[i].getInfo();
+            if (!candidates[i].getInfo()) return false;
         }
+        planets.swap(candidates);
+        return true;
     }
 
     void printPlanet() const {

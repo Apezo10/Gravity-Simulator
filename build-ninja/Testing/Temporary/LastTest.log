@@ -1,0 +1,19 @@
+Start testing: Sep 20 23:35 Eastern Daylight Time
+----------------------------------------------------------
+1/1 Testing: input_validation
+1/1 Test: input_validation
+Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/input_validation_tests.exe"
+Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
+"input_validation" start time: Sep 20 23:35 Eastern Daylight Time
+Output:
+----------------------------------------------------------
+Input validation, EOF cancellation, and five one-year preset checks passed.
+<end of output>
+Test time =   0.90 sec
+----------------------------------------------------------
+Test Passed.
+"input_validation" end time: Sep 20 23:35 Eastern Daylight Time
+"input_validation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 20 23:35 Eastern Daylight Time
