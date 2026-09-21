@@ -7,6 +7,7 @@
 #include <random>
 #include <array>
 #include <sstream>
+#include <cstdint>
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -23,6 +24,23 @@ const double G = 6.67430e-11;
 
 //Scale metres to pixals
 const double SCALE = 2.0e9;
+
+// Match the former speed at 60 FPS: 30 simulated hours per real second.
+constexpr double PHYSICS_STEP_SECONDS = 1800.0;
+class SimulationTiming {
+    std::int64_t pendingTicks = 0;
+public:
+    template <typename Step>
+    void advance(std::int64_t elapsedMicroseconds, Step step) {
+        // Limit catch-up after a long stall to 15 steps (a quarter second).
+        // Discard excess wall time instead of freezing the UI in a backlog.
+        pendingTicks += clamp<std::int64_t>(elapsedMicroseconds, 0, 250000) * 60;
+        while (pendingTicks >= 1000000) {
+            step(PHYSICS_STEP_SECONDS);
+            pendingTicks -= 1000000;
+        }
+    }
+};
 
 // Read a complete line so malformed values cannot spill into the next field.
 // A closed input stream cancels setup instead of retrying forever.
@@ -86,7 +104,6 @@ class Planet {
     double radius{};
     double xAccel{0};
     double yAccel{0};
-    double dt{1800};
     double mass{};
     sf::Color color{135, 206, 235};
     bool blackHole = false;
@@ -173,7 +190,7 @@ class Planet {
         yAccel = ay;
     }
 
-    void update() {
+    void update(double dt) {
         //Updates xy by integrating accel and velocity (accel first ALWAYS)
         xVel += xAccel * dt;
         yVel += yAccel * dt;
@@ -338,7 +355,7 @@ class PlanetSystem {
     }
 
     //Updates the x and y position of the planet based on velocity input
-    void update() {
+    void update(double dt) {
 
         //Nested loop, claculate accel for every planet
         for (int i=0; i<planets.size(); i++) {
@@ -380,7 +397,7 @@ class PlanetSystem {
 
         //Now update every planet
         for (int i = 0; i<planets.size(); i++) {
-            planets[i].update();
+            planets[i].update(dt);
         }
     }
 
@@ -575,8 +592,19 @@ int main() {
 
     // Reuse the shape instead of allocating its vertices for every body each frame.
     sf::CircleShape planet;
+    SimulationTiming timing;
+    sf::Clock frameClock;
     while (window.isOpen()) {
-        bool asteroidAdded = false;
+        // Advance existing bodies before input so a new asteroid is drawn at
+        // its click position, without skipping time for the entire system.
+        timing.advance(frameClock.restart().asMicroseconds(), [&](double dt) {
+            p.update(dt);
+            if (++trailStep == 4) {
+                for (size_t i = 0; i < trails.size(); ++i)
+                    trails[i].add(p.getParSystem()[i]);
+                trailStep = 0;
+            }
+        });
 
         //__________________________________________________________________________
         // MOUSE INPUT
@@ -587,7 +615,6 @@ int main() {
                     // Give the new body its own trail, just like preset/manual bodies.
                     trails.emplace_back();
                     trails.back().add(p.getParSystem().back());
-                    asteroidAdded = true;
                 }
                 if (button->button == sf::Mouse::Button::Right) {
                     camera.dragging = true;
@@ -614,18 +641,6 @@ int main() {
 
         if (!window.isOpen()) {
             break;
-        }
-
-        //__________________________________________________________________________
-        // UPDATE GRAVITY AND TRAILS
-        // Show the asteroid at the click position before its first physics step.
-        if (!asteroidAdded) {
-            p.update();
-        }
-
-        if (++trailStep == 4) {
-            for (size_t i = 0; i < trails.size(); ++i) trails[i].add(p.getParSystem()[i]);
-            trailStep = 0;
         }
 
         window.clear();

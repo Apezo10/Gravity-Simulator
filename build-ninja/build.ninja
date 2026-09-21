@@ -286,6 +286,45 @@ build input_validation_tests.exe: CXX_EXECUTABLE_LINKER__input_validation_tests_
   TARGET_PDB = input_validation_tests.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\input_validation_tests.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target simulation_timing_tests
+
+
+#############################################
+# Order-only phony target for simulation_timing_tests
+
+build cmake_object_order_depends_target_simulation_timing_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+
+build CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj: CXX_COMPILER__simulation_timing_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/simulation_timing.cpp || cmake_object_order_depends_target_simulation_timing_tests
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\simulation_timing_tests.dir\tests\simulation_timing.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\simulation_timing_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\simulation_timing_tests.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation_timing_tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target simulation_timing_tests
+
+
+#############################################
+# Link the executable simulation_timing_tests.exe
+
+build simulation_timing_tests.exe: CXX_EXECUTABLE_LINKER__simulation_timing_tests_Debug CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\simulation_timing_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = simulation_timing_tests.exe
+  TARGET_IMPLIB = libsimulation_timing_tests.dll.a
+  TARGET_PDB = simulation_timing_tests.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation_timing_tests.dir
+
 
 #############################################
 # Utility command for package
@@ -2590,6 +2629,8 @@ build sfml-system: phony _deps/sfml-build/lib/libsfml-system-s-d.a
 
 build sfml-window: phony _deps/sfml-build/lib/libsfml-window-s-d.a
 
+build simulation_timing_tests: phony simulation_timing_tests.exe
+
 build vectors: phony vectors.exe
 
 # =============================================================================
@@ -2600,7 +2641,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
 
-build all: phony vectors.exe input_validation_tests.exe _deps/sfml-build/all
+build all: phony vectors.exe input_validation_tests.exe simulation_timing_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 

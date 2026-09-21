@@ -80,7 +80,8 @@
 						26,
 						27,
 						29,
-						34
+						34,
+						35
 					]
 				},
 				{
@@ -260,7 +261,8 @@
 						26,
 						27,
 						29,
-						34
+						34,
+						35
 					]
 				},
 				{
@@ -549,6 +551,13 @@
 					"jsonFile" : "target-sfml-window-Debug-4df3a88a5096413f2eb0.json",
 					"name" : "sfml-window",
 					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "simulation_timing_tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-simulation_timing_tests-Debug-cd17bd0187617af074ec.json",
+					"name" : "simulation_timing_tests",
+					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,

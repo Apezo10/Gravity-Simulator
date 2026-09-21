@@ -51,7 +51,7 @@ int main() {
             require(p.getX() == -1.5e11 && p.getY() == 0 && p.getXvel() == 0 &&
                     p.getYvel() == 2.98e4 && p.getRad() == 6.371e6 && p.getMass() == 5.972e24,
                     "Invalid value accepted or fields shifted");
-            system.update();
+            system.update(PHYSICS_STEP_SECONDS);
             require(isfinite(p.getX()) && isfinite(p.getY()), "Valid manual body became nonfinite");
         }
         // EOF at every setup stage, including after a completed first body.
@@ -80,7 +80,7 @@ int main() {
             require(system.chooseSetup(), "Preset selection failed");
             require(system.getParSystem().size() == counts[choice-1], "Wrong preset count");
             for (int step = 0; step < 17532; ++step) {
-                system.update();
+                system.update(PHYSICS_STEP_SECONDS);
                 for (const auto& p : system.getParSystem())
                     require(isfinite(p.getX()) && isfinite(p.getY()) &&
                             isfinite(p.getXvel()) && isfinite(p.getYvel()), "Preset became nonfinite");
