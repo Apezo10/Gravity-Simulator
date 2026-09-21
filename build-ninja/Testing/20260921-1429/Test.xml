@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-ninja"
+	BuildStamp="20260921-1429-Experimental"
+	Name="Adins-Laptop"
+	Generator="ctest-4.4.3"
+	CompilerName="C:/msys64/ucrt64/bin/g++.exe"
+	CompilerVersion="15.2.0"
+	OSName="Windows"
+	Hostname="Adins-Laptop"
+	OSRelease="10.0.26200"
+	OSVersion="Windows 10"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="1"
+	ModelName="AMD Ryzen 9 8945HX with Radeon Graphics"
+	ProcessorCacheSize="64"
+	NumberOfLogicalCPU="32"
+	NumberOfPhysicalCPU="16"
+	TotalVirtualMemory="13312"
+	TotalPhysicalMemory="15664"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2501.000000"
+	>
+	<Testing>
+		<StartDateTime>Sep 21 10:29 Eastern Daylight Time</StartDateTime>
+		<StartTestTime>1790000956</StartTestTime>
+		<TestList/>
+		<EndDateTime>Sep 21 10:29 Eastern Daylight Time</EndDateTime>
+		<EndTestTime>1790000957</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

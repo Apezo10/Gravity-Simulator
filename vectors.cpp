@@ -673,12 +673,15 @@ int main() {
             size_t oldest = (trail.next + OrbitTrail::capacity - trail.count) % OrbitTrail::capacity;
             float radius = body.getDisplayRadius();
 
+            sf::Vector2f previousPoint;
             for (size_t j = 0; j <= trail.count; ++j) {
                 auto point = j == trail.count ? camera.toScreen(body.getX(), body.getY())
                     : camera.toScreen(trail.points[(oldest + j) % OrbitTrail::capacity].x,
                                       trail.points[(oldest + j) % OrbitTrail::capacity].y);
-                auto before = j == 0 ? point : trailVertices[2 * (j - 1)].position;
+                // Measure direction between center points, not the ribbon's edges.
+                auto before = j == 0 ? point : previousPoint;
                 auto direction = point - before;
+                previousPoint = point;
 
                 float length = hypot(direction.x, direction.y);
 
