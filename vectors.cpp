@@ -191,6 +191,11 @@ class Planet {
         yAccel = ay;
     }
 
+    void addAccel(double ax, double ay) {
+        xAccel += ax;
+        yAccel += ay;
+    }
+
     void kick(double dt) {
         xVel += xAccel * dt;
         yVel += yAccel * dt;
@@ -403,44 +408,26 @@ class PlanetSystem {
 
     private:
     void calculateAccelerations() {
-        //Nested loop, claculate accel for every planet
-        for (int i=0; i<planets.size(); i++) {
+        for (Planet& planet : planets) planet.setAccel(0.0, 0.0);
 
-            double ax = 0.0;
-            double ay = 0.0;
+        // Evaluate each pair once, applying gravity in opposite directions.
+        for (size_t i = 0; i < planets.size(); ++i) {
+            for (size_t j = i + 1; j < planets.size(); ++j) {
+                Planet& a = planets[i];
+                Planet& b = planets[j];
+                const double dx = b.getX() - a.getX();
+                const double dy = b.getY() - a.getY();
+                const double distance = hypot(dx, dy);
+                if (distance == 0.0) continue;
 
-            for (int j=0; j<planets.size(); j++) {
-
-                if (i==j) {
-                    continue;
-                }
-
-                //Get x and y coord differences between planets
-                double dx = planets[j].getX() - planets[i].getX();
-                double dy = planets[j].getY() - planets[i].getY();
-
-                //Compute distance between planets
-                double distance = sqrt(dx*dx + dy*dy);
-
-                if (distance == 0)
-                    continue;
-
-                //Compute force based on planets masses and distances from each other
-                double F = G * (planets[i].getMass() * planets[j].getMass()) / (distance * distance);
-
-                //Plnet i accel
-                double x = dx/distance;
-                double y = dy/distance;
-
-                double accel = F/planets[i].getMass();
-
-                ax += accel * x;
-                ay += accel * y;
+                const double gravity = G / distance / distance;
+                const double gx = gravity * (dx / distance);
+                const double gy = gravity * (dy / distance);
+                // Acceleration depends on the other body's mass, not its own.
+                a.addAccel(gx * b.getMass(), gy * b.getMass());
+                b.addAccel(-gx * a.getMass(), -gy * a.getMass());
             }
-
-            planets[i].setAccel(ax, ay);
         }
-
     }
 
     public:
