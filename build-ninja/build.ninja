@@ -364,6 +364,45 @@ build collision_tests.exe: CXX_EXECUTABLE_LINKER__collision_tests_Debug CMakeFil
   TARGET_PDB = collision_tests.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\collision_tests.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target orbital_accuracy_tests
+
+
+#############################################
+# Order-only phony target for orbital_accuracy_tests
+
+build cmake_object_order_depends_target_orbital_accuracy_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+
+build CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj: CXX_COMPILER__orbital_accuracy_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/orbital_accuracy.cpp || cmake_object_order_depends_target_orbital_accuracy_tests
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\orbital_accuracy_tests.dir\tests\orbital_accuracy.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\orbital_accuracy_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\orbital_accuracy_tests.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\orbital_accuracy_tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target orbital_accuracy_tests
+
+
+#############################################
+# Link the executable orbital_accuracy_tests.exe
+
+build orbital_accuracy_tests.exe: CXX_EXECUTABLE_LINKER__orbital_accuracy_tests_Debug CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\orbital_accuracy_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = orbital_accuracy_tests.exe
+  TARGET_IMPLIB = liborbital_accuracy_tests.dll.a
+  TARGET_PDB = orbital_accuracy_tests.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\orbital_accuracy_tests.dir
+
 
 #############################################
 # Utility command for package
@@ -2662,6 +2701,8 @@ build libsfml-system-s-d.a: phony _deps/sfml-build/lib/libsfml-system-s-d.a
 
 build libsfml-window-s-d.a: phony _deps/sfml-build/lib/libsfml-window-s-d.a
 
+build orbital_accuracy_tests: phony orbital_accuracy_tests.exe
+
 build sfml-graphics: phony _deps/sfml-build/lib/libsfml-graphics-s-d.a
 
 build sfml-main: phony _deps/sfml-build/lib/libsfml-main-d.a
@@ -2682,7 +2723,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
 
-build all: phony vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe _deps/sfml-build/all
+build all: phony vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 

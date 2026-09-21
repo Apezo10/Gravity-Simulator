@@ -81,8 +81,9 @@
 						27,
 						28,
 						30,
-						35,
-						36
+						31,
+						36,
+						37
 					]
 				},
 				{
@@ -92,7 +93,7 @@
 						2
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build-Debug-ababf71ddc6cb6ced65b.json",
+					"jsonFile" : "directory-_deps.sfml-build-Debug-8445d79d20e779172862.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -127,7 +128,7 @@
 					],
 					"build" : "_deps/sfml-build/src/SFML/System",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.System-Debug-0e61421f41898e814778.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.System-Debug-848869c8bdb5632b0c99.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -137,13 +138,13 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/System",
 					"targetIndexes" : 
 					[
-						33
+						34
 					]
 				},
 				{
 					"build" : "_deps/sfml-build/src/SFML/Main",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Main-Debug-f1b9936231af9a9bfaf6.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Main-Debug-dcb8e72cb564a6513737.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -153,7 +154,7 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/Main",
 					"targetIndexes" : 
 					[
-						32
+						33
 					]
 				},
 				{
@@ -164,7 +165,7 @@
 					],
 					"build" : "_deps/sfml-build/src/SFML/Window",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Window-Debug-743bfef7e7dafee9eeb4.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Window-Debug-4b144c0c499d9c0effff.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -174,7 +175,7 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/Window",
 					"targetIndexes" : 
 					[
-						34
+						35
 					]
 				},
 				{
@@ -184,7 +185,7 @@
 						7
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Graphics-Debug-ab24467c77808bd8e7d9.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Graphics-Debug-875ac04241a43c21a291.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -194,7 +195,7 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/Graphics",
 					"targetIndexes" : 
 					[
-						31
+						32
 					]
 				},
 				{
@@ -263,8 +264,9 @@
 						27,
 						28,
 						30,
-						35,
-						36
+						31,
+						36,
+						37
 					]
 				},
 				{
@@ -291,10 +293,10 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						31,
 						32,
 						33,
-						34
+						34,
+						35
 					]
 				},
 				{
@@ -531,6 +533,13 @@
 					"id" : "input_validation_tests::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-input_validation_tests-Debug-5366a8f618c96022e165.json",
 					"name" : "input_validation_tests",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "orbital_accuracy_tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-orbital_accuracy_tests-Debug-07005a86dc172694d049.json",
+					"name" : "orbital_accuracy_tests",
 					"projectIndex" : 0
 				},
 				{

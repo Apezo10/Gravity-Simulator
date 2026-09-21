@@ -191,13 +191,19 @@ class Planet {
         yAccel = ay;
     }
 
-    void update(double dt) {
-        //Updates xy by integrating accel and velocity (accel first ALWAYS)
+    void kick(double dt) {
         xVel += xAccel * dt;
         yVel += yAccel * dt;
-
+    }
+    void drift(double dt) {
         xPos += xVel * dt;
         yPos += yVel * dt;
+    }
+    void update(double dt) {
+        // Exact motion when acceleration is constant over this interval.
+        kick(dt * 0.5);
+        drift(dt);
+        kick(dt * 0.5);
     }
 
 };
@@ -395,12 +401,8 @@ class PlanetSystem {
         }
     }
 
-    //Updates the x and y position of the planet based on velocity input
-    vector<pair<size_t, size_t>> update(double dt) {
-        vector<pair<size_t, size_t>> merges;
-        // Resolve existing overlaps before evaluating the inverse-square force.
-        mergeOverlaps(merges);
-
+    private:
+    void calculateAccelerations() {
         //Nested loop, claculate accel for every planet
         for (int i=0; i<planets.size(); i++) {
 
@@ -439,11 +441,21 @@ class PlanetSystem {
             planets[i].setAccel(ax, ay);
         }
 
-        //Now update every planet
-        for (int i = 0; i<planets.size(); i++) {
-            planets[i].update(dt);
-        }
+    }
+
+    public:
+    vector<pair<size_t, size_t>> update(double dt) {
+        vector<pair<size_t, size_t>> merges;
         mergeOverlaps(merges);
+        // Velocity Verlet: half kick, full drift, recompute gravity, half kick.
+        calculateAccelerations();
+        for (Planet& planet : planets) planet.kick(dt * 0.5);
+        for (Planet& planet : planets) planet.drift(dt);
+        // Merge before recalculating gravity to avoid forces inside overlapping bodies.
+        // Mass-weighted half-step velocities preserve momentum across each merge.
+        mergeOverlaps(merges);
+        calculateAccelerations();
+        for (Planet& planet : planets) planet.kick(dt * 0.5);
         return merges;
     }
 

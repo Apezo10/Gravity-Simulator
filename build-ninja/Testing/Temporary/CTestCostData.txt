@@ -1,4 +1,5 @@
-input_validation 4 0.18441
-simulation_timing 3 0.187963
-collisions 1 0.571573
+input_validation 5 0.156676
+simulation_timing 4 0.130555
+collisions 2 0.262569
+orbital_accuracy 1 0.784052
 ---
