@@ -1,7 +1,11 @@
 // Exercise the real implementation without starting the graphical application.
-#define main simulation_main
-#include "../vectors.cpp"
-#undef main
+#include "setup.hpp"
+#include "simulation_timing.hpp"
+#include "orbit_trail.hpp"
+#include <cmath>
+#include <iostream>
+#include <sstream>
+using namespace std;
 #include <stdexcept>
 
 struct ConsoleInput {
@@ -29,7 +33,7 @@ int main() {
         {
             ConsoleInput io("no\nabc\n0\n-1\n1.5\n1001\n999999999999999999999\n1 junk\n1\n" + body);
             PlanetSystem system;
-            require(system.chooseSetup(), "Count retry failed");
+            require(chooseSetup(system), "Count retry failed");
             require(system.getParSystem().size() == 1, "Wrong count");
             const auto& p = system.getParSystem()[0];
             require(p.getX() == -1.5e11 && p.getYvel() == 2.98e4, "Valid signed/scientific values changed");
@@ -46,7 +50,7 @@ int main() {
             }
             ConsoleInput io(input);
             PlanetSystem system;
-            require(system.chooseSetup(), "Field retry failed");
+            require(chooseSetup(system), "Field retry failed");
             const auto& p = system.getParSystem()[0];
             require(p.getX() == -1.5e11 && p.getY() == 0 && p.getXvel() == 0 &&
                     p.getYvel() == 2.98e4 && p.getRad() == 6.371e6 && p.getMass() == 5.972e24,
@@ -65,19 +69,19 @@ int main() {
         for (const auto& input : cancelled) {
             ConsoleInput io(input);
             PlanetSystem system;
-            require(!system.chooseSetup(), "EOF did not cancel setup");
+            require(!chooseSetup(system), "EOF did not cancel setup");
             require(system.getParSystem().empty(), "Partial setup was published");
         }
         {
             ConsoleInput io("no\n1\n0\n0\n0\n0\n1\n0\n");
             PlanetSystem system;
-            require(!system.chooseSetup(), "Zero mass followed by EOF accepted");
+            require(!chooseSetup(system), "Zero mass followed by EOF accepted");
         }
         const size_t counts[] = {2, 3, 5, 2, 2};
         for (int choice = 1; choice <= 5; ++choice) {
             ConsoleInput io("maybe\nyes\ninvalid\n" + to_string(choice) + "\n");
             PlanetSystem system;
-            require(system.chooseSetup(), "Preset selection failed");
+            require(chooseSetup(system), "Preset selection failed");
             require(system.getParSystem().size() == counts[choice-1], "Wrong preset count");
             for (int step = 0; step < 17532; ++step) {
                 system.update(PHYSICS_STEP_SECONDS);

@@ -1,6 +1,10 @@
-#define main simulation_main
-#include "../vectors.cpp"
-#undef main
+#include "setup.hpp"
+#include "simulation_timing.hpp"
+#include "orbit_trail.hpp"
+#include <cmath>
+#include <iostream>
+#include <sstream>
+using namespace std;
 #include <stdexcept>
 
 void require(bool condition, const char* message) {
@@ -13,7 +17,7 @@ PlanetSystem setup(const string& bodies) {
     auto* oldInput = cin.rdbuf(input.rdbuf());
     auto* oldOutput = cout.rdbuf(output.rdbuf());
     PlanetSystem system;
-    bool ok = system.chooseSetup();
+    bool ok = chooseSetup(system);
     cin.rdbuf(oldInput);
     cout.rdbuf(oldOutput);
     cin.clear();

@@ -41,22 +41,104 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/
 # =============================================================================
+# Object build statements for STATIC_LIBRARY target simulation
+
+
+#############################################
+# Order-only phony target for simulation
+
+build cmake_object_order_depends_target_simulation: phony || .
+
+build CMakeFiles/simulation.dir/src/planet_system.cpp.obj: CXX_COMPILER__simulation_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/src/planet_system.cpp || cmake_object_order_depends_target_simulation
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\simulation.dir\src\planet_system.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
+  OBJECT_DIR = CMakeFiles\simulation.dir
+  OBJECT_FILE_DIR = CMakeFiles\simulation.dir\src
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target simulation
+
+
+#############################################
+# Link the static library libsimulation.a
+
+build libsimulation.a: CXX_STATIC_LIBRARY_LINKER__simulation_Debug CMakeFiles/simulation.dir/src/planet_system.cpp.obj
+  CONFIG = Debug
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = CMakeFiles\simulation.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = libsimulation.a
+  TARGET_PDB = simulation.a.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation.dir
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target simulation_setup
+
+
+#############################################
+# Order-only phony target for simulation_setup
+
+build cmake_object_order_depends_target_simulation_setup: phony || cmake_object_order_depends_target_simulation
+
+build CMakeFiles/simulation_setup.dir/src/setup.cpp.obj: CXX_COMPILER__simulation_setup_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/src/setup.cpp || cmake_object_order_depends_target_simulation_setup
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\simulation_setup.dir\src\setup.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
+  OBJECT_DIR = CMakeFiles\simulation_setup.dir
+  OBJECT_FILE_DIR = CMakeFiles\simulation_setup.dir\src
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation_setup.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target simulation_setup
+
+
+#############################################
+# Link the static library libsimulation_setup.a
+
+build libsimulation_setup.a: CXX_STATIC_LIBRARY_LINKER__simulation_setup_Debug CMakeFiles/simulation_setup.dir/src/setup.cpp.obj || libsimulation.a
+  CONFIG = Debug
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = CMakeFiles\simulation_setup.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = libsimulation_setup.a
+  TARGET_PDB = simulation_setup.a.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation_setup.dir
+
+# =============================================================================
 # Object build statements for EXECUTABLE target vectors
 
 
 #############################################
 # Order-only phony target for vectors
 
-build cmake_object_order_depends_target_vectors: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+build cmake_object_order_depends_target_vectors: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window cmake_object_order_depends_target_simulation cmake_object_order_depends_target_simulation_setup
 
 build CMakeFiles/vectors.dir/vectors.cpp.obj: CXX_COMPILER__vectors_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/vectors.cpp || cmake_object_order_depends_target_vectors
   CONFIG = Debug
   DEFINES = -DSFML_STATIC -DSIM_FONT_PATH=\"C:/Users/Adins/Downloads/Learning-cpp/Practice/assets/tuffy.ttf\"
   DEP_FILE = CMakeFiles\vectors.dir\vectors.cpp.obj.d
   FLAGS = -g
-  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
   OBJECT_DIR = CMakeFiles\vectors.dir
   OBJECT_FILE_DIR = CMakeFiles\vectors.dir
+  TARGET_SUPPORT_DIR = CMakeFiles\vectors.dir
+
+build CMakeFiles/vectors.dir/src/renderer.cpp.obj: CXX_COMPILER__vectors_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/src/renderer.cpp || cmake_object_order_depends_target_vectors
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC -DSIM_FONT_PATH=\"C:/Users/Adins/Downloads/Learning-cpp/Practice/assets/tuffy.ttf\"
+  DEP_FILE = CMakeFiles\vectors.dir\src\renderer.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\vectors.dir
+  OBJECT_FILE_DIR = CMakeFiles\vectors.dir\src
   TARGET_SUPPORT_DIR = CMakeFiles\vectors.dir
 
 
@@ -67,10 +149,10 @@ build CMakeFiles/vectors.dir/vectors.cpp.obj: CXX_COMPILER__vectors_unscanned_De
 #############################################
 # Link the executable vectors.exe
 
-build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Debug CMakeFiles/vectors.dir/vectors.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Debug CMakeFiles/vectors.dir/vectors.cpp.obj CMakeFiles/vectors.dir/src/renderer.cpp.obj | libsimulation_setup.a _deps/sfml-build/lib/libsfml-graphics-s-d.a libsimulation.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a libsimulation.a libsimulation_setup.a
   CONFIG = Debug
   FLAGS = -g
-  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = libsimulation_setup.a  _deps/sfml-build/lib/libsfml-graphics-s-d.a  libsimulation.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\vectors.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -254,14 +336,13 @@ build ContinuousSubmit: phony CMakeFiles/ContinuousSubmit
 #############################################
 # Order-only phony target for input_validation_tests
 
-build cmake_object_order_depends_target_input_validation_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+build cmake_object_order_depends_target_input_validation_tests: phony || cmake_object_order_depends_target_simulation cmake_object_order_depends_target_simulation_setup
 
 build CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj: CXX_COMPILER__input_validation_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/input_validation.cpp || cmake_object_order_depends_target_input_validation_tests
   CONFIG = Debug
-  DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\input_validation_tests.dir\tests\input_validation.cpp.obj.d
   FLAGS = -g
-  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
   OBJECT_DIR = CMakeFiles\input_validation_tests.dir
   OBJECT_FILE_DIR = CMakeFiles\input_validation_tests.dir\tests
   TARGET_SUPPORT_DIR = CMakeFiles\input_validation_tests.dir
@@ -274,10 +355,10 @@ build CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj: CXX_
 #############################################
 # Link the executable input_validation_tests.exe
 
-build input_validation_tests.exe: CXX_EXECUTABLE_LINKER__input_validation_tests_Debug CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build input_validation_tests.exe: CXX_EXECUTABLE_LINKER__input_validation_tests_Debug CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj | libsimulation_setup.a libsimulation.a || libsimulation.a libsimulation_setup.a
   CONFIG = Debug
   FLAGS = -g
-  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = libsimulation_setup.a  libsimulation.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\input_validation_tests.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -293,14 +374,13 @@ build input_validation_tests.exe: CXX_EXECUTABLE_LINKER__input_validation_tests_
 #############################################
 # Order-only phony target for simulation_timing_tests
 
-build cmake_object_order_depends_target_simulation_timing_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+build cmake_object_order_depends_target_simulation_timing_tests: phony || cmake_object_order_depends_target_simulation cmake_object_order_depends_target_simulation_setup
 
 build CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj: CXX_COMPILER__simulation_timing_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/simulation_timing.cpp || cmake_object_order_depends_target_simulation_timing_tests
   CONFIG = Debug
-  DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\simulation_timing_tests.dir\tests\simulation_timing.cpp.obj.d
   FLAGS = -g
-  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
   OBJECT_DIR = CMakeFiles\simulation_timing_tests.dir
   OBJECT_FILE_DIR = CMakeFiles\simulation_timing_tests.dir\tests
   TARGET_SUPPORT_DIR = CMakeFiles\simulation_timing_tests.dir
@@ -313,10 +393,10 @@ build CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj: CX
 #############################################
 # Link the executable simulation_timing_tests.exe
 
-build simulation_timing_tests.exe: CXX_EXECUTABLE_LINKER__simulation_timing_tests_Debug CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build simulation_timing_tests.exe: CXX_EXECUTABLE_LINKER__simulation_timing_tests_Debug CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj | libsimulation_setup.a libsimulation.a || libsimulation.a libsimulation_setup.a
   CONFIG = Debug
   FLAGS = -g
-  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = libsimulation_setup.a  libsimulation.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\simulation_timing_tests.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -332,14 +412,13 @@ build simulation_timing_tests.exe: CXX_EXECUTABLE_LINKER__simulation_timing_test
 #############################################
 # Order-only phony target for collision_tests
 
-build cmake_object_order_depends_target_collision_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+build cmake_object_order_depends_target_collision_tests: phony || cmake_object_order_depends_target_simulation cmake_object_order_depends_target_simulation_setup
 
 build CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj: CXX_COMPILER__collision_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/collisions.cpp || cmake_object_order_depends_target_collision_tests
   CONFIG = Debug
-  DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\collision_tests.dir\tests\collisions.cpp.obj.d
   FLAGS = -g
-  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
   OBJECT_DIR = CMakeFiles\collision_tests.dir
   OBJECT_FILE_DIR = CMakeFiles\collision_tests.dir\tests
   TARGET_SUPPORT_DIR = CMakeFiles\collision_tests.dir
@@ -352,10 +431,10 @@ build CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj: CXX_COMPILER__col
 #############################################
 # Link the executable collision_tests.exe
 
-build collision_tests.exe: CXX_EXECUTABLE_LINKER__collision_tests_Debug CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build collision_tests.exe: CXX_EXECUTABLE_LINKER__collision_tests_Debug CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj | libsimulation_setup.a libsimulation.a || libsimulation.a libsimulation_setup.a
   CONFIG = Debug
   FLAGS = -g
-  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = libsimulation_setup.a  libsimulation.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\collision_tests.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -371,14 +450,13 @@ build collision_tests.exe: CXX_EXECUTABLE_LINKER__collision_tests_Debug CMakeFil
 #############################################
 # Order-only phony target for orbital_accuracy_tests
 
-build cmake_object_order_depends_target_orbital_accuracy_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+build cmake_object_order_depends_target_orbital_accuracy_tests: phony || cmake_object_order_depends_target_simulation cmake_object_order_depends_target_simulation_setup
 
 build CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj: CXX_COMPILER__orbital_accuracy_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/orbital_accuracy.cpp || cmake_object_order_depends_target_orbital_accuracy_tests
   CONFIG = Debug
-  DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\orbital_accuracy_tests.dir\tests\orbital_accuracy.cpp.obj.d
   FLAGS = -g
-  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
   OBJECT_DIR = CMakeFiles\orbital_accuracy_tests.dir
   OBJECT_FILE_DIR = CMakeFiles\orbital_accuracy_tests.dir\tests
   TARGET_SUPPORT_DIR = CMakeFiles\orbital_accuracy_tests.dir
@@ -391,10 +469,10 @@ build CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj: CXX_
 #############################################
 # Link the executable orbital_accuracy_tests.exe
 
-build orbital_accuracy_tests.exe: CXX_EXECUTABLE_LINKER__orbital_accuracy_tests_Debug CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build orbital_accuracy_tests.exe: CXX_EXECUTABLE_LINKER__orbital_accuracy_tests_Debug CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj | libsimulation_setup.a libsimulation.a || libsimulation.a libsimulation_setup.a
   CONFIG = Debug
   FLAGS = -g
-  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = libsimulation_setup.a  libsimulation.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\orbital_accuracy_tests.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -2711,6 +2789,10 @@ build sfml-system: phony _deps/sfml-build/lib/libsfml-system-s-d.a
 
 build sfml-window: phony _deps/sfml-build/lib/libsfml-window-s-d.a
 
+build simulation: phony libsimulation.a
+
+build simulation_setup: phony libsimulation_setup.a
+
 build simulation_timing_tests: phony simulation_timing_tests.exe
 
 build vectors: phony vectors.exe
@@ -2723,7 +2805,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
 
-build all: phony vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe _deps/sfml-build/all
+build all: phony libsimulation.a libsimulation_setup.a vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 

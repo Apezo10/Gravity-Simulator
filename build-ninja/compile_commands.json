@@ -1,31 +1,49 @@
 [
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -DSIM_FONT_PATH=\\\"C:/Users/Adins/Downloads/Learning-cpp/Practice/assets/tuffy.ttf\\\" -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\vectors.dir\\vectors.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\vectors.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\simulation.dir\\src\\planet_system.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\src\\planet_system.cpp",
+  "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/src/planet_system.cpp",
+  "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/simulation.dir/src/planet_system.cpp.obj"
+},
+{
+  "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\simulation_setup.dir\\src\\setup.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\src\\setup.cpp",
+  "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/src/setup.cpp",
+  "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/simulation_setup.dir/src/setup.cpp.obj"
+},
+{
+  "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -DSIM_FONT_PATH=\\\"C:/Users/Adins/Downloads/Learning-cpp/Practice/assets/tuffy.ttf\\\" -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\vectors.dir\\vectors.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\vectors.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/vectors.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/vectors.dir/vectors.cpp.obj"
 },
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\input_validation_tests.dir\\tests\\input_validation.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\input_validation.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -DSIM_FONT_PATH=\\\"C:/Users/Adins/Downloads/Learning-cpp/Practice/assets/tuffy.ttf\\\" -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\vectors.dir\\src\\renderer.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\src\\renderer.cpp",
+  "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/src/renderer.cpp",
+  "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/vectors.dir/src/renderer.cpp.obj"
+},
+{
+  "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\input_validation_tests.dir\\tests\\input_validation.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\input_validation.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/tests/input_validation.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj"
 },
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\simulation_timing_tests.dir\\tests\\simulation_timing.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\simulation_timing.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\simulation_timing_tests.dir\\tests\\simulation_timing.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\simulation_timing.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/tests/simulation_timing.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj"
 },
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\collision_tests.dir\\tests\\collisions.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\collisions.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\collision_tests.dir\\tests\\collisions.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\collisions.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/tests/collisions.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj"
 },
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -g -o CMakeFiles\\orbital_accuracy_tests.dir\\tests\\orbital_accuracy.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\orbital_accuracy.cpp",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\orbital_accuracy_tests.dir\\tests\\orbital_accuracy.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\orbital_accuracy.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/tests/orbital_accuracy.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj"
 },
