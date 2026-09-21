@@ -79,9 +79,10 @@
 						25,
 						26,
 						27,
-						29,
-						34,
-						35
+						28,
+						30,
+						35,
+						36
 					]
 				},
 				{
@@ -91,7 +92,7 @@
 						2
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build-Debug-11541e984090cc1d8767.json",
+					"jsonFile" : "directory-_deps.sfml-build-Debug-ababf71ddc6cb6ced65b.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -126,7 +127,7 @@
 					],
 					"build" : "_deps/sfml-build/src/SFML/System",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.System-Debug-5ef2ada4fcc98340f1c0.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.System-Debug-0e61421f41898e814778.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -136,13 +137,13 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/System",
 					"targetIndexes" : 
 					[
-						32
+						33
 					]
 				},
 				{
 					"build" : "_deps/sfml-build/src/SFML/Main",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Main-Debug-c401820c201c491412f6.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Main-Debug-f1b9936231af9a9bfaf6.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -152,7 +153,7 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/Main",
 					"targetIndexes" : 
 					[
-						31
+						32
 					]
 				},
 				{
@@ -163,7 +164,7 @@
 					],
 					"build" : "_deps/sfml-build/src/SFML/Window",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Window-Debug-2a68e33e4cffeeb17e18.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Window-Debug-743bfef7e7dafee9eeb4.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -173,7 +174,7 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/Window",
 					"targetIndexes" : 
 					[
-						33
+						34
 					]
 				},
 				{
@@ -183,7 +184,7 @@
 						7
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Graphics-Debug-23598c95cfc43cfb06f5.json",
+					"jsonFile" : "directory-_deps.sfml-build.src.SFML.Graphics-Debug-ab24467c77808bd8e7d9.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -193,7 +194,7 @@
 					"source" : "build-ninja/_deps/sfml-src/src/SFML/Graphics",
 					"targetIndexes" : 
 					[
-						30
+						31
 					]
 				},
 				{
@@ -203,7 +204,7 @@
 					],
 					"build" : "_deps/freetype-build",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-_deps.freetype-build-Debug-28a8ed9ee9dbc76c880b.json",
+					"jsonFile" : "directory-_deps.freetype-build-Debug-8a36bff88a56442c7c51.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -213,7 +214,7 @@
 					"source" : "build-ninja/_deps/freetype-src",
 					"targetIndexes" : 
 					[
-						28
+						29
 					]
 				}
 			],
@@ -260,9 +261,10 @@
 						25,
 						26,
 						27,
-						29,
-						34,
-						35
+						28,
+						30,
+						35,
+						36
 					]
 				},
 				{
@@ -289,10 +291,10 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						30,
 						31,
 						32,
-						33
+						33,
+						34
 					]
 				},
 				{
@@ -308,7 +310,7 @@
 					"parentIndex" : 1,
 					"targetIndexes" : 
 					[
-						28
+						29
 					]
 				}
 			],
@@ -508,6 +510,13 @@
 					"id" : "NightlyUpdate::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-NightlyUpdate-Debug-dfedc6f1666d9afa12f9.json",
 					"name" : "NightlyUpdate",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "collision_tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-collision_tests-Debug-94c4c3d5acd08c792d22.json",
+					"name" : "collision_tests",
 					"projectIndex" : 0
 				},
 				{

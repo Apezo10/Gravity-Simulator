@@ -1,3 +1,4 @@
-input_validation 3 0.246585
-simulation_timing 2 0.255272
+input_validation 4 0.18441
+simulation_timing 3 0.187963
+collisions 1 0.571573
 ---

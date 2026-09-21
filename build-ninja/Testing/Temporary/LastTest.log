@@ -1,10 +1,10 @@
-Start testing: Sep 21 10:58 Eastern Daylight Time
+Start testing: Sep 21 11:01 Eastern Daylight Time
 ----------------------------------------------------------
-1/2 Testing: input_validation
-1/2 Test: input_validation
+1/3 Testing: input_validation
+1/3 Test: input_validation
 Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/input_validation_tests.exe"
 Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
-"input_validation" start time: Sep 21 10:58 Eastern Daylight Time
+"input_validation" start time: Sep 21 11:01 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Input validation, EOF cancellation, and five one-year preset checks passed.
@@ -12,24 +12,40 @@ Input validation, EOF cancellation, and five one-year preset checks passed.
 Test time =   0.74 sec
 ----------------------------------------------------------
 Test Passed.
-"input_validation" end time: Sep 21 10:58 Eastern Daylight Time
+"input_validation" end time: Sep 21 11:01 Eastern Daylight Time
 "input_validation" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/2 Testing: simulation_timing
-2/2 Test: simulation_timing
+2/3 Testing: simulation_timing
+2/3 Test: simulation_timing
 Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/simulation_timing_tests.exe"
 Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
-"simulation_timing" start time: Sep 21 10:58 Eastern Daylight Time
+"simulation_timing" start time: Sep 21 11:01 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Timing passed at 15, 30, 60, 144 and 240 FPS, with uneven frames and stalls.
 <end of output>
-Test time =   0.51 sec
+Test time =   0.56 sec
 ----------------------------------------------------------
 Test Passed.
-"simulation_timing" end time: Sep 21 10:58 Eastern Daylight Time
+"simulation_timing" end time: Sep 21 11:01 Eastern Daylight Time
 "simulation_timing" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 21 10:58 Eastern Daylight Time
+3/3 Testing: collisions
+3/3 Test: collisions
+Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/collision_tests.exe"
+Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
+"collisions" start time: Sep 21 11:01 Eastern Daylight Time
+Output:
+----------------------------------------------------------
+Collision conservation, coincident chains, separation and movement passed.
+<end of output>
+Test time =   0.57 sec
+----------------------------------------------------------
+Test Passed.
+"collisions" end time: Sep 21 11:01 Eastern Daylight Time
+"collisions" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 21 11:01 Eastern Daylight Time

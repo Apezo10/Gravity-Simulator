@@ -50,7 +50,7 @@
 				"_deps/sfml-build/lib/libfreetyped.a"
 			],
 			"targetId" : "freetype::@d06f9f5ffc3cc0b4bd77",
-			"targetIndex" : 28,
+			"targetIndex" : 29,
 			"type" : "target"
 		},
 		{
@@ -62,7 +62,7 @@
 			[
 				{
 					"id" : "freetype::@d06f9f5ffc3cc0b4bd77",
-					"index" : 28
+					"index" : 29
 				},
 				{
 					"id" : "freetype-interface::@d06f9f5ffc3cc0b4bd77",

@@ -8,6 +8,7 @@
 #include <array>
 #include <sstream>
 #include <cstdint>
+#include <utility>
 #include <SFML/Graphics.hpp>
 using namespace std;
 
@@ -209,6 +210,46 @@ class PlanetSystem {
     vector<Planet> planets;
     int asteroidCount = 0;
 
+    void mergeOverlaps(vector<pair<size_t, size_t>>& merges) {
+        // Restart after each merge: the new radius can overlap an earlier body.
+        bool merged;
+        do {
+            merged = false;
+            for (size_t i = 0; i < planets.size() && !merged; ++i) {
+                for (size_t j = i + 1; j < planets.size(); ++j) {
+                    const Planet& a = planets[i];
+                    const Planet& b = planets[j];
+                    if (hypot(b.getX() - a.getX(), b.getY() - a.getY()) >
+                        a.getRad() + b.getRad()) continue;
+
+                    const double mass = a.getMass() + b.getMass();
+                    const double wa = a.getMass() / mass;
+                    const double wb = b.getMass() / mass;
+                    const bool blackHole = a.isBlackHole() || b.isBlackHole();
+                    // Preserve volume for ordinary bodies; use the horizon for black holes.
+                    const double scale = max(a.getRad(), b.getRad());
+                    const double ra = a.getRad() / scale;
+                    const double rb = b.getRad() / scale;
+                    const double radius = blackHole ? 2 * G * mass / (299792458.0 * 299792458.0)
+                        : scale * cbrt(ra * ra * ra + rb * rb * rb);
+                    const Planet& appearance = a.isBlackHole() ? a : b.isBlackHole() ? b
+                        : a.getMass() >= b.getMass() ? a : b;
+                    Planet result(a.getX() * wa + b.getX() * wb,
+                                  a.getY() * wa + b.getY() * wb,
+                                  a.getXvel() * wa + b.getXvel() * wb,
+                                  a.getYvel() * wa + b.getYvel() * wb,
+                                  radius, mass, appearance.getColor(), blackHole,
+                                  appearance.getName());
+                    planets[i] = result;
+                    planets.erase(planets.begin() + j);
+                    merges.emplace_back(i, j);
+                    merged = true;
+                    break;
+                }
+            }
+        } while (merged);
+    }
+
     public:
     // ADD AN ASTEROID AT THE MOUSE POSITION
     void addAsteroid(sf::Vector2f mouse, const Camera& camera) {
@@ -355,7 +396,10 @@ class PlanetSystem {
     }
 
     //Updates the x and y position of the planet based on velocity input
-    void update(double dt) {
+    vector<pair<size_t, size_t>> update(double dt) {
+        vector<pair<size_t, size_t>> merges;
+        // Resolve existing overlaps before evaluating the inverse-square force.
+        mergeOverlaps(merges);
 
         //Nested loop, claculate accel for every planet
         for (int i=0; i<planets.size(); i++) {
@@ -399,6 +443,8 @@ class PlanetSystem {
         for (int i = 0; i<planets.size(); i++) {
             planets[i].update(dt);
         }
+        mergeOverlaps(merges);
+        return merges;
     }
 
     //VERY IMPORTANT LINE - GETTER FOR THE VECTOR and allows it to be reffered to by reference
@@ -598,7 +644,11 @@ int main() {
         // Advance existing bodies before input so a new asteroid is drawn at
         // its click position, without skipping time for the entire system.
         timing.advance(frameClock.restart().asMicroseconds(), [&](double dt) {
-            p.update(dt);
+            for (const auto& merge : p.update(dt)) {
+                // Keep trails aligned with the same sequential removals as the bodies.
+                trails[merge.first] = OrbitTrail{};
+                trails.erase(trails.begin() + merge.second);
+            }
             if (++trailStep == 4) {
                 for (size_t i = 0; i < trails.size(); ++i)
                     trails[i].add(p.getParSystem()[i]);

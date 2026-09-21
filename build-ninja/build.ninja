@@ -325,6 +325,45 @@ build simulation_timing_tests.exe: CXX_EXECUTABLE_LINKER__simulation_timing_test
   TARGET_PDB = simulation_timing_tests.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\simulation_timing_tests.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target collision_tests
+
+
+#############################################
+# Order-only phony target for collision_tests
+
+build cmake_object_order_depends_target_collision_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+
+build CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj: CXX_COMPILER__collision_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/collisions.cpp || cmake_object_order_depends_target_collision_tests
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\collision_tests.dir\tests\collisions.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\collision_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\collision_tests.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\collision_tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target collision_tests
+
+
+#############################################
+# Link the executable collision_tests.exe
+
+build collision_tests.exe: CXX_EXECUTABLE_LINKER__collision_tests_Debug CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\collision_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = collision_tests.exe
+  TARGET_IMPLIB = libcollision_tests.dll.a
+  TARGET_PDB = collision_tests.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\collision_tests.dir
+
 
 #############################################
 # Utility command for package
@@ -2607,6 +2646,8 @@ build _deps/freetype-build/install/strip: phony _deps/freetype-build/CMakeFiles/
 # =============================================================================
 # Target aliases.
 
+build collision_tests: phony collision_tests.exe
+
 build freetype: phony _deps/sfml-build/lib/libfreetyped.a
 
 build input_validation_tests: phony input_validation_tests.exe
@@ -2641,7 +2682,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
 
-build all: phony vectors.exe input_validation_tests.exe simulation_timing_tests.exe _deps/sfml-build/all
+build all: phony vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 
