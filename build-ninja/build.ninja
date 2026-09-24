@@ -481,6 +481,44 @@ build orbital_accuracy_tests.exe: CXX_EXECUTABLE_LINKER__orbital_accuracy_tests_
   TARGET_PDB = orbital_accuracy_tests.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\orbital_accuracy_tests.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target simulation_controls_tests
+
+
+#############################################
+# Order-only phony target for simulation_controls_tests
+
+build cmake_object_order_depends_target_simulation_controls_tests: phony || cmake_object_order_depends_target_simulation
+
+build CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj: CXX_COMPILER__simulation_controls_tests_unscanned_Debug C$:/Users/Adins/Downloads/Learning-cpp/Practice/tests/simulation_controls.cpp || cmake_object_order_depends_target_simulation_controls_tests
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\simulation_controls_tests.dir\tests\simulation_controls.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src
+  OBJECT_DIR = CMakeFiles\simulation_controls_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\simulation_controls_tests.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation_controls_tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target simulation_controls_tests
+
+
+#############################################
+# Link the executable simulation_controls_tests.exe
+
+build simulation_controls_tests.exe: CXX_EXECUTABLE_LINKER__simulation_controls_tests_Debug CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj | libsimulation.a || libsimulation.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = libsimulation.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\simulation_controls_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = simulation_controls_tests.exe
+  TARGET_IMPLIB = libsimulation_controls_tests.dll.a
+  TARGET_PDB = simulation_controls_tests.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\simulation_controls_tests.dir
+
 
 #############################################
 # Utility command for package
@@ -2791,6 +2829,8 @@ build sfml-window: phony _deps/sfml-build/lib/libsfml-window-s-d.a
 
 build simulation: phony libsimulation.a
 
+build simulation_controls_tests: phony simulation_controls_tests.exe
+
 build simulation_setup: phony libsimulation_setup.a
 
 build simulation_timing_tests: phony simulation_timing_tests.exe
@@ -2805,7 +2845,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
 
-build all: phony libsimulation.a libsimulation_setup.a vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe _deps/sfml-build/all
+build all: phony libsimulation.a libsimulation_setup.a vectors.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe simulation_controls_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 

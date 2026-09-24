@@ -165,11 +165,11 @@
 		},
 		{
 			"backtrace" : 2,
-			"id" : "sfml-graphics::@98af38147d5fa7e70f61"
+			"id" : "freetype::@d06f9f5ffc3cc0b4bd77"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "freetype::@d06f9f5ffc3cc0b4bd77"
+			"id" : "sfml-graphics::@98af38147d5fa7e70f61"
 		}
 	],
 	"id" : "vectors::@6890427a1f51a3e7e1df",

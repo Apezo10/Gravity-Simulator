@@ -4,11 +4,16 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 #include <stdexcept>
 
 void require(bool condition, const char* message) {
-    if (!condition) throw runtime_error(message);
+
+
+    if (!condition) {
+        throw runtime_error(message);
+    }
 }
 
 array<double, 5> run(int frames, bool uneven) {
@@ -26,31 +31,59 @@ array<double, 5> run(int frames, bool uneven) {
     OrbitTrail trail;
     int steps = 0;
     std::int64_t previous = 0;
+
+
     for (int i = 1; i <= frames; ++i) {
+
         // Exactly ten seconds split into different rendering schedules.
         std::int64_t now = 10000000LL * i / frames;
-        if (uneven && i < frames && i % 2) now -= 3000;
+
+
+        if (uneven && i < frames && i % 2) {
+            now -= 3000;
+        }
+
         timing.advance(now - previous, [&](double dt) {
-            system.update(dt);
-            if (++steps % 4 == 0) trail.add(system.getParSystem()[1]);
-        });
+                system.update(dt);
+
+
+                if (++steps % 4 == 0) {
+                    trail.add(system.getBodies()[1]);
+                }
+            });
         previous = now;
     }
+
     require(steps == 600, "Wrong step count for ten seconds");
     require(trail.count == 150, "Trail samples depend on frame rate");
-    const auto& earth = system.getParSystem()[1];
-    return {earth.getX(), earth.getY(), earth.getXvel(), earth.getYvel(), double(trail.count)};
+    const auto& earth = system.getBodies()[1];
+    return {
+        earth.getX(), earth.getY(), earth.getXVelocity(), earth.getYVelocity(), double(trail.count)};
 }
 
 int main() {
+
+
     try {
         const auto baseline = run(600, false);
+
+
         for (int fps : {15, 30, 60, 144, 240})
+        {
+
+
             for (bool uneven : {false, true})
+            {
                 require(run(fps * 10, uneven) == baseline, "Orbit depends on rendering schedule");
+            }
+        }
+
         SimulationTiming timing;
         int steps = 0;
-        auto step = [&](double dt) { require(dt == 1800, "Variable physics timestep"); ++steps; };
+        auto step = [&](double dt) {
+            require(dt == 1800, "Variable physics timestep");
+            ++steps;
+        };
         timing.advance(10000, step);
         require(steps == 0, "Stepped too early");
         timing.advance(10000, step);

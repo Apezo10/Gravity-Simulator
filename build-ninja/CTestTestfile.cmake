@@ -12,4 +12,6 @@ add_test("collisions" "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninj
 set_tests_properties("collisions" PROPERTIES  TIMEOUT "15" _BACKTRACE_TRIPLES "C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt;43;add_test;C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt;0;")
 add_test("orbital_accuracy" "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/orbital_accuracy_tests.exe")
 set_tests_properties("orbital_accuracy" PROPERTIES  TIMEOUT "15" _BACKTRACE_TRIPLES "C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt;48;add_test;C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt;0;")
+add_test("simulation_controls" "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/simulation_controls_tests.exe")
+set_tests_properties("simulation_controls" PROPERTIES  TIMEOUT "15" _BACKTRACE_TRIPLES "C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt;52;add_test;C:/Users/Adins/Downloads/Learning-cpp/Practice/CMakeLists.txt;0;")
 subdirs("_deps/sfml-build")

@@ -49,6 +49,12 @@
 },
 {
   "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/Adins/Downloads/Learning-cpp/Practice/src -g -o CMakeFiles\\simulation_controls_tests.dir\\tests\\simulation_controls.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\tests\\simulation_controls.cpp",
+  "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/tests/simulation_controls.cpp",
+  "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj"
+},
+{
+  "directory": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DSFML_STATIC -D_CRT_SECURE_NO_WARNINGS -D_WINSOCK_DEPRECATED_NO_WARNINGS -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/include -IC:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/src -g -fvisibility=hidden -fno-keep-inline-dllexport -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion -Wdouble-promotion -Wformat=2 -Wimplicit-fallthrough -Wsuggest-override -Wnull-dereference -Wold-style-cast -Wpedantic -Wmisleading-indentation -Wduplicated-cond -Wlogical-op -Wduplicated-branches -o _deps\\sfml-build\\src\\SFML\\System\\CMakeFiles\\sfml-system.dir\\Clock.cpp.obj -c C:\\Users\\Adins\\Downloads\\Learning-cpp\\Practice\\build-ninja\\_deps\\sfml-src\\src\\SFML\\System\\Clock.cpp",
   "file": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-src/src/SFML/System/Clock.cpp",
   "output": "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Clock.cpp.obj"

@@ -4,11 +4,16 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 #include <stdexcept>
 
 void require(bool condition, const char* message) {
-    if (!condition) throw runtime_error(message);
+
+
+    if (!condition) {
+        throw runtime_error(message);
+    }
 }
 
 PlanetSystem circularSystem() {
@@ -27,57 +32,72 @@ PlanetSystem circularSystem() {
 
 double energy(const vector<Planet>& bodies) {
     double result = 0;
+
+
     for (const auto& body : bodies)
+    {
         result += 0.5 * body.getMass() *
-                  (body.getXvel() * body.getXvel() + body.getYvel() * body.getYvel());
+        (body.getXVelocity() * body.getXVelocity() + body.getYVelocity() * body.getYVelocity());
+    }
+
     return result - G * bodies[0].getMass() * bodies[1].getMass() /
-        hypot(bodies[1].getX() - bodies[0].getX(), bodies[1].getY() - bodies[0].getY());
+    hypot(bodies[1].getX() - bodies[0].getX(), bodies[1].getY() - bodies[0].getY());
 }
 
 double orbitError(int steps) {
     auto system = circularSystem();
-    const auto& initial = system.getParSystem();
+    const auto& initial = system.getBodies();
     const double separation = initial[1].getX() - initial[0].getX();
     const double period = 2 * acos(-1.0) * sqrt(pow(separation, 3) /
         (G * (initial[0].getMass() + initial[1].getMass())));
-    for (int i = 0; i < steps; ++i) system.update(period / steps);
-    const auto& bodies = system.getParSystem();
+
+
+    for (int i = 0; i < steps; ++i) {
+        system.update(period / steps);
+    }
+
+    const auto& bodies = system.getBodies();
     return hypot(bodies[1].getX() - bodies[0].getX() - separation,
-                 bodies[1].getY() - bodies[0].getY()) / separation;
+        bodies[1].getY() - bodies[0].getY()) / separation;
 }
 
 int main() {
+
+
     try {
         Planet body(0, 0, 2, -3, 1, 1);
-        body.setAccel(4, -2);
+        body.setAcceleration(4, -2);
         body.update(2);
         require(body.getX() == 12 && body.getY() == -10 &&
-                body.getXvel() == 10 && body.getYvel() == -7,
-                "Constant acceleration motion incorrect");
+            body.getXVelocity() == 10 && body.getYVelocity() == -7,
+            "Constant acceleration motion incorrect");
 
         auto system = circularSystem();
-        const auto& bodies = system.getParSystem();
+        const auto& bodies = system.getBodies();
         const double initialEnergy = energy(bodies);
         const double separation = bodies[1].getX() - bodies[0].getX();
-        const double momentumScale = bodies[1].getMass() * abs(bodies[1].getYvel());
+        const double momentumScale = bodies[1].getMass() * abs(bodies[1].getYVelocity());
         double maxEnergyError = 0, maxRadiusError = 0;
+
+
         for (int step = 0; step < 175320; ++step) {
             require(system.update(PHYSICS_STEP_SECONDS).empty(), "Circular orbit collided");
             maxEnergyError = max(maxEnergyError, abs((energy(bodies) - initialEnergy) / initialEnergy));
             maxRadiusError = max(maxRadiusError, abs(hypot(bodies[1].getX() - bodies[0].getX(),
                 bodies[1].getY() - bodies[0].getY()) / separation - 1));
-            const double px = bodies[0].getMass() * bodies[0].getXvel() + bodies[1].getMass() * bodies[1].getXvel();
-            const double py = bodies[0].getMass() * bodies[0].getYvel() + bodies[1].getMass() * bodies[1].getYvel();
-            require(hypot(px, py) / momentumScale < 1e-10, "Momentum drift too large");
+            const double px = bodies[0].getMass() * bodies[0].getXVelocity() + bodies[1].getMass() * bodies[1].getXVelocity();
+            const double py = bodies[0].getMass() * bodies[0].getYVelocity() + bodies[1].getMass() * bodies[1].getYVelocity();
+            require(hypot(px, py) / momentumScale < 1e-10, "Momentum advancePosition too large");
         }
+
         require(maxEnergyError < 1e-9, "Ten-year energy error too large");
         require(maxRadiusError < 1e-6, "Ten-year orbital radius error too large");
         const double coarse = orbitError(200), fine = orbitError(400);
         require(fine < coarse / 3.5 && fine > coarse / 4.5,
-                "Halving timestep did not give second-order convergence");
+            "Halving timestep did not give second-order convergence");
         cout << "Ten-year maximum relative energy error: " << maxEnergyError
-             << "; radius error: " << maxRadiusError
-             << "; convergence ratio: " << coarse / fine << '\n';
+        << "; radius error: " << maxRadiusError
+        << "; convergence ratio: " << coarse / fine << '\n';
     } catch (const exception& error) {
         cerr << error.what() << '\n';
         return 1;

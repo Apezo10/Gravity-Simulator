@@ -1,10 +1,10 @@
-Start testing: Sep 21 11:15 Eastern Daylight Time
+Start testing: Sep 24 19:26 Eastern Daylight Time
 ----------------------------------------------------------
-1/4 Testing: input_validation
-1/4 Test: input_validation
+1/5 Testing: input_validation
+1/5 Test: input_validation
 Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/input_validation_tests.exe"
 Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
-"input_validation" start time: Sep 21 11:15 Eastern Daylight Time
+"input_validation" start time: Sep 24 19:26 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Input validation, EOF cancellation, and five one-year preset checks passed.
@@ -12,56 +12,72 @@ Input validation, EOF cancellation, and five one-year preset checks passed.
 Test time =   0.23 sec
 ----------------------------------------------------------
 Test Passed.
-"input_validation" end time: Sep 21 11:15 Eastern Daylight Time
+"input_validation" end time: Sep 24 19:26 Eastern Daylight Time
 "input_validation" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/4 Testing: simulation_timing
-2/4 Test: simulation_timing
+2/5 Testing: simulation_timing
+2/5 Test: simulation_timing
 Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/simulation_timing_tests.exe"
 Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
-"simulation_timing" start time: Sep 21 11:15 Eastern Daylight Time
+"simulation_timing" start time: Sep 24 19:26 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Timing passed at 15, 30, 60, 144 and 240 FPS, with uneven frames and stalls.
 <end of output>
-Test time =   0.08 sec
+Test time =   0.10 sec
 ----------------------------------------------------------
 Test Passed.
-"simulation_timing" end time: Sep 21 11:15 Eastern Daylight Time
+"simulation_timing" end time: Sep 24 19:26 Eastern Daylight Time
 "simulation_timing" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/4 Testing: collisions
-3/4 Test: collisions
+3/5 Testing: collisions
+3/5 Test: collisions
 Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/collision_tests.exe"
 Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
-"collisions" start time: Sep 21 11:15 Eastern Daylight Time
+"collisions" start time: Sep 24 19:26 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Collision conservation, coincident chains, separation and movement passed.
 <end of output>
-Test time =   0.08 sec
+Test time =   0.09 sec
 ----------------------------------------------------------
 Test Passed.
-"collisions" end time: Sep 21 11:15 Eastern Daylight Time
+"collisions" end time: Sep 24 19:26 Eastern Daylight Time
 "collisions" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/4 Testing: orbital_accuracy
-4/4 Test: orbital_accuracy
+4/5 Testing: orbital_accuracy
+4/5 Test: orbital_accuracy
 Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/orbital_accuracy_tests.exe"
 Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
-"orbital_accuracy" start time: Sep 21 11:15 Eastern Daylight Time
+"orbital_accuracy" start time: Sep 24 19:26 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Ten-year maximum relative energy error: 5.87549e-14; radius error: 6.42174e-08; convergence ratio: 3.99887
 <end of output>
-Test time =   0.24 sec
+Test time =   0.30 sec
 ----------------------------------------------------------
 Test Passed.
-"orbital_accuracy" end time: Sep 21 11:15 Eastern Daylight Time
+"orbital_accuracy" end time: Sep 24 19:26 Eastern Daylight Time
 "orbital_accuracy" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 21 11:15 Eastern Daylight Time
+5/5 Testing: simulation_controls
+5/5 Test: simulation_controls
+Command: "C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja/simulation_controls_tests.exe"
+Directory: C:/Users/Adins/Downloads/Learning-cpp/Practice/build-ninja
+"simulation_controls" start time: Sep 24 19:26 Eastern Daylight Time
+Output:
+----------------------------------------------------------
+Speed, pause, reset, trail and selection controls passed.
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"simulation_controls" end time: Sep 24 19:26 Eastern Daylight Time
+"simulation_controls" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 24 19:26 Eastern Daylight Time
