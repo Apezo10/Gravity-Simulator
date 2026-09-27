@@ -9,6 +9,7 @@ class SimulationSession {
     std::vector<Planet> initialBodies;
     SimulationTiming timing;
     int stepsSinceTrailSample = 0;
+    std::uint64_t revision = 0;
 
     // Integer quarter-speed units represent 0.25x through 4x exactly.
     int speedQuarters = 4;
@@ -33,6 +34,7 @@ class SimulationSession {
     }
 
     void step(double seconds) {
+        ++revision;
 
 
         for (const auto& [survivorIndex, removedIndex] : system.update(seconds)) {
@@ -71,6 +73,10 @@ public:
         return speedQuarters / 4.0;
     }
 
+    std::uint64_t stateRevision() const {
+        return revision;
+    }
+
     void faster() {
         speedQuarters = std::min(16, speedQuarters * 2);
     }
@@ -80,6 +86,7 @@ public:
     }
 
     void reset() {
+        ++revision;
         system.setBodies(initialBodies);
         timing = SimulationTiming{
         };
@@ -99,6 +106,7 @@ public:
     }
 
     void addAsteroid(double x, double y) {
+        ++revision;
         system.addAsteroid(x, y);
         trails.emplace_back();
         trails.back().add(system.getBodies().back());

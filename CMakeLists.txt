@@ -27,6 +27,11 @@ target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(trajectory_preview_tests tests/trajectory_preview.cpp)
+    target_link_libraries(trajectory_preview_tests PRIVATE simulation)
+    add_test(NAME trajectory_preview COMMAND trajectory_preview_tests)
+    set_tests_properties(trajectory_preview PROPERTIES TIMEOUT 15)
+
     add_executable(input_validation_tests tests/input_validation.cpp)
     target_compile_features(input_validation_tests PRIVATE cxx_std_17)
     target_link_libraries(input_validation_tests PRIVATE simulation_setup)

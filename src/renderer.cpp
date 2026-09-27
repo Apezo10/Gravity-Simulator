@@ -1,4 +1,5 @@
 #include "renderer.hpp"
+#include "trajectory_preview.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -197,6 +198,10 @@ namespace {
             "Shift-click: select | F: follow | Esc: deselect\n"
             "Left-click: asteroid | Right-drag: pan | Wheel: zoom\n";
 
+            if (session.paused) {
+                contents += "Dotted forecast: up to 90 days / first collision\n";
+            }
+
 
             if (session.selected && *session.selected < session.system.getBodies().size()) {
                 const auto& body = session.system.getBodies()[*session.selected];
@@ -224,6 +229,10 @@ struct Renderer::Impl {
     Grid grid;
     StatusDisplay statusDisplay;
     sf::CircleShape planet;
+    TrajectoryPreview preview;
+    bool previewReady = false;
+    std::uint64_t previewRevision = 0;
+
     vector<sf::Vertex> trailVertices = vector<sf::Vertex>((OrbitTrail::capacity + 1) * 2);
     array<sf::Vertex, 14> trailCapVertices{
     };
@@ -340,6 +349,52 @@ struct Renderer::Impl {
 
     }
 
+    void drawPreview(sf::RenderWindow& window, const SimulationSession& session,
+        const Camera& camera) {
+        if (!session.paused) {
+            previewReady = false;
+            return;
+        }
+
+        const auto& bodies = session.system.getBodies();
+
+        // Reuse the forecast when only the camera or selection changes.
+        if (!previewReady || previewRevision != session.stateRevision()) {
+            preview.calculate(session.system);
+            previewRevision = session.stateRevision();
+            previewReady = true;
+        }
+
+        sf::CircleShape dot(2.0f, 12);
+        dot.setOrigin({2.0f, 2.0f});
+
+        for (size_t i = 0; i < bodies.size(); ++i) {
+            if (session.selected && *session.selected != i) {
+                continue;
+            }
+
+            const auto& path = preview.paths[i];
+            auto color = bodies[i].isBlackHole()
+                ? sf::Color(180, 120, 255) : toColor(bodies[i].getColor());
+            auto lastDot = camera.toScreen(bodies[i].getX(), bodies[i].getY());
+
+            for (size_t j = 0; j < path.size(); ++j) {
+                const auto point = camera.toScreen(path[j].x, path[j].y);
+
+                // Keep nearby samples from becoming a solid line when zoomed out.
+                if (hypot(point.x - lastDot.x, point.y - lastDot.y) < 7.0f) {
+                    continue;
+                }
+
+                color.a = static_cast<unsigned char>(210 - 150 * j / path.size());
+                dot.setFillColor(color);
+                dot.setPosition(point);
+                window.draw(dot);
+                lastDot = point;
+            }
+        }
+    }
+
     void drawBodies(sf::RenderWindow& window, const vector<Planet>& bodies, const Camera& camera) {
 
 
@@ -389,6 +444,7 @@ struct Renderer::Impl {
         const auto& bodies = session.system.getBodies();
         drawGrid(window, bodies, camera);
         drawTrails(window, bodies, session.trails, camera);
+        drawPreview(window, session, camera);
         drawBodies(window, bodies, camera);
         drawSelection(window, session, camera);
         statusDisplay.draw(window, session);

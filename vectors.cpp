@@ -2,6 +2,7 @@
 #include "src/setup.hpp"
 #include "src/simulation_timing.hpp"
 #include <iostream>
+#include <array>
 
 using namespace std;
 

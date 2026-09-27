@@ -5,7 +5,7 @@
       "name": "local",
       "displayName": "Local MinGW Debug",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build-ninja",
+      "binaryDir": "${sourceDir}/build/local",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
