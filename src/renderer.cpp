@@ -191,15 +191,21 @@ namespace {
         void draw(sf::RenderWindow& window, const SimulationSession& session) {
             char row[320];
             snprintf(row, sizeof(row), "%s | %.2gx | Day %.2f | %zu bodies\n",
-                session.paused ? "Paused" : "Running", session.speed(),
+                session.launch ? "Aiming" : (session.paused ? "Paused" : "Running"), session.speed(),
                 session.elapsedSeconds / 86400.0, session.system.getBodies().size());
             contents = row;
             contents += "Space: pause | Up/Down: speed | R: reset\n"
             "Shift-click: select | F: follow | Esc: deselect\n"
-            "Left-click: asteroid | Right-drag: pan | Wheel: zoom\n";
+            "Left-drag: launch asteroid | Right-drag: pan | Wheel: zoom\n";
 
-            if (session.paused) {
+            if (session.paused || session.launch) {
                 contents += "Dotted forecast: up to 90 days / first collision\n";
+            }
+
+            if (session.launch) {
+                snprintf(row, sizeof(row), "Launch: %.1f km/s | Release: launch | Esc: cancel\n",
+                    hypot(session.launch->vx, session.launch->vy) / 1000.0);
+                contents += row;
             }
 
 
@@ -230,6 +236,7 @@ struct Renderer::Impl {
     StatusDisplay statusDisplay;
     sf::CircleShape planet;
     TrajectoryPreview preview;
+    vector<Planet> previewBodies;
     bool previewReady = false;
     std::uint64_t previewRevision = 0;
 
@@ -351,25 +358,33 @@ struct Renderer::Impl {
 
     void drawPreview(sf::RenderWindow& window, const SimulationSession& session,
         const Camera& camera) {
-        if (!session.paused) {
+        if (!session.paused && !session.launch) {
             previewReady = false;
             return;
         }
 
-        const auto& bodies = session.system.getBodies();
-
         // Reuse the forecast when only the camera or selection changes.
         if (!previewReady || previewRevision != session.stateRevision()) {
-            preview.calculate(session.system);
+            PlanetSystem forecast = session.system;
+
+            if (session.launch) {
+                const auto& launch = *session.launch;
+                forecast.addAsteroid(launch.x, launch.y, launch.vx, launch.vy);
+            }
+
+            previewBodies = forecast.getBodies();
+            preview.calculate(forecast);
             previewRevision = session.stateRevision();
             previewReady = true;
         }
 
+        const auto& bodies = previewBodies;
         sf::CircleShape dot(2.0f, 12);
         dot.setOrigin({2.0f, 2.0f});
 
         for (size_t i = 0; i < bodies.size(); ++i) {
-            if (session.selected && *session.selected != i) {
+            if (session.launch ? i + 1 != bodies.size()
+                               : (session.selected && *session.selected != i)) {
                 continue;
             }
 
@@ -393,6 +408,41 @@ struct Renderer::Impl {
                 lastDot = point;
             }
         }
+    }
+
+    void drawLaunch(sf::RenderWindow& window, const SimulationSession& session,
+        const Camera& camera) {
+        if (!session.launch) return;
+
+        const auto& launch = *session.launch;
+        const auto start = camera.toScreen(launch.x, launch.y);
+        const sf::Vector2f direction(
+            static_cast<float>(launch.vx / AsteroidLaunch::speedPerPixel),
+            static_cast<float>(-launch.vy / AsteroidLaunch::speedPerPixel));
+        const auto end = start + direction;
+        const sf::Color color(255, 190, 100);
+
+        sf::CircleShape marker(5.0f, 24);
+        marker.setOrigin({5.0f, 5.0f});
+        marker.setPosition(start);
+        marker.setFillColor(sf::Color(255, 165, 0, 100));
+        marker.setOutlineColor(color);
+        marker.setOutlineThickness(1.5f);
+        window.draw(marker);
+
+        const float length = hypot(direction.x, direction.y);
+        if (length < 3.0f) return;
+
+        const auto unit = direction / length;
+        const sf::Vector2f normal(-unit.y, unit.x);
+        const float headSize = min(10.0f, length * 0.4f);
+
+        const array<sf::Vertex, 6> arrow = {{
+            {start, color}, {end, color},
+            {end, color}, {end - unit * headSize + normal * headSize * 0.5f, color},
+            {end, color}, {end - unit * headSize - normal * headSize * 0.5f, color}
+        }};
+        window.draw(arrow.data(), arrow.size(), sf::PrimitiveType::Lines);
     }
 
     void drawBodies(sf::RenderWindow& window, const vector<Planet>& bodies, const Camera& camera) {
@@ -447,6 +497,7 @@ struct Renderer::Impl {
         drawPreview(window, session, camera);
         drawBodies(window, bodies, camera);
         drawSelection(window, session, camera);
+        drawLaunch(window, session, camera);
         statusDisplay.draw(window, session);
     }
 };

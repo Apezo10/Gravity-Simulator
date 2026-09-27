@@ -13,7 +13,7 @@ class PlanetSystem {
     void calculateAccelerations();
 
 public:
-    void addAsteroid(double x, double y);
+    void addAsteroid(double x, double y, double vx = 0, double vy = 0);
     void setBodies(std::vector<Planet> bodies) {
         planets = std::move(bodies);
         asteroidCount = 0;

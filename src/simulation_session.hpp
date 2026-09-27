@@ -4,6 +4,12 @@
 #include "simulation_timing.hpp"
 #include <optional>
 
+struct AsteroidLaunch {
+    static constexpr double speedPerPixel = 300.0;
+    double x, y;
+    double vx = 0, vy = 0;
+};
+
 // Application state independent of the window and keyboard bindings.
 class SimulationSession {
     std::vector<Planet> initialBodies;
@@ -64,6 +70,7 @@ public:
     bool following = false;
     std::optional<std::size_t> selected;
     double elapsedSeconds = 0;
+    std::optional<AsteroidLaunch> launch;
 
     explicit SimulationSession(const PlanetSystem& initial) : initialBodies(initial.getBodies()) {
         reset();
@@ -87,6 +94,7 @@ public:
 
     void reset() {
         ++revision;
+        launch.reset();
         system.setBodies(initialBodies);
         timing = SimulationTiming{
         };
@@ -105,18 +113,44 @@ public:
         }
     }
 
-    void addAsteroid(double x, double y) {
+    void addAsteroid(double x, double y, double vx = 0, double vy = 0) {
         ++revision;
-        system.addAsteroid(x, y);
+        system.addAsteroid(x, y, vx, vy);
         trails.emplace_back();
         trails.back().add(system.getBodies().back());
+    }
+
+    void beginLaunch(double x, double y) {
+        launch = AsteroidLaunch{x, y};
+        ++revision;
+    }
+
+    void aimLaunch(double dx, double dy) {
+        if (!launch) return;
+
+        // Screen Y points down; world Y points up. Speed is independent of zoom.
+        launch->vx = dx * AsteroidLaunch::speedPerPixel;
+        launch->vy = -dy * AsteroidLaunch::speedPerPixel;
+        ++revision;
+    }
+
+    void cancelLaunch() {
+        launch.reset();
+        ++revision;
+    }
+
+    void finishLaunch() {
+        if (!launch) return;
+
+        addAsteroid(launch->x, launch->y, launch->vx, launch->vy);
+        cancelLaunch();
     }
 
     void advance(std::int64_t microseconds) {
 
 
         // Discard paused wall time to prevent a catch-up jump on resume.
-        if (paused) {
+        if (paused || launch) {
             return;
         }
 

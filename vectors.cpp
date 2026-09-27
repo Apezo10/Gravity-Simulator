@@ -12,6 +12,13 @@ using namespace std;
 
 namespace {
 
+    void aimLaunch(SimulationSession& session, const Camera& camera, sf::Vector2f mouse) {
+        if (!session.launch) return;
+
+        const auto start = camera.toScreen(session.launch->x, session.launch->y);
+        session.aimLaunch(mouse.x - start.x, mouse.y - start.y);
+    }
+
     void followSelectedBody(const SimulationSession& session, Camera& camera) {
 
 
@@ -52,6 +59,12 @@ namespace {
 
             break;
             case sf::Keyboard::Key::Escape:
+            if (session.launch) {
+                session.cancelLaunch();
+                frameClock.restart();
+                break;
+            }
+
             session.selected.reset();
             session.following = false;
             break;
@@ -88,12 +101,13 @@ namespace {
                     }
                 } else {
                     const auto world = camera.toWorld(mouse);
-                    session.addAsteroid(world.x, world.y);
+                    camera.dragging = false;
+                    session.beginLaunch(world.x, world.y);
                 }
             }
 
 
-            if (button->button == sf::Mouse::Button::Right) {
+            if (button->button == sf::Mouse::Button::Right && !session.launch) {
                 session.following = false;
                 camera.dragging = true;
                 camera.lastMouse = window.mapPixelToCoords(button->position);
@@ -102,6 +116,12 @@ namespace {
 
 
         if (const auto* button = event.getIf<sf::Event::MouseButtonReleased>()) {
+
+            if (button->button == sf::Mouse::Button::Left && session.launch) {
+                aimLaunch(session, camera, window.mapPixelToCoords(button->position));
+                session.finishLaunch();
+                frameClock.restart();
+            }
 
 
             if (button->button == sf::Mouse::Button::Right) {
@@ -114,10 +134,14 @@ namespace {
         if (event.is<sf::Event::FocusLost>() || event.is<sf::Event::MouseLeft>())
         {
             camera.dragging = false;
+            session.cancelLaunch();
+            frameClock.restart();
         }
 
 
         if (const auto* mouse = event.getIf<sf::Event::MouseMoved>()) {
+
+            aimLaunch(session, camera, window.mapPixelToCoords(mouse->position));
 
 
             if (camera.dragging) {
@@ -129,7 +153,7 @@ namespace {
         if (const auto* wheel = event.getIf<sf::Event::MouseWheelScrolled>()) {
 
 
-            if (wheel->wheel == sf::Mouse::Wheel::Vertical)
+            if (wheel->wheel == sf::Mouse::Wheel::Vertical && !session.launch)
             {
                 camera.scroll(wheel->delta, window.mapPixelToCoords(wheel->position));
             }

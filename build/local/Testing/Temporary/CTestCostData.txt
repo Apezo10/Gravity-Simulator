@@ -1,7 +1,7 @@
-trajectory_preview 1 0.0395077
-input_validation 1 0.0825545
-simulation_timing 1 0.0571856
-collisions 1 0.0592998
-orbital_accuracy 1 0.0937771
-simulation_controls 1 0.0489829
+trajectory_preview 2 0.0196707
+input_validation 2 0.038551
+simulation_timing 2 0.0213138
+collisions 2 0.0227615
+orbital_accuracy 2 0.0516668
+simulation_controls 2 0.0285701
 ---

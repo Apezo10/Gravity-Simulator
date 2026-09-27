@@ -44,6 +44,42 @@ int main() {
 
         SimulationSession session(initial);
 
+        // Aiming freezes time without changing the user's pause setting.
+        session.beginLaunch(1e12, 2e12);
+        session.aimLaunch(100, -50);
+        session.advance(1000000);
+        require(session.elapsedSeconds == 0 && !session.paused,
+            "Aiming advanced time or changed pause state");
+        require(session.system.getBodies().size() == 1,
+            "Aiming added a body before release");
+
+        session.finishLaunch();
+        const auto& asteroid = session.system.getBodies().back();
+        require(asteroid.getX() == 1e12 && asteroid.getY() == 2e12,
+            "Launch position changed");
+        require(asteroid.getXVelocity() == 30000 && asteroid.getYVelocity() == 15000,
+            "Drag direction or speed was incorrect");
+        require(session.trails.size() == 2 && !session.launch,
+            "Launch did not initialize its trail or clear aiming");
+        session.finishLaunch();
+        require(session.system.getBodies().size() == 2, "Release launched twice");
+
+        session.paused = true;
+        session.beginLaunch(3e12, 0);
+        session.cancelLaunch();
+        session.finishLaunch();
+        require(session.system.getBodies().size() == 2 && session.paused,
+            "Cancel launched a body or changed pause state");
+
+        session.beginLaunch(3e12, 0);
+        session.finishLaunch();
+        require(session.system.getBodies().back().getXVelocity() == 0 && session.paused,
+            "A click should launch at rest and preserve pause");
+
+        session.beginLaunch(4e12, 0);
+        session.reset();
+        require(!session.launch, "Reset left an unfinished launch");
+
         // Partial tick survives pause.
         session.advance(10000);
         session.paused = true;

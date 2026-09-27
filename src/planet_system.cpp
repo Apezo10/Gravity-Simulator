@@ -1,7 +1,6 @@
 #include "planet_system.hpp"
 #include <algorithm>
 #include <cmath>
-#include <random>
 
 using namespace std;
 
@@ -135,15 +134,7 @@ vector<pair<size_t, size_t>> PlanetSystem::update(double dt) {
     return merges;
 }
 
-void PlanetSystem::addAsteroid(double x, double y) {
-
-    // Seed once, then choose new X/Y velocities (m/s) for each click.
-    static mt19937 generator(random_device{
-        }());
-    uniform_real_distribution<double> velocity(-30000.0, 30000.0);
-
-    double vx = velocity(generator);
-    double vy = velocity(generator);
+void PlanetSystem::addAsteroid(double x, double y, double vx, double vy) {
     double radius = 1000.0;
     double mass = 1.0e12;
 
