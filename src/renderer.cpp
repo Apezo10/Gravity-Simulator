@@ -110,6 +110,19 @@ struct Renderer::Impl {
     sf::Clock previewRefresh;
     bool previewWasLaunching = false;
 
+    vector<sf::Vertex> previewVertices;
+    const array<sf::Vector2f, 12> dotOutline = [] {
+        // Match the original two-pixel circle, calculating its outline only once.
+        const sf::CircleShape dot(2.0f, 12);
+        array<sf::Vector2f, 12> points;
+
+        for (size_t i = 0; i < points.size(); ++i) {
+            points[i] = dot.getPoint(i) - sf::Vector2f(2.0f, 2.0f);
+        }
+
+        return points;
+    }();
+
     vector<sf::Vertex> trailVertices = vector<sf::Vertex>((OrbitTrail::capacity + 1) * 2);
     array<sf::Vertex, 14> trailCapVertices{
     };
@@ -258,8 +271,9 @@ struct Renderer::Impl {
         }
 
         const auto& bodies = previewBodies;
-        sf::CircleShape dot(2.0f, 12);
-        dot.setOrigin({2.0f, 2.0f});
+
+        // Keep the allocated storage between frames and batch all visible dots.
+        previewVertices.clear();
 
         for (size_t i = 0; i < bodies.size(); ++i) {
             if (session.launch ? i + 1 != bodies.size()
@@ -281,11 +295,19 @@ struct Renderer::Impl {
                 }
 
                 color.a = static_cast<unsigned char>(210 - 150 * j / path.size());
-                dot.setFillColor(color);
-                dot.setPosition(point);
-                window.draw(dot);
+
+                for (size_t edge = 0; edge < dotOutline.size(); ++edge) {
+                    previewVertices.push_back({point, color});
+                    previewVertices.push_back({point + dotOutline[edge], color});
+                    previewVertices.push_back({point + dotOutline[(edge + 1) % dotOutline.size()], color});
+                }
+
                 lastDot = point;
             }
+        }
+
+        if (!previewVertices.empty()) {
+            window.draw(previewVertices.data(), previewVertices.size(), sf::PrimitiveType::Triangles);
         }
     }
 
