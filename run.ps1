@@ -1,13 +1,18 @@
-# Build through CMake so the compiler can find SFML's headers and libraries.
+param(
+    [ValidateSet('release', 'local')]
+    [string]$Preset = 'release'
+)
+
+# Use Release for everyday runs; local keeps the Debug build available.
 Push-Location $PSScriptRoot
 try {
-    cmake --preset local
+    cmake --preset $Preset
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    cmake --build --preset local
+    cmake --build --preset $Preset
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    & .\build-ninja\vectors.exe
+    & ".\build\$Preset\vectors.exe"
 } finally {
     Pop-Location
 }

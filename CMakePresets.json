@@ -11,12 +11,26 @@
         "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
         "CMAKE_MAKE_PROGRAM": "${sourceDir}/.tools/ninja/ninja.exe"
       }
+    },
+    {
+      "name": "release",
+      "displayName": "Local MinGW Release",
+      "inherits": "local",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
     }
   ],
   "buildPresets": [
     {
       "name": "local",
       "configurePreset": "local",
+      "jobs": 4
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
       "jobs": 4
     }
   ]
