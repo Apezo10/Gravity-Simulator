@@ -239,6 +239,8 @@ struct Renderer::Impl {
     vector<Planet> previewBodies;
     bool previewReady = false;
     std::uint64_t previewRevision = 0;
+    sf::Clock previewRefresh;
+    bool previewWasLaunching = false;
 
     vector<sf::Vertex> trailVertices = vector<sf::Vertex>((OrbitTrail::capacity + 1) * 2);
     array<sf::Vertex, 14> trailCapVertices{
@@ -363,8 +365,15 @@ struct Renderer::Impl {
             return;
         }
 
-        // Reuse the forecast when only the camera or selection changes.
-        if (!previewReady || previewRevision != session.stateRevision()) {
+        const bool launching = session.launch.has_value();
+        const bool modeChanged = launching != previewWasLaunching;
+        const bool stateChanged = previewRevision != session.stateRevision();
+
+        // Recalculate at most ten times a second while aiming. The arrow still
+        // follows every frame, and the latest aim is used when the timer expires.
+        const bool refreshDue = !launching || previewRefresh.getElapsedTime().asMilliseconds() >= 100;
+
+        if (!previewReady || modeChanged || (stateChanged && refreshDue)) {
             PlanetSystem forecast = session.system;
 
             if (session.launch) {
@@ -376,6 +385,8 @@ struct Renderer::Impl {
             preview.calculate(forecast);
             previewRevision = session.stateRevision();
             previewReady = true;
+            previewWasLaunching = launching;
+            previewRefresh.restart();
         }
 
         const auto& bodies = previewBodies;

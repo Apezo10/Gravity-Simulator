@@ -16,10 +16,16 @@ public:
     void calculate(const PlanetSystem& system) {
         // Forecast a copy so positions, velocities, and collisions stay untouched.
         PlanetSystem forecast = system;
-        paths.assign(system.getBodies().size(), {});
-
         constexpr int steps = days * 86400 / PHYSICS_STEP_SECONDS;
         constexpr int sampleEvery = 12;
+
+        // Keep each path's storage between forecasts instead of reallocating it.
+        paths.resize(system.getBodies().size());
+
+        for (auto& path : paths) {
+            path.clear();
+            path.reserve(steps / sampleEvery);
+        }
 
         for (int step = 1; step <= steps; ++step) {
             // End before a merge changes body indices or identities.

@@ -1,17 +1,17 @@
-Start testing: Sep 27 16:30 Eastern Daylight Time
+Start testing: Sep 27 16:38 Eastern Daylight Time
 ----------------------------------------------------------
 1/6 Testing: trajectory_preview
 1/6 Test: trajectory_preview
 Command: "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/trajectory_preview_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
-"trajectory_preview" start time: Sep 27 16:30 Eastern Daylight Time
+"trajectory_preview" start time: Sep 27 16:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"trajectory_preview" end time: Sep 27 16:30 Eastern Daylight Time
+"trajectory_preview" end time: Sep 27 16:38 Eastern Daylight Time
 "trajectory_preview" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -19,15 +19,15 @@ Test Passed.
 2/6 Test: input_validation
 Command: "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/input_validation_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
-"input_validation" start time: Sep 27 16:30 Eastern Daylight Time
+"input_validation" start time: Sep 27 16:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Input validation, EOF cancellation, and five one-year preset checks passed.
 <end of output>
-Test time =   0.08 sec
+Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"input_validation" end time: Sep 27 16:30 Eastern Daylight Time
+"input_validation" end time: Sep 27 16:38 Eastern Daylight Time
 "input_validation" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -35,15 +35,15 @@ Test Passed.
 3/6 Test: simulation_timing
 Command: "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/simulation_timing_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
-"simulation_timing" start time: Sep 27 16:30 Eastern Daylight Time
+"simulation_timing" start time: Sep 27 16:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Timing passed at 15, 30, 60, 144 and 240 FPS, with uneven frames and stalls.
 <end of output>
-Test time =   0.04 sec
+Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"simulation_timing" end time: Sep 27 16:30 Eastern Daylight Time
+"simulation_timing" end time: Sep 27 16:38 Eastern Daylight Time
 "simulation_timing" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -51,15 +51,15 @@ Test Passed.
 4/6 Test: collisions
 Command: "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/collision_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
-"collisions" start time: Sep 27 16:30 Eastern Daylight Time
+"collisions" start time: Sep 27 16:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Collision conservation, coincident chains, separation and movement passed.
 <end of output>
-Test time =   0.05 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"collisions" end time: Sep 27 16:30 Eastern Daylight Time
+"collisions" end time: Sep 27 16:38 Eastern Daylight Time
 "collisions" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -67,15 +67,15 @@ Test Passed.
 5/6 Test: orbital_accuracy
 Command: "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/orbital_accuracy_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
-"orbital_accuracy" start time: Sep 27 16:30 Eastern Daylight Time
+"orbital_accuracy" start time: Sep 27 16:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Ten-year maximum relative energy error: 5.87549e-14; radius error: 6.42174e-08; convergence ratio: 3.99887
 <end of output>
-Test time =   0.10 sec
+Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"orbital_accuracy" end time: Sep 27 16:30 Eastern Daylight Time
+"orbital_accuracy" end time: Sep 27 16:38 Eastern Daylight Time
 "orbital_accuracy" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -83,16 +83,16 @@ Test Passed.
 6/6 Test: simulation_controls
 Command: "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/simulation_controls_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
-"simulation_controls" start time: Sep 27 16:30 Eastern Daylight Time
+"simulation_controls" start time: Sep 27 16:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Speed, pause, reset, trail and selection controls passed.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"simulation_controls" end time: Sep 27 16:30 Eastern Daylight Time
+"simulation_controls" end time: Sep 27 16:38 Eastern Daylight Time
 "simulation_controls" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 27 16:30 Eastern Daylight Time
+End testing: Sep 27 16:38 Eastern Daylight Time

@@ -156,3 +156,7 @@
 2164	2866	8122441098776056	vectors.exe	3f5f4f3acb598c79
 42	692	8122441927505198	CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj	cef872dc61f19a76
 692	838	8122441934005137	simulation_controls_tests.exe	832b25e0af955de9
+33	691	8122447149272461	CMakeFiles/trajectory_preview_tests.dir/tests/trajectory_preview.cpp.obj	cdea14a0e25e1dde
+692	837	8122447155850569	trajectory_preview_tests.exe	cbcfe750d68f8360
+28	1378	8122447149225354	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
+1378	1906	8122447162723504	vectors.exe	3f5f4f3acb598c79
