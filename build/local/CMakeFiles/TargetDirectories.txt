@@ -29,6 +29,7 @@ C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/
 C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/ContinuousCoverage.dir
 C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/ContinuousMemCheck.dir
 C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/ContinuousSubmit.dir
+C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/grid_cache_tests.dir
 C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/trajectory_preview_tests.dir
 C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/input_validation_tests.dir
 C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CMakeFiles/simulation_timing_tests.dir

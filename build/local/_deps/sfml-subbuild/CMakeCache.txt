@@ -26,7 +26,7 @@ CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/Users/Adins/OneDrive/Documents/VScode
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/sfml-populate
 
-//make program
+//No help, variable specified on the command line.
 CMAKE_MAKE_PROGRAM:FILEPATH=C:/Users/Adins/OneDrive/DOCUME~1/VSCODE~2/GRAVIT~1/GRAVIT~1/TOOLS~1/ninja/ninja.exe
 
 //Value Computed by CMake

@@ -27,6 +27,11 @@ target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(grid_cache_tests tests/grid_cache.cpp)
+    target_link_libraries(grid_cache_tests PRIVATE simulation SFML::Graphics)
+    add_test(NAME grid_cache COMMAND grid_cache_tests)
+    set_tests_properties(grid_cache PROPERTIES TIMEOUT 15)
+
     add_executable(trajectory_preview_tests tests/trajectory_preview.cpp)
     target_link_libraries(trajectory_preview_tests PRIVATE simulation)
     add_test(NAME trajectory_preview COMMAND trajectory_preview_tests)

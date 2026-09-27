@@ -330,6 +330,45 @@ build ContinuousMemCheck: phony CMakeFiles/ContinuousMemCheck
 build ContinuousSubmit: phony CMakeFiles/ContinuousSubmit
 
 # =============================================================================
+# Object build statements for EXECUTABLE target grid_cache_tests
+
+
+#############################################
+# Order-only phony target for grid_cache_tests
+
+build cmake_object_order_depends_target_grid_cache_tests: phony || cmake_object_order_depends_target_freetype cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window cmake_object_order_depends_target_simulation
+
+build CMakeFiles/grid_cache_tests.dir/tests/grid_cache.cpp.obj: CXX_COMPILER__grid_cache_tests_unscanned_Debug C$:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity$ Sim/Gravity-Simulator/tests/grid_cache.cpp || cmake_object_order_depends_target_grid_cache_tests
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\grid_cache_tests.dir\tests\grid_cache.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -I"C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/src" -I"C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-src/include"
+  OBJECT_DIR = CMakeFiles\grid_cache_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\grid_cache_tests.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\grid_cache_tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target grid_cache_tests
+
+
+#############################################
+# Link the executable grid_cache_tests.exe
+
+build grid_cache_tests.exe: CXX_EXECUTABLE_LINKER__grid_cache_tests_Debug CMakeFiles/grid_cache_tests.dir/tests/grid_cache.cpp.obj | libsimulation.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libfreetyped.a || _deps/sfml-build/lib/libfreetyped.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a libsimulation.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = libsimulation.a  _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetyped.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\grid_cache_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = grid_cache_tests.exe
+  TARGET_IMPLIB = libgrid_cache_tests.dll.a
+  TARGET_PDB = grid_cache_tests.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\grid_cache_tests.dir
+
+# =============================================================================
 # Object build statements for EXECUTABLE target trajectory_preview_tests
 
 
@@ -2835,6 +2874,8 @@ build collision_tests: phony collision_tests.exe
 
 build freetype: phony _deps/sfml-build/lib/libfreetyped.a
 
+build grid_cache_tests: phony grid_cache_tests.exe
+
 build input_validation_tests: phony input_validation_tests.exe
 
 build libfreetyped.a: phony _deps/sfml-build/lib/libfreetyped.a
@@ -2877,7 +2918,7 @@ build vectors: phony vectors.exe
 #############################################
 # Folder: C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local
 
-build all: phony libsimulation.a libsimulation_setup.a vectors.exe trajectory_preview_tests.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe simulation_controls_tests.exe _deps/sfml-build/all
+build all: phony libsimulation.a libsimulation_setup.a vectors.exe grid_cache_tests.exe trajectory_preview_tests.exe input_validation_tests.exe simulation_timing_tests.exe collision_tests.exe orbital_accuracy_tests.exe simulation_controls_tests.exe _deps/sfml-build/all
 
 # =============================================================================
 
