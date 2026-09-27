@@ -61,10 +61,56 @@ double orbitError(int steps) {
         bodies[1].getY() - bodies[0].getY()) / separation;
 }
 
+void checkAccelerationCache() {
+    auto cached = circularSystem();
+    cached.update(1800);
+
+    // Copies used by trajectory forecasts retain valid accelerations too.
+    auto reference = cached;
+
+    for (int step = 0; step < 100; ++step) {
+        if (step == 25) {
+            cached.addAsteroid(2e11, 1e11, 10000, -5000);
+            reference.addAsteroid(2e11, 1e11, 10000, -5000);
+        }
+
+        if (step == 50) {
+            // Reset into a collision, with a third body still exerting gravity.
+            const vector<Planet> bodies = {
+                Planet(0, 0, 1, 0, 1, 1e10),
+                Planet(4, 0, -1, 0, 1, 1e10),
+                Planet(100, 0, 0, 0, 1, 1e12)
+            };
+            cached.setBodies(bodies);
+            reference.setBodies(bodies);
+        }
+
+        // Force the reference to recalculate at both ends of every step.
+        reference.setBodies(reference.getBodies());
+        const double dt = step < 50 ? (step % 2 == 0 ? 1800 : 900) : 1;
+        require(cached.update(dt) == reference.update(dt), "Cache changed collision results");
+
+        const auto& actual = cached.getBodies();
+        const auto& expected = reference.getBodies();
+        require(actual.size() == expected.size(), "Cache changed body count");
+
+        for (size_t i = 0; i < actual.size(); ++i) {
+            require(actual[i].getX() == expected[i].getX() &&
+                actual[i].getY() == expected[i].getY() &&
+                actual[i].getXVelocity() == expected[i].getXVelocity() &&
+                actual[i].getYVelocity() == expected[i].getYVelocity() &&
+                actual[i].getMass() == expected[i].getMass(),
+                "Cached gravity differs from full recalculation");
+        }
+    }
+}
+
 int main() {
 
 
     try {
+        checkAccelerationCache();
+
         Planet body(0, 0, 2, -3, 1, 1);
         body.setAcceleration(4, -2);
         body.update(2);

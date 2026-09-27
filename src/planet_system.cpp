@@ -61,6 +61,7 @@ void PlanetSystem::mergeOverlaps(vector<pair<size_t, size_t>>& merges) {
 
                 planets[i] = mergeBodies(a, b);
                 planets.erase(planets.begin() + j);
+                accelerationsReady = false;
                 merges.emplace_back(i, j);
                 merged = true;
                 break;
@@ -102,20 +103,27 @@ void PlanetSystem::calculateAccelerations() {
             b.addAcceleration(-gx * a.getMass(), -gy * a.getMass());
         }
     }
+
+    accelerationsReady = true;
 }
 
 vector<pair<size_t, size_t>> PlanetSystem::update(double dt) {
     vector<pair<size_t, size_t>> merges;
     mergeOverlaps(merges);
 
+    // The previous step already calculated gravity at these positions.
+    if (!accelerationsReady) {
+        calculateAccelerations();
+    }
+
+
     // Velocity Verlet updates velocity in two half-steps around the position step.
-    calculateAccelerations();
-
-
     for (Planet& planet : planets) {
         planet.advanceVelocity(dt * 0.5);
     }
 
+
+    accelerationsReady = false;
 
     for (Planet& planet : planets) {
         planet.advancePosition(dt);
@@ -145,4 +153,5 @@ void PlanetSystem::addAsteroid(double x, double y, double vx, double vy) {
     // The existing drawing code keeps small bodies visible at a 3-pixel radius.
     Planet asteroid(x, y, vx, vy, radius, mass, color, false, name);
     planets.push_back(asteroid);
+    accelerationsReady = false;
 }
