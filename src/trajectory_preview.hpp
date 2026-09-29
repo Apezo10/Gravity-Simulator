@@ -2,6 +2,7 @@
 
 #include "planet_system.hpp"
 #include "simulation_timing.hpp"
+#include <chrono>
 #include <vector>
 
 struct PredictedPoint {
@@ -9,15 +10,23 @@ struct PredictedPoint {
 };
 
 class TrajectoryPreview {
+    PlanetSystem forecast;
+    int completedSteps = 0;
+    bool complete = true;
+
+    static constexpr int sampleEvery = 12;
+
 public:
     static constexpr int days = 90;
+    static constexpr int steps = days * 86400 / PHYSICS_STEP_SECONDS;
+
     std::vector<std::vector<PredictedPoint>> paths;
 
-    void calculate(const PlanetSystem& system) {
+    void begin(const PlanetSystem& system) {
         // Forecast a copy so positions, velocities, and collisions stay untouched.
-        PlanetSystem forecast = system;
-        constexpr int steps = days * 86400 / PHYSICS_STEP_SECONDS;
-        constexpr int sampleEvery = 12;
+        forecast = system;
+        completedSteps = 0;
+        complete = system.getBodies().empty();
 
         // Keep each path's storage between forecasts instead of reallocating it.
         paths.resize(system.getBodies().size());
@@ -26,14 +35,33 @@ public:
             path.clear();
             path.reserve(steps / sampleEvery);
         }
+    }
 
-        for (int step = 1; step <= steps; ++step) {
-            // End before a merge changes body indices or identities.
-            if (!forecast.update(PHYSICS_STEP_SECONDS).empty()) {
+    bool isComplete() const {
+        return complete;
+    }
+
+    void advance(std::chrono::microseconds budget = std::chrono::milliseconds(2),
+        int maxSteps = steps) {
+        const auto deadline = std::chrono::steady_clock::now() + budget;
+
+        // Yield between physics steps so input and rendering can continue.
+        // One individual physics step can still exceed the time budget.
+        for (int i = 0; i < maxSteps && !complete; ++i) {
+            if (std::chrono::steady_clock::now() >= deadline) {
                 break;
             }
 
-            if (step % sampleEvery != 0) {
+            // End before a merge changes body indices or identities.
+            if (!forecast.update(PHYSICS_STEP_SECONDS).empty()) {
+                complete = true;
+                break;
+            }
+
+            ++completedSteps;
+            complete = completedSteps == steps;
+
+            if (completedSteps % sampleEvery != 0) {
                 continue;
             }
 

@@ -250,8 +250,8 @@ struct Renderer::Impl {
         const bool modeChanged = launching != previewWasLaunching;
         const bool stateChanged = previewRevision != session.stateRevision();
 
-        // Recalculate at most ten times a second while aiming. The arrow still
-        // follows every frame, and the latest aim is used when the timer expires.
+        // Replace outdated forecasts at most ten times a second while aiming.
+        // Each new forecast clears the old path and grows over subsequent frames.
         const bool refreshDue = !launching || previewRefresh.getElapsedTime().asMilliseconds() >= 100;
 
         if (!previewReady || modeChanged || (stateChanged && refreshDue)) {
@@ -263,12 +263,14 @@ struct Renderer::Impl {
             }
 
             previewBodies = forecast.getBodies();
-            preview.calculate(forecast);
+            preview.begin(forecast);
             previewRevision = session.stateRevision();
             previewReady = true;
             previewWasLaunching = launching;
             previewRefresh.restart();
         }
+
+        preview.advance();
 
         const auto& bodies = previewBodies;
 
