@@ -11,7 +11,11 @@ class PlanetSystem {
     int asteroidCount = 0;
     bool accelerationsReady = false;
 
+    void mergePair(std::size_t first, std::size_t second,
+        std::vector<std::pair<std::size_t, std::size_t>>& merges);
     void mergeOverlaps(std::vector<std::pair<std::size_t, std::size_t>>& merges);
+    void advancePositions(double dt,
+        std::vector<std::pair<std::size_t, std::size_t>>& merges);
     void calculateAccelerations();
 
 public:

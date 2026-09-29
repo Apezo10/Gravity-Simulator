@@ -1,10 +1,45 @@
 #include "planet_system.hpp"
 #include <algorithm>
 #include <cmath>
+#include <optional>
 
 using namespace std;
 
 namespace {
+
+    optional<double> collisionTime(const Planet& a, const Planet& b, double dt) {
+        const double dx = b.getX() - a.getX();
+        const double dy = b.getY() - a.getY();
+        const double vx = b.getXVelocity() - a.getXVelocity();
+        const double vy = b.getYVelocity() - a.getYVelocity();
+        const double speed = hypot(vx, vy);
+
+        if (speed == 0) {
+            return nullopt;
+        }
+
+        // During Verlet's position step, relative motion is a straight line.
+        const double ux = vx / speed;
+        const double uy = vy / speed;
+        const double along = dx * ux + dy * uy;
+        const double across = abs(dx * uy - dy * ux);
+        const double radius = a.getRadius() + b.getRadius();
+
+        if (along >= 0 || across > radius) {
+            return nullopt;
+        }
+
+        // Find first contact without squaring astronomical distances.
+        const double ratio = across / radius;
+        const double chord = radius * sqrt((1 - ratio) * (1 + ratio));
+        const double time = max(0.0, (-along - chord) / speed);
+
+        if (time > dt) {
+            return nullopt;
+        }
+
+        return time;
+    }
 
     Planet mergeBodies(const Planet& a, const Planet& b) {
         const double mass = a.getMass() + b.getMass();
@@ -36,6 +71,15 @@ namespace {
 
 }
 
+void PlanetSystem::mergePair(size_t first, size_t second,
+    vector<pair<size_t, size_t>>& merges) {
+    planets[first] = mergeBodies(planets[first], planets[second]);
+    planets.erase(planets.begin() + second);
+
+    accelerationsReady = false;
+    merges.emplace_back(first, second);
+}
+
 void PlanetSystem::mergeOverlaps(vector<pair<size_t, size_t>>& merges) {
 
     // Restart after each merge: the new radius can overlap an earlier body.
@@ -59,15 +103,46 @@ void PlanetSystem::mergeOverlaps(vector<pair<size_t, size_t>>& merges) {
                     continue;
                 }
 
-                planets[i] = mergeBodies(a, b);
-                planets.erase(planets.begin() + j);
-                accelerationsReady = false;
-                merges.emplace_back(i, j);
+                mergePair(i, j, merges);
                 merged = true;
                 break;
             }
         }
     } while (merged);
+}
+
+void PlanetSystem::advancePositions(double dt, vector<pair<size_t, size_t>>& merges) {
+    while (true) {
+        double nextTime = dt;
+        optional<pair<size_t, size_t>> nextPair;
+
+        // Resolve the earliest contact first, regardless of body storage order.
+        for (size_t i = 0; i < planets.size(); ++i) {
+            for (size_t j = i + 1; j < planets.size(); ++j) {
+                const auto time = collisionTime(planets[i], planets[j], nextTime);
+
+                if (time && (!nextPair || *time < nextTime)) {
+                    nextTime = *time;
+                    nextPair = pair{i, j};
+                }
+            }
+        }
+
+        for (Planet& planet : planets) {
+            planet.advancePosition(nextTime);
+        }
+
+        if (!nextPair) {
+            break;
+        }
+
+        // Merge the detected pair directly: rounding can leave a tiny contact gap.
+        mergePair(nextPair->first, nextPair->second, merges);
+        mergeOverlaps(merges);
+
+        // Continue the remaining drift with the merged body's momentum.
+        dt -= nextTime;
+    }
 }
 
 void PlanetSystem::calculateAccelerations() {
@@ -125,9 +200,7 @@ vector<pair<size_t, size_t>> PlanetSystem::update(double dt) {
 
     accelerationsReady = false;
 
-    for (Planet& planet : planets) {
-        planet.advancePosition(dt);
-    }
+    advancePositions(dt, merges);
 
     // Merge before recalculating gravity to avoid forces inside overlapping bodies.
     // Mass-weighted half-step velocities preserve momentum across each merge.

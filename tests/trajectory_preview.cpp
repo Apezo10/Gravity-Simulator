@@ -94,6 +94,14 @@ int main() {
             "Forecast should stop at a collision");
         require(system.getBodies().size() == 2, "Forecast merged real bodies");
 
+        system.setBodies({Planet(-10, 0, 20, 0, 1, 1), Planet(10, 0, -20, 0, 1, 1)});
+        preview.begin(system);
+        finish(preview);
+        require(preview.paths[0].empty() && preview.paths[1].empty(),
+            "Forecast missed a collision between step endpoints");
+        require(system.getBodies().size() == 2 && system.getBodies()[0].getX() == -10,
+            "Swept forecast changed the real system");
+
         system.setBodies({});
         preview.begin(system);
         require(preview.isComplete() && preview.paths.empty(),
