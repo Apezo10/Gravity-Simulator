@@ -14,16 +14,16 @@ FetchContent_Declare(SFML
 )
 FetchContent_MakeAvailable(SFML)
 
-add_library(simulation STATIC src/planet_system.cpp)
+add_library(simulation STATIC Simulation/planet_system.cpp)
 target_compile_features(simulation PUBLIC cxx_std_17)
-target_include_directories(simulation PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_include_directories(simulation PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Simulation" "${CMAKE_CURRENT_SOURCE_DIR}/Rendering")
 
-add_library(simulation_setup STATIC src/setup.cpp)
+add_library(simulation_setup STATIC Simulation/setup.cpp)
 target_link_libraries(simulation_setup PUBLIC simulation)
 
-add_executable(vectors vectors.cpp src/renderer.cpp)
+add_executable(vectors main.cpp Rendering/renderer.cpp)
 target_link_libraries(vectors PRIVATE simulation_setup SFML::Graphics)
-target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/tuffy.ttf")
+target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/Rendering/tuffy.ttf")
 
 include(CTest)
 if(BUILD_TESTING)

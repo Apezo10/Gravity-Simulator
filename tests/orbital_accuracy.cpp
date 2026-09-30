@@ -19,13 +19,18 @@ void require(bool condition, const char* message) {
 PlanetSystem circularSystem() {
     istringstream input("yes\n1\n");
     ostringstream output;
+
     auto* oldInput = cin.rdbuf(input.rdbuf());
     auto* oldOutput = cout.rdbuf(output.rdbuf());
+    
     PlanetSystem system;
     const bool ok = chooseSetup(system);
+    
     cin.rdbuf(oldInput);
     cout.rdbuf(oldOutput);
     cin.clear();
+    
+    
     require(ok, "Preset setup failed");
     return system;
 }

@@ -1,5 +1,5 @@
 {
-  "C_Cpp.default.compileCommands": "${workspaceFolder}/build-ninja/compile_commands.json",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/local/compile_commands.json",
   "code-runner.runInTerminal": true,
   "code-runner.executorMap": {
     "cpp": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$workspaceRoot/run.ps1\""

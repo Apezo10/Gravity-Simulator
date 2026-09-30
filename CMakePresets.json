@@ -8,6 +8,7 @@
       "binaryDir": "${sourceDir}/build/local",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
         "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
         "CMAKE_MAKE_PROGRAM": "${sourceDir}/.tools/ninja/ninja.exe"
       }

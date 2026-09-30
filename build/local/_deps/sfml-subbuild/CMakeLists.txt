@@ -1,7 +1,7 @@
 # Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
 # file LICENSE.rst or https://cmake.org/licensing for details.
 
-cmake_minimum_required(VERSION 4.3.1)
+cmake_minimum_required(VERSION 4.4.3)
 
 # Reject any attempt to use a toolchain file. We must not use one because
 # we could be downloading it here. If the CMAKE_TOOLCHAIN_FILE environment
@@ -19,9 +19,9 @@ project(sfml-populate NONE)
 
 include(ExternalProject)
 ExternalProject_Add(sfml-populate
-                     "UPDATE_DISCONNECTED" "True" "DOWNLOAD_EXTRACT_TIMESTAMP" "TRUE" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "URL" "https://github.com/SFML/SFML/archive/refs/tags/3.0.2.tar.gz"
-                    SOURCE_DIR          "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-src"
-                    BINARY_DIR          "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build"
+                     "UPDATE_DISCONNECTED" "False" "DOWNLOAD_EXTRACT_TIMESTAMP" "TRUE" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "URL" "https://github.com/SFML/SFML/archive/refs/tags/3.0.2.tar.gz"
+                    SOURCE_DIR          "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/local/_deps/sfml-src"
+                    BINARY_DIR          "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/local/_deps/sfml-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

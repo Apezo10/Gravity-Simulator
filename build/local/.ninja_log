@@ -3,61 +3,64 @@
 292	1216	8122433755279081	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Utils.cpp.obj	9a9475fd12d98090
 8739	8955	8122433839746855	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftstroke.c.obj	5c8b20754541344e
 32	307	8122433752685469	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Clock.cpp.obj	4ef1c12141c3487c
+22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/cmake_install.cmake	7c1f3fb6003a1d92
 38	567	8122433752741994	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Err.cpp.obj	5dc74ddbf108bed
-646	780	8122441083600964	libsimulation.a	7bb02ef1a90b76c7
 4320	5452	8122433795556157	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/CursorImpl.cpp.obj	3b6f5a02354f0844
+590	684	8122451618327965	libsimulation.a	7bb02ef1a90b76c7
 568	929	8122433758060871	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector3.cpp.obj	68f76cf4813f6b48
+22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/cmake_install.cmake	7c1f3fb6003a1d92
 308	708	8122433755439605	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector2.cpp.obj	cb1f61b8386c73ab
 50	1061	8122433752866801	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/String.cpp.obj	fbd778fd956a61a1
 931	1233	8122433761669396	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/MemoryInputStream.cpp.obj	aebf60a2719183c0
-6464	8512	8122433817001757	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/WindowImplWin32.cpp.obj	fed31544c53adbaa
 708	1607	8122433759437408	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/FileInputStream.cpp.obj	fdbd120db97035b9
+6464	8512	8122433817001757	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/WindowImplWin32.cpp.obj	fed31544c53adbaa
 1234	1797	8122433764693513	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Clipboard.cpp.obj	4cc8f011aff2d2c3
-9237	9457	8122433844731494	_deps/freetype-build/CMakeFiles/freetype.dir/src/gzip/ftgzip.c.obj	c11c1a4efc03d9be
-33	646	8122441077466993	CMakeFiles/simulation.dir/src/planet_system.cpp.obj	9f737c64b92ecb54
+29	590	8122451612717094	CMakeFiles/simulation.dir/src/planet_system.cpp.obj	9f737c64b92ecb54
 8512	8657	8122433837482597	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftinit.c.obj	abebf56f6fd74df8
-7912	8056	8122433831477292	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftbbox.c.obj	47c64da2a20dba0c
+9237	9457	8122433844731494	_deps/freetype-build/CMakeFiles/freetype.dir/src/gzip/ftgzip.c.obj	c11c1a4efc03d9be
+22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/src/SFML/Window/cmake_install.cmake	7c1f3fb6003a1d92
 1063	2207	8122433763001319	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Win32/SleepImpl.cpp.obj	62e7d047af729cd
-8903	9028	8122433841391297	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftwinfnt.c.obj	247b15aff868c734
-3563	3973	8122433787995651	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.obj	8d6c77011c5cd3d1
+7912	8056	8122433831477292	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftbbox.c.obj	47c64da2a20dba0c
 1608	2234	8122433768435880	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Context.cpp.obj	8952cb9a0dc12c5e
-6065	7055	8122433813010755	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/VideoModeImpl.cpp.obj	4ff72e61828dfa6f
+3563	3973	8122433787995651	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.obj	8d6c77011c5cd3d1
+8903	9028	8122433841391297	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftwinfnt.c.obj	247b15aff868c734
 1797	2474	8122433770325177	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Cursor.cpp.obj	17fcd69084761f65
-7055	8937	8122433822915408	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/WglContext.cpp.obj	feac69c1ba16a798
+6065	7055	8122433813010755	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/VideoModeImpl.cpp.obj	4ff72e61828dfa6f
 2209	2562	8122433774445642	_deps/sfml-build/lib/libsfml-system-s-d.a	44822f97a75ad836
 2562	3932	8122433777975968	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.obj	1be23ff9203c8ab7
+7055	8937	8122433822915408	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/WglContext.cpp.obj	feac69c1ba16a798
 2234	2668	8122433774705563	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlResource.cpp.obj	ca39f7ae7d99aad7
 2668	3139	8122433779035513	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Keyboard.cpp.obj	cd5633cd7da8095d
+3140	3267	8122433783754757	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Mouse.cpp.obj	faf78f8cb23ea823
 10575	10695	8122433858111204	_deps/freetype-build/CMakeFiles/freetype.dir/builds/windows/ftdebug.c.obj	ac7c4f6ff095c45c
 8392	8548	8122433836278956	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftglyph.c.obj	ff4fcf007e8f428
-3140	3267	8122433783754757	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Mouse.cpp.obj	faf78f8cb23ea823
 3267	3394	8122433785028744	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Touch.cpp.obj	4d095695fb9fc979
 3394	3563	8122433786301458	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Sensor.cpp.obj	1344fb254caafd35
 2474	3878	8122433777097150	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.obj	8d82458c5b18d153
 8318	8447	8122433835541192	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftgasp.c.obj	720e26145ba2fb9
-8448	8598	8122433836833740	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftgxval.c.obj	7c6e109a21e34fb6
 3932	4184	8122433791676066	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Vulkan.cpp.obj	eb911cce833c8865
+8448	8598	8122433836833740	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftgxval.c.obj	7c6e109a21e34fb6
 2084	4303	8122433773197684	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlContext.cpp.obj	6e500173b7c513c0
 3879	4320	8122433791140136	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/VideoMode.cpp.obj	7547d8a76ecbc835
 3973	4785	8122433792092906	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.obj	ebf04ee978f483a3
 4184	4935	8122433794202067	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.obj	67a5b2877b907ea0
-9028	9440	8122433842645532	_deps/freetype-build/CMakeFiles/freetype.dir/src/cff/cff.c.obj	679a960ddcf3e364
-9090	9331	8122433843267022	_deps/freetype-build/CMakeFiles/freetype.dir/src/cid/type1cid.c.obj	b3ba5601123fe209
 12444	13375	8122433876791891	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderWindow.cpp.obj	e9d13c09756412ed
 4786	5952	8122433800209045	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/ClipboardImpl.cpp.obj	569a7a0ac6039d36
+9090	9331	8122433843267022	_deps/freetype-build/CMakeFiles/freetype.dir/src/cid/type1cid.c.obj	b3ba5601123fe209
+9028	9440	8122433842645532	_deps/freetype-build/CMakeFiles/freetype.dir/src/cff/cff.c.obj	679a960ddcf3e364
 5953	6065	8122433811880236	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/SensorImpl.cpp.obj	e797cf3eb3b70eb1
 4303	6411	8122433795386341	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.obj	65cdca1a2ab52880
 4936	6464	8122433801716174	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/InputImpl.cpp.obj	4062825907c7c293
 5453	7460	8122433806890180	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/JoystickImpl.cpp.obj	e2768ce1b196b8c
 6412	7508	8122433816473090	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/VulkanImplWin32.cpp.obj	1ec3051760f5ff7b
-8598	8713	8122433838337677	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftotval.c.obj	5db5e28b80e6776c
 7461	7912	8122433826969235	_deps/freetype-build/CMakeFiles/freetype.dir/src/autofit/autofit.c.obj	a1558b6afee115c8
+8598	8713	8122433838337677	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftotval.c.obj	5db5e28b80e6776c
 7509	8098	8122433827450762	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftbase.c.obj	fd6052071133b6c2
 8056	8191	8122433832918384	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftbdf.c.obj	2149dffd5b27d628
 8099	8267	8122433833347081	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftbitmap.c.obj	6634c8beaaaa1189
 8191	8318	8122433834267064	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftcid.c.obj	59d9c9ff0c4e1e5
-8548	8739	8122433837845426	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftmm.c.obj	35a8df7da2919ea7
 8267	8391	8122433835037324	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftfstype.c.obj	6795b380e99ea6e4
+8548	8739	8122433837845426	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftmm.c.obj	35a8df7da2919ea7
 11997	12216	8122433872333100	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderStates.cpp.obj	3c051f1e596abd15
 8658	8781	8122433838932919	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftpatent.c.obj	19b7ac052986f411
 8713	8854	8122433839489400	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/ftpfr.c.obj	35eea11071eaff52
@@ -65,10 +68,10 @@
 8854	8977	8122433840892305	_deps/freetype-build/CMakeFiles/freetype.dir/src/base/fttype1.c.obj	bb52783d8de91865
 8955	9090	8122433841913115	_deps/freetype-build/CMakeFiles/freetype.dir/src/bzip2/ftbzip2.c.obj	6cc652aa1894c165
 8937	9237	8122433841730479	_deps/freetype-build/CMakeFiles/freetype.dir/src/bdf/bdf.c.obj	5f0803521c287f57
-1378	1906	8122447162723504	vectors.exe	3f5f4f3acb598c79
 8977	9257	8122433842122427	_deps/freetype-build/CMakeFiles/freetype.dir/src/cache/ftcache.c.obj	a14aeabda3c6cd84
-9331	9529	8122433845669244	_deps/freetype-build/CMakeFiles/freetype.dir/src/pcf/pcf.c.obj	ce6710fd47aecf4
+1979	2721	8122451632222800	vectors.exe	3f5f4f3acb598c79
 9258	9404	8122433844940776	_deps/freetype-build/CMakeFiles/freetype.dir/src/lzw/ftlzw.c.obj	5b49309f74cf83b4
+9331	9529	8122433845669244	_deps/freetype-build/CMakeFiles/freetype.dir/src/pcf/pcf.c.obj	ce6710fd47aecf4
 9404	9671	8122433846406074	_deps/freetype-build/CMakeFiles/freetype.dir/src/pfr/pfr.c.obj	cb8aa50f2c78394e
 9529	9705	8122433847652235	_deps/freetype-build/CMakeFiles/freetype.dir/src/psnames/psnames.c.obj	2d1b7174317ae504
 9458	9745	8122433846930893	_deps/freetype-build/CMakeFiles/freetype.dir/src/pshinter/pshinter.c.obj	3dd1ebb27f2a7d2a
@@ -87,17 +90,17 @@
 10797	11050	8122433860328823	_deps/sfml-build/lib/libsfml-window-s-d.a	e187a19f047da23a
 10569	11204	8122433858044046	_deps/freetype-build/CMakeFiles/freetype.dir/builds/windows/ftsystem.c.obj	d06888ece9919db4
 11050	11319	8122433862859630	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Glsl.cpp.obj	58728cf78e2f1297
-38	751	8122441077514843	CMakeFiles/simulation_setup.dir/src/setup.cpp.obj	b9d6065b6049a15
+34	654	8122451612774553	CMakeFiles/simulation_setup.dir/src/setup.cpp.obj	b9d6065b6049a15
 11205	11997	8122433864407279	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLCheck.cpp.obj	f8f84d80ee5cce82
 11319	12265	8122433865545828	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLExtensions.cpp.obj	242467bccf380b8d
 10911	12443	8122433861475372	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Font.cpp.obj	c8d56e98d69a3372
 12216	13084	8122433874520622	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTexture.cpp.obj	2d5cc7da85b52c03
 11429	13453	8122433866653475	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Image.cpp.obj	5ccb7a2093b6ff87
 13375	13470	8122433886112524	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/StencilMode.cpp.obj	7de8e925beb26865
-2443	2667	8122441101573671	collision_tests.exe	f51aa32c0308c4ce
 12265	13625	8122433875006888	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTarget.cpp.obj	545fb94a86d515f9
-1553	2178	8122441092667669	CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj	15cca96390bc0a82
+2453	2632	8122451636953821	collision_tests.exe	f51aa32c0308c4ce
 13471	13892	8122433887060435	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/TextureSaver.cpp.obj	56259c07834c001e
+1376	1979	8122451626179602	CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj	15cca96390bc0a82
 13626	13908	8122433888617416	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transform.cpp.obj	26fa3081fd895485
 13892	14197	8122433891280564	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transformable.cpp.obj	80959609c74b6e9
 13909	14223	8122433891445963	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/View.cpp.obj	a28fc0825c1c2e1f
@@ -112,61 +115,163 @@
 14943	15589	8122433901790707	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexBuffer.cpp.obj	4745e07cc5dcd58a
 15590	15775	8122433908254644	_deps/sfml-build/lib/libfreetyped.a	410df4d59d450a7e
 14816	15823	8122433900513695	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Text.cpp.obj	561300c4d54a02e7
-780	887	8122441084935735	libsimulation_setup.a	167cbc1dbab1a385
+684	766	8122451619266313	libsimulation_setup.a	167cbc1dbab1a385
 15432	15969	8122433906683530	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplDefault.cpp.obj	b024fdf45cdff145
 15270	16246	8122433905060093	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplFBO.cpp.obj	e6aa988550140f8c
-887	1609	8122441086011014	CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj	970f5acf7190539b
-28	1378	8122447149225354	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
-43	1604	8122441077575827	CMakeFiles/vectors.dir/vectors.cpp.obj	675590c17d5b0978
-1604	2251	8122441093180580	CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj	8605cb4852a546ad
-1609	2163	8122441093232704	CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj	e03fadb0f0f29cdb
+766	1491	8122451620092524	CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj	970f5acf7190539b
+44	1534	8122451612868048	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
+39	1453	8122451612820341	CMakeFiles/vectors.dir/vectors.cpp.obj	675590c17d5b0978
+1453	2133	8122451626964081	CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj	8605cb4852a546ad
+1491	2240	8122451627343242	CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj	e03fadb0f0f29cdb
 17222	17484	8122433924580984	_deps/sfml-build/lib/libsfml-graphics-s-d.a	d89ea09d0236d972
-2251	2457	8122441099648166	input_validation_tests.exe	971aeab0a0d4aa71
-2393	2598	8122441101073011	simulation_timing_tests.exe	5b8209c16db1e108
-42	692	8122441927505198	CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj	cef872dc61f19a76
-2457	2674	8122441101710191	orbital_accuracy_tests.exe	a306749087c69165
+2377	2567	8122451636195865	input_validation_tests.exe	971aeab0a0d4aa71
+2419	2598	8122451636615974	simulation_timing_tests.exe	5b8209c16db1e108
+1534	2419	8122451627771930	CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj	cef872dc61f19a76
+2567	2728	8122451638094752	orbital_accuracy_tests.exe	a306749087c69165
 17208	17991	8122433924435266	_deps/sfml-build/src/SFML/Main/CMakeFiles/sfml-main.dir/MainWin32.cpp.obj	a67e8b60ef5bda37
-692	838	8122441934005137	simulation_controls_tests.exe	832b25e0af955de9
+2598	2755	8122451638403447	simulation_controls_tests.exe	832b25e0af955de9
 17992	18097	8122433932281079	_deps/sfml-build/lib/libsfml-main-d.a	fa54951820d066aa
-33	691	8122447149272461	CMakeFiles/trajectory_preview_tests.dir/tests/trajectory_preview.cpp.obj	cdea14a0e25e1dde
-692	837	8122447155850569	trajectory_preview_tests.exe	cbcfe750d68f8360
-22	901	8122448986359372	build.ninja	7c1f3fb6003a1d92
-22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/cmake_install.cmake	7c1f3fb6003a1d92
-22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/cmake_install.cmake	7c1f3fb6003a1d92
+655	1375	8122451618970335	CMakeFiles/trajectory_preview_tests.dir/tests/trajectory_preview.cpp.obj	cdea14a0e25e1dde
+2240	2453	8122451634823311	trajectory_preview_tests.exe	cbcfe750d68f8360
+22	901	8124378346019514	build.ninja	7c1f3fb6003a1d92
 22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/src/SFML/cmake_install.cmake	7c1f3fb6003a1d92
 22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/src/SFML/System/cmake_install.cmake	7c1f3fb6003a1d92
 22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/src/SFML/Main/cmake_install.cmake	7c1f3fb6003a1d92
-22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/src/SFML/Window/cmake_install.cmake	7c1f3fb6003a1d92
 22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/sfml-build/src/SFML/Graphics/cmake_install.cmake	7c1f3fb6003a1d92
 22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/_deps/freetype-build/cmake_install.cmake	7c1f3fb6003a1d92
 22	901	8122448986359372	C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/local/CTestTestfile.cmake	7c1f3fb6003a1d92
-40	757	8122448987223704	CMakeFiles/grid_cache_tests.dir/tests/grid_cache.cpp.obj	4ef58f71504350d5
-758	907	8122448994412401	grid_cache_tests.exe	3ac017b0d84d315d
-36	1330	8122448987175384	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
-1331	1813	8122449000135566	vectors.exe	3f5f4f3acb598c79
 55	741	8122449302878542	CMakeFiles/grid_cache_tests.dir/tests/grid_cache.cpp.obj	4ef58f71504350d5
-741	887	8122449309750628	grid_cache_tests.exe	3ac017b0d84d315d
-48	1348	8122449302818024	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
-1348	1825	8122449315812978	vectors.exe	3f5f4f3acb598c79
-34	1230	8122450534930539	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
-1230	1735	8122450546890910	vectors.exe	3f5f4f3acb598c79
-29	590	8122451612717094	CMakeFiles/simulation.dir/src/planet_system.cpp.obj	9f737c64b92ecb54
-34	654	8122451612774553	CMakeFiles/simulation_setup.dir/src/setup.cpp.obj	b9d6065b6049a15
-590	684	8122451618327965	libsimulation.a	7bb02ef1a90b76c7
-684	766	8122451619266313	libsimulation_setup.a	167cbc1dbab1a385
-655	1375	8122451618970335	CMakeFiles/trajectory_preview_tests.dir/tests/trajectory_preview.cpp.obj	cdea14a0e25e1dde
-39	1453	8122451612820341	CMakeFiles/vectors.dir/vectors.cpp.obj	675590c17d5b0978
-766	1491	8122451620092524	CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj	970f5acf7190539b
-44	1534	8122451612868048	CMakeFiles/vectors.dir/src/renderer.cpp.obj	17ee5cc5a525e83c
-1376	1979	8122451626179602	CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj	15cca96390bc0a82
-1453	2133	8122451626964081	CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj	8605cb4852a546ad
-1491	2240	8122451627343242	CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj	e03fadb0f0f29cdb
 2134	2377	8122451633761462	grid_cache_tests.exe	3ac017b0d84d315d
-1534	2419	8122451627771930	CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj	cef872dc61f19a76
-2240	2453	8122451634823311	trajectory_preview_tests.exe	cbcfe750d68f8360
-2377	2567	8122451636195865	input_validation_tests.exe	971aeab0a0d4aa71
-2419	2598	8122451636615974	simulation_timing_tests.exe	5b8209c16db1e108
-2453	2632	8122451636953821	collision_tests.exe	f51aa32c0308c4ce
-1979	2721	8122451632222800	vectors.exe	3f5f4f3acb598c79
-2567	2728	8122451638094752	orbital_accuracy_tests.exe	a306749087c69165
-2598	2755	8122451638403447	simulation_controls_tests.exe	832b25e0af955de9
+107	1161	8124378574294254	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Sleep.cpp.obj	223ba7b4b1e5d66a
+80	1177	8124378573988189	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Clock.cpp.obj	55bb559efe9e29b7
+94	1291	8124378574221554	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Err.cpp.obj	e6ed5096e79b20cd
+1179	1705	8124378585098854	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector2.cpp.obj	e2493a5957ff62ef
+1292	1731	8124378586230143	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector3.cpp.obj	31b49809130b25a2
+120	1954	8124378574454210	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/String.cpp.obj	8af1eadb929e0fb4
+1731	2076	8124378590615967	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/MemoryInputStream.cpp.obj	f901e05cbc759ed4
+1164	2401	8124378584948882	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Utils.cpp.obj	41a322125d51d865
+1705	2906	8124378590360310	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/FileInputStream.cpp.obj	b42fedaa6df7989
+2401	3104	8124378597325698	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Clipboard.cpp.obj	395a9b79540d1a9d
+2076	3125	8124378594069863	CMakeFiles/simulation.dir/Simulation/planet_system.cpp.obj	2103d6713a182c22
+1954	3505	8124378592856936	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Win32/SleepImpl.cpp.obj	a6ad815329c0c8de
+2906	3685	8124378602363972	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Context.cpp.obj	6d05ae0c8752229e
+3104	3919	8124378604358252	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Cursor.cpp.obj	d4dc02b137b57024
+3506	4012	8124378608360261	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-system-s-d.a	eb93244d91a742a0
+3685	4217	8124378610158226	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlResource.cpp.obj	cb9f716187f905fe
+4218	5004	8124378615476714	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Keyboard.cpp.obj	31e03ae3a03ee17
+5004	5221	8124378623309829	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Mouse.cpp.obj	16530ce8ffebd5e6
+5222	5417	8124378625526133	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Touch.cpp.obj	b6d913b88e501968
+5418	5712	8124378627484290	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Sensor.cpp.obj	7529a525911b8ce0
+3919	6240	8124378612501001	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Joystick.cpp.obj	f9963143caa8b16
+4012	6342	8124378613383227	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/JoystickManager.cpp.obj	a0fafaee7ceb9915
+5713	6377	8124378630438004	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/SensorManager.cpp.obj	87bcc7c9718e27d6
+3125	6481	8124378604546608	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/GlContext.cpp.obj	eaac76bcbfeb79c6
+6343	6684	8124378636743007	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Vulkan.cpp.obj	f6630bbe452f6784
+6241	6911	8124378635718431	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/VideoMode.cpp.obj	89005d6bc1d9f04f
+6377	7664	8124378637087957	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.obj	2ea485cbfee5a28d
+6481	7708	8124378638124172	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.obj	8f7185e8df7f06c4
+6911	8695	8124378642422637	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/CursorImpl.cpp.obj	128c5cf3ba33bedd
+7665	9596	8124378649906743	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/ClipboardImpl.cpp.obj	383bdb1723bd4d67
+9597	9796	8124378669283147	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/SensorImpl.cpp.obj	85c80c8538412d8f
+6684	9989	8124378640156378	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.obj	2e99684a32d740ef
+7708	10091	8124378650378134	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/InputImpl.cpp.obj	c28750511f32698b
+9796	11432	8124378671280612	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/VideoModeImpl.cpp.obj	16526a3b2ee472
+9989	11740	8124378673199300	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/VulkanImplWin32.cpp.obj	a8122edc82e23823
+8695	11974	8124378660264139	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/JoystickImpl.cpp.obj	5d7ca416abd7c4c7
+11740	12981	8124378690711112	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/autofit/autofit.c.obj	5139792e5b885a71
+10091	13143	8124378674223303	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/WindowImplWin32.cpp.obj	ef358bb1d8d75bb7
+11975	13164	8124378693041191	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftbase.c.obj	34023fa40da1475a
+12982	13198	8124378703131621	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftbbox.c.obj	a6009261ac9fe377
+13143	13345	8124378704730468	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftbdf.c.obj	6f4a28cac9817fc
+13198	13395	8124378705292238	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftcid.c.obj	8c928a04f6457ea1
+13165	13424	8124378704945127	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftbitmap.c.obj	467e472e425ce0bc
+13345	13552	8124378706763494	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftfstype.c.obj	5b4e86333b6ed985
+13395	13605	8124378707264180	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftgasp.c.obj	57a1ff4b576b18d7
+13425	13674	8124378707555737	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftglyph.c.obj	9c93e2d129cd6e3f
+13552	13761	8124378708833615	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftgxval.c.obj	d304aec1f0f2e776
+13605	13831	8124378709360922	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftinit.c.obj	8ba109b2e9bdaa70
+13674	13914	8124378710059196	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftmm.c.obj	cadde625775d4f39
+13762	13983	8124378710877504	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftotval.c.obj	803350210e77de3
+13831	14032	8124378711624818	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftpatent.c.obj	fdd6294f1e27f664
+11432	14069	8124378687634857	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/WglContext.cpp.obj	be43a5807ee38ed5
+13914	14119	8124378712447536	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftpfr.c.obj	3681163f3dfe4433
+14032	14228	8124378713630107	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftsynth.c.obj	d079572c0d3c63f7
+14069	14269	8124378713963803	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/fttype1.c.obj	a4a0b211c4d0bfb0
+14119	14312	8124378714505453	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftwinfnt.c.obj	59e4eac60dc28481
+13983	14324	8124378713150231	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftstroke.c.obj	2fbf80d03895935e
+14269	14453	8124378715978317	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/bzip2/ftbzip2.c.obj	2d95922eb5a47d9d
+14229	14613	8124378715594228	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/bdf/bdf.c.obj	b32dce7f5b887cab
+14312	14678	8124378716429262	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/cache/ftcache.c.obj	d8b501ca922e7e84
+14453	14794	8124378717831316	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/cid/type1cid.c.obj	86622d2cdb35a862
+14324	14895	8124378716550685	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/cff/cff.c.obj	dcffa968dd621eba
+14679	14914	8124378720099709	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/lzw/ftlzw.c.obj	8443c37f47e161ee
+14613	14970	8124378719446519	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/gzip/ftgzip.c.obj	d2d4c06c3804563e
+14794	15109	8124378721249770	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/pcf/pcf.c.obj	1546cf876280b184
+14896	15282	8124378722269781	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/pfr/pfr.c.obj	a254b3a101855635
+15109	15354	8124378724273418	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/psnames/psnames.c.obj	1f8a337ca746e46c
+14971	15366	8124378723009307	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/pshinter/pshinter.c.obj	7bbae9b6baa4f8d1
+15283	15602	8124378726141208	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/raster/raster.c.obj	f7eae88c202264c5
+14914	15701	8124378722457672	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/psaux/psaux.c.obj	2a10f7911086aef
+15354	15730	8124378726853525	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/sdf/sdf.c.obj	54fd4f13fd2f8c63
+15702	15919	8124378730331098	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/svg/svg.c.obj	3ed87b60df441191
+15602	15937	8124378729324802	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/smooth/smooth.c.obj	ab4bbee0a195604a
+15937	16256	8124378732664684	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/type42/type42.c.obj	a89d4be34452734f
+15367	16316	8124378726978943	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/sfnt/sfnt.c.obj	45eca4e223ac5458
+15920	16418	8124378732510586	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/type1/type1.c.obj	c6e20d6243eddc3c
+16257	16528	8124378735852340	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/winfonts/winfnt.c.obj	8152b9875dec364b
+16419	16642	8124378737496244	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/builds/windows/ftdebug.c.obj	bbe69b738926ffce
+15730	16743	8124378730613127	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/truetype/truetype.c.obj	1794d4d581ab841
+16642	16821	8124378739734510	libsimulation.a	607415fd7047556f
+16528	16996	8124378738596308	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/src/base/ftver.rc.obj	a62be2d46dc2ba36
+16996	17136	8124378743226385	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/BlendMode.cpp.obj	e9c4cbd4b0e76504
+16821	17236	8124378741520327	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-window-s-d.a	fd74b6b7cef58386
+16317	17289	8124378736469456	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/freetype-build/CMakeFiles/freetype.dir/builds/windows/ftsystem.c.obj	214fc397f2371cac
+17237	17605	8124378745681124	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Glsl.cpp.obj	be364b5a5833ed70
+16743	17779	8124378740745625	CMakeFiles/simulation_setup.dir/Simulation/setup.cpp.obj	e3931d906a5ea7c
+17289	18499	8124378746190497	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLCheck.cpp.obj	72bf53f98d90ba2d
+18499	18813	8124378758296711	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderStates.cpp.obj	9503a45088c33ebd
+17606	18961	8124378749349515	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLExtensions.cpp.obj	f46db8bbde20bd77
+17137	19320	8124378744679420	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Font.cpp.obj	b48c3ec953ddce44
+18813	20080	8124378761445526	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTexture.cpp.obj	ab0c846d51033043
+19321	20658	8124378766522022	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderWindow.cpp.obj	ab421ffc6907523a
+17779	20699	8124378751107617	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Image.cpp.obj	1d5eb82807aca035
+20659	20795	8124378779901152	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/StencilMode.cpp.obj	c97b91450e1358c5
+18962	20868	8124378762934195	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTarget.cpp.obj	e190a64612195718
+20868	21357	8124378781989535	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transform.cpp.obj	15b88b2607e73e59
+20795	21447	8124378781244403	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/TextureSaver.cpp.obj	e723af498542e7aa
+21357	21812	8124378786862425	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transformable.cpp.obj	eedf8e18d8c7f0da
+21447	21927	8124378787786918	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/View.cpp.obj	33b6d694a498564f
+20081	22235	8124378774119542	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Shader.cpp.obj	da390ad7ccf701df
+21928	22394	8124378792590595	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/CircleShape.cpp.obj	4eebe69a904938e5
+20700	22470	8124378780311509	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Texture.cpp.obj	f94299ca1c7075bc
+22235	22681	8124378795659464	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RectangleShape.cpp.obj	eefc62c727df2456
+22394	22899	8124378797245803	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/ConvexShape.cpp.obj	b542ab9b84c8c929
+21812	22986	8124378791431912	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Shape.cpp.obj	4c05635249a186
+22899	23412	8124378802297798	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexArray.cpp.obj	1d7bad2e10a32008
+22471	23626	8124378797975600	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Sprite.cpp.obj	f8df0b5279117aad
+22987	23907	8124378803176166	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexBuffer.cpp.obj	c6bd3cee1cd870cb
+22681	24141	8124378800126761	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Text.cpp.obj	e05149626610d365
+23907	24219	8124378812380857	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libfreetyped.a	51f0abc5c39ee4b4
+24141	24300	8124378814724522	libsimulation_setup.a	679e19f25f64aa48
+23626	24449	8124378809570646	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplDefault.cpp.obj	958f87802e6f5286
+23412	24809	8124378807390125	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplFBO.cpp.obj	4600876b0bd28635
+24450	25572	8124378817809068	CMakeFiles/grid_cache_tests.dir/tests/grid_cache.cpp.obj	f54c01563e225c90
+24809	26015	8124378821380244	CMakeFiles/trajectory_preview_tests.dir/tests/trajectory_preview.cpp.obj	25a470ddc712f6fb
+24219	26285	8124378815506168	CMakeFiles/vectors.dir/main.cpp.obj	437e1db2f1f3165b
+24300	26573	8124378816315311	CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj	79c95a77f721913c
+25572	26586	8124378829020012	CMakeFiles/input_validation_tests.dir/tests/input_validation.cpp.obj	3bdfbfeaae6e844e
+26015	26920	8124378833398033	CMakeFiles/simulation_timing_tests.dir/tests/simulation_timing.cpp.obj	f444ed881acff71a
+26286	27263	8124378836168216	CMakeFiles/collision_tests.dir/tests/collisions.cpp.obj	cf22739683d4eba6
+26573	27516	8124378838991968	CMakeFiles/orbital_accuracy_tests.dir/tests/orbital_accuracy.cpp.obj	2b326ec4e18821f5
+26586	27641	8124378839169819	CMakeFiles/simulation_controls_tests.dir/tests/simulation_controls.cpp.obj	a4a55de3a99c8b84
+27264	27664	8124378845949565	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-graphics-s-d.a	f6a5c5fcce50c6d3
+27516	27794	8124378848475770	trajectory_preview_tests.exe	61a514808b928780
+27641	27915	8124378849721927	input_validation_tests.exe	5e3b228d832b6316
+27794	28059	8124378851249495	grid_cache_tests.exe	74ccbd34bdc12ced
+26920	28081	8124378842515786	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/src/SFML/Main/CMakeFiles/sfml-main.dir/MainWin32.cpp.obj	42b901dbcc2f0e4f
+27915	28186	8124378852467447	simulation_timing_tests.exe	9cd958700d99aa96
+28059	28332	8124378853902628	collision_tests.exe	89b8739d60aca3f5
+28081	28352	8124378854127897	orbital_accuracy_tests.exe	78cfc5a8fd883ab9
+28187	28453	8124378855164811	simulation_controls_tests.exe	2e3cc0142c18184
+28332	28475	8124378856632062	C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-main-d.a	50addbd2aed93e3f
+27664	28629	8124378849912010	vectors.exe	8402810eae293bd7
