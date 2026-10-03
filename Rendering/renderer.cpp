@@ -1,6 +1,7 @@
 #include "renderer.hpp"
 #include "grid.hpp"
 #include "trajectory_preview.hpp"
+#include "performance_stats.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -56,7 +57,8 @@ namespace {
             background.setFillColor(sf::Color(12, 16, 24, 220));
         }
 
-        void draw(sf::RenderWindow& window, const SimulationSession& session) {
+        void draw(sf::RenderWindow& window, const SimulationSession& session,
+            const PerformanceStats& performance) {
             char row[320];
             snprintf(row, sizeof(row), "%s | %.2gx | Day %.2f | %zu bodies\n",
                 session.launch ? "Aiming" : (session.paused ? "Paused" : "Running"), session.speed(),
@@ -64,7 +66,17 @@ namespace {
             contents = row;
             contents += "Space: pause | Up/Down: speed | R: reset\n"
             "Shift-click: select | F: follow | Esc: deselect\n"
-            "Left-drag: launch asteroid | Right-drag: pan | Wheel: zoom\n";
+            "Left-drag: launch asteroid | Right-drag: pan | Wheel: zoom\n"
+            "F3: performance overlay\n";
+
+            if (session.showPerformance) {
+                const auto& p = performance.average;
+                snprintf(row, sizeof(row), "%.1f FPS | Frame: %.2f ms (0.5 s average)\n"
+                    "CPU ms: Physics %.3f | Grid %.3f\n"
+                    "Trails %.3f | Preview %.3f\n",
+                    performance.fps, p.frameMs, p.physicsMs, p.gridMs, p.trailsMs, p.previewMs);
+                contents += row;
+            }
 
             if (session.paused || session.launch) {
                 contents += "Dotted forecast: up to 90 days / first collision\n";
@@ -102,6 +114,7 @@ namespace {
 struct Renderer::Impl {
     Grid grid;
     StatusDisplay statusDisplay;
+    PerformanceStats performance;
     sf::CircleShape planet;
     TrajectoryPreview preview;
     vector<Planet> previewBodies;
@@ -385,21 +398,27 @@ struct Renderer::Impl {
 
     }
 
-    void draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera) {
+    void draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera,
+        double frameMs, double physicsMs) {
         const auto& bodies = session.system.getBodies();
-        drawGrid(window, bodies, camera);
-        drawTrails(window, bodies, session.trails, camera);
-        drawPreview(window, session, camera);
+        PerformanceSample sample;
+        sample.frameMs = frameMs;
+        sample.physicsMs = physicsMs;
+        sample.gridMs = measureMilliseconds([&] { drawGrid(window, bodies, camera); });
+        sample.trailsMs = measureMilliseconds([&] { drawTrails(window, bodies, session.trails, camera); });
+        sample.previewMs = measureMilliseconds([&] { drawPreview(window, session, camera); });
+        performance.add(sample);
         drawBodies(window, bodies, camera);
         drawSelection(window, session, camera);
         drawLaunch(window, session, camera);
-        statusDisplay.draw(window, session);
+        statusDisplay.draw(window, session, performance);
     }
 };
 Renderer::Renderer(const sf::Font& font) : impl(std::make_unique<Impl>(font)) {}
 Renderer::~Renderer() = default;
-void Renderer::draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera) {
-    impl->draw(window, session, camera);
+void Renderer::draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera,
+    double frameMs, double physicsMs) {
+    impl->draw(window, session, camera, frameMs, physicsMs);
 }
 
 optional<size_t> Renderer::pickBody(sf::Vector2f mouse, const vector<Planet>& bodies,

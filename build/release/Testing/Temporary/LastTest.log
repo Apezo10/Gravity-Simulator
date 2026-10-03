@@ -1,18 +1,18 @@
-Start testing: Oct 03 07:35 Eastern Daylight Time
+Start testing: Oct 03 07:38 Eastern Daylight Time
 ----------------------------------------------------------
 1/7 Testing: grid_cache
 1/7 Test: grid_cache
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/grid_cache_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"grid_cache" start time: Oct 03 07:35 Eastern Daylight Time
+"grid_cache" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Grid cache invalidation and vertex equivalence passed.
 <end of output>
-Test time =   0.08 sec
+Test time =   0.03 sec
 ----------------------------------------------------------
 Test Passed.
-"grid_cache" end time: Oct 03 07:35 Eastern Daylight Time
+"grid_cache" end time: Oct 03 07:38 Eastern Daylight Time
 "grid_cache" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -20,14 +20,14 @@ Test Passed.
 2/7 Test: trajectory_preview
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/trajectory_preview_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"trajectory_preview" start time: Oct 03 07:35 Eastern Daylight Time
+"trajectory_preview" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.03 sec
 ----------------------------------------------------------
 Test Passed.
-"trajectory_preview" end time: Oct 03 07:35 Eastern Daylight Time
+"trajectory_preview" end time: Oct 03 07:38 Eastern Daylight Time
 "trajectory_preview" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -35,7 +35,7 @@ Test Passed.
 3/7 Test: input_validation
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/input_validation_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"input_validation" start time: Oct 03 07:35 Eastern Daylight Time
+"input_validation" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Input validation, EOF cancellation, and five one-year preset checks passed.
@@ -43,7 +43,7 @@ Input validation, EOF cancellation, and five one-year preset checks passed.
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"input_validation" end time: Oct 03 07:35 Eastern Daylight Time
+"input_validation" end time: Oct 03 07:38 Eastern Daylight Time
 "input_validation" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -51,7 +51,7 @@ Test Passed.
 4/7 Test: simulation_timing
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/simulation_timing_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"simulation_timing" start time: Oct 03 07:35 Eastern Daylight Time
+"simulation_timing" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Timing passed at 15, 30, 60, 144 and 240 FPS, with uneven frames and stalls.
@@ -59,7 +59,7 @@ Timing passed at 15, 30, 60, 144 and 240 FPS, with uneven frames and stalls.
 Test time =   0.03 sec
 ----------------------------------------------------------
 Test Passed.
-"simulation_timing" end time: Oct 03 07:35 Eastern Daylight Time
+"simulation_timing" end time: Oct 03 07:38 Eastern Daylight Time
 "simulation_timing" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -67,7 +67,7 @@ Test Passed.
 5/7 Test: collisions
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/collision_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"collisions" start time: Oct 03 07:35 Eastern Daylight Time
+"collisions" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Collision conservation, swept contacts, near misses and collision chains passed.
@@ -75,7 +75,7 @@ Collision conservation, swept contacts, near misses and collision chains passed.
 Test time =   0.03 sec
 ----------------------------------------------------------
 Test Passed.
-"collisions" end time: Oct 03 07:35 Eastern Daylight Time
+"collisions" end time: Oct 03 07:38 Eastern Daylight Time
 "collisions" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -83,15 +83,15 @@ Test Passed.
 6/7 Test: orbital_accuracy
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/orbital_accuracy_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"orbital_accuracy" start time: Oct 03 07:35 Eastern Daylight Time
+"orbital_accuracy" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
 Ten-year maximum relative energy error: 5.87549e-14; radius error: 6.42174e-08; convergence ratio: 3.99887
 <end of output>
-Test time =   0.07 sec
+Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"orbital_accuracy" end time: Oct 03 07:35 Eastern Daylight Time
+"orbital_accuracy" end time: Oct 03 07:38 Eastern Daylight Time
 "orbital_accuracy" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -99,16 +99,16 @@ Test Passed.
 7/7 Test: simulation_controls
 Command: "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release/simulation_controls_tests.exe"
 Directory: C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release
-"simulation_controls" start time: Oct 03 07:35 Eastern Daylight Time
+"simulation_controls" start time: Oct 03 07:38 Eastern Daylight Time
 Output:
 ----------------------------------------------------------
-Speed, pause, reset, trail and selection controls passed.
+Speed, pause, reset, trail, selection and performance checks passed.
 <end of output>
-Test time =   0.03 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"simulation_controls" end time: Oct 03 07:35 Eastern Daylight Time
+"simulation_controls" end time: Oct 03 07:38 Eastern Daylight Time
 "simulation_controls" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 03 07:35 Eastern Daylight Time
+End testing: Oct 03 07:38 Eastern Daylight Time

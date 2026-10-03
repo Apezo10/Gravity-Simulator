@@ -1,4 +1,5 @@
 #include "simulation_session.hpp"
+#include "performance_stats.hpp"
 #include <iostream>
 #include <stdexcept>
 
@@ -129,7 +130,18 @@ int main() {
         merging.selected = 2;
         merging.advance(20000);
         require(merging.selected == 1, "Selection index did not track removal");
-        std::cout << "Speed, pause, reset, trail and selection controls passed.\n";
+        PerformanceStats stats;
+        stats.add({250, 2, 4, 6, 8});
+        require(stats.fps == 0, "Performance averages published before window completed");
+        stats.add({250, 4, 6, 8, 10});
+        require(stats.fps == 4 && stats.average.frameMs == 250 &&
+            stats.average.physicsMs == 3 && stats.average.gridMs == 5 &&
+            stats.average.trailsMs == 7 && stats.average.previewMs == 9,
+            "Performance averages or FPS incorrect");
+        stats.add({500, 1, 0, 0, 0});
+        require(stats.fps == 2 && stats.average.physicsMs == 1 && stats.average.gridMs == 0,
+            "Performance window retained previous samples");
+        std::cout << "Speed, pause, reset, trail, selection and performance checks passed.\n";
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';
         return 1;

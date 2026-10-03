@@ -15,5 +15,6 @@ public:
     ~Renderer();
     std::optional<std::size_t> pickBody(sf::Vector2f mouse,
         const std::vector<Planet>& bodies, const Camera& camera) const;
-    void draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera);
+    void draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera,
+        double frameMs, double physicsMs);
 };

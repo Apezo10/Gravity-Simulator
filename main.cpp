@@ -3,6 +3,7 @@
 #include "simulation_timing.hpp"
 #include <iostream>
 #include <array>
+#include "performance_stats.hpp"
 
 using namespace std;
 
@@ -35,6 +36,9 @@ namespace {
 
 
         switch (key) {
+            case sf::Keyboard::Key::F3:
+            session.showPerformance = !session.showPerformance;
+            break;
             case sf::Keyboard::Key::Space:
             session.paused = !session.paused;
             break;
@@ -196,13 +200,18 @@ int main() {
     Renderer renderer(font);
 
     sf::Clock frameClock;
+    auto previousFrame = std::chrono::steady_clock::now();
 
 
     while (window.isOpen()) {
 
         // Advance existing bodies before input so a new asteroid is drawn at
         // its click position, without skipping time for the entire system.
-        session.advance(frameClock.restart().asMicroseconds());
+        const auto currentFrame = std::chrono::steady_clock::now();
+        const double frameMs = std::chrono::duration<double, std::milli>(currentFrame - previousFrame).count();
+        previousFrame = currentFrame;
+        const auto elapsed = frameClock.restart().asMicroseconds();
+        const double physicsMs = measureMilliseconds([&] { session.advance(elapsed); });
         followSelectedBody(session, camera);
 
 
@@ -218,7 +227,7 @@ int main() {
         window.clear();
 
         followSelectedBody(session, camera);
-        renderer.draw(window, session, camera);
+        renderer.draw(window, session, camera, frameMs, physicsMs);
         window.display();
     }
 

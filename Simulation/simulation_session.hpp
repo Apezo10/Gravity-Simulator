@@ -68,6 +68,7 @@ public:
     std::vector<OrbitTrail> trails;
     bool paused = false;
     bool following = false;
+    bool showPerformance = false;
     std::optional<std::size_t> selected;
     double elapsedSeconds = 0;
     std::optional<AsteroidLaunch> launch;
