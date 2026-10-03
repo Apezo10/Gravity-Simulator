@@ -39,31 +39,41 @@ int main() {
     try {
         Grid grid;
         Camera camera;
+        auto now = std::chrono::steady_clock::time_point{};
         std::vector<Planet> bodies = {
             Planet(0, 0, 20, 0, 1, 1.9885e30),
             Planet(1.5e11, 1e10, 0, 0, 1, 5.972e24)
         };
 
-        require(grid.updateGrid(bodies, camera), "First frame was not built");
-        require(!grid.updateGrid(bodies, camera), "Unchanged grid was rebuilt");
+        require(grid.updateGrid(bodies, camera, now), "First frame was not built");
+        require(!grid.updateGrid(bodies, camera, now), "Unchanged grid was rebuilt");
 
         bodies[0].advancePosition(1800);
-        require(grid.updateGrid(bodies, camera), "Body movement did not refresh grid");
+        const auto cachedPoint = grid.getVerticalLines()[0][0].position;
+        now += std::chrono::milliseconds(16);
+        require(!grid.updateGrid(bodies, camera, now), "Motion rebuilt grid before refresh deadline");
+        require(grid.getVerticalLines()[0][0].position == cachedPoint, "Throttled grid changed vertices");
+        bodies[0].advancePosition(1800);
+        now += std::chrono::microseconds(17333);
+        require(grid.updateGrid(bodies, camera, now), "Pending movement did not refresh at deadline");
+        require(std::hypot(grid.getVerticalLines()[0][0].position.x - originalPoint(0, 0, bodies, camera).x,
+            grid.getVerticalLines()[0][0].position.y - originalPoint(0, 0, bodies, camera).y) < 0.001f,
+            "Refresh used stale body positions");
         camera.x += 1e10;
-        require(grid.updateGrid(bodies, camera), "Camera X did not refresh grid");
+        require(grid.updateGrid(bodies, camera, now), "Camera X did not refresh grid");
         camera.y -= 2e10;
-        require(grid.updateGrid(bodies, camera), "Camera Y did not refresh grid");
+        require(grid.updateGrid(bodies, camera, now), "Camera Y did not refresh grid");
         camera.zoom = 2;
-        require(grid.updateGrid(bodies, camera), "Zoom did not refresh grid");
+        require(grid.updateGrid(bodies, camera, now), "Zoom did not refresh grid");
 
         bodies[1] = Planet(1.5e11, 1e10, 0, 0, 1, 1e31);
-        require(grid.updateGrid(bodies, camera), "Mass change did not refresh grid");
+        require(grid.updateGrid(bodies, camera, now), "Mass change did not refresh grid");
         bodies[1] = Planet(1.5e11, 1e10, 0, 0, 1, 1e31, {}, true);
-        require(grid.updateGrid(bodies, camera), "Black hole change did not refresh grid");
+        require(grid.updateGrid(bodies, camera, now), "Black hole change did not refresh grid");
 
         for (double zoom : {0.01, 1.0, 2.0, 10000.0}) {
             camera.zoom = zoom;
-            grid.updateGrid(bodies, camera);
+            grid.updateGrid(bodies, camera, now);
             std::size_t segmentVertex = 0;
             for (int axis = 0; axis < 2; ++axis) {
                 const auto& lines = axis == 0 ? grid.getVerticalLines() : grid.getHorizontalLines();
@@ -91,12 +101,12 @@ int main() {
             }
 
             camera.dragging = true;
-            require(!grid.updateGrid(bodies, camera), "Drag flag unnecessarily refreshed grid");
+            require(!grid.updateGrid(bodies, camera, now), "Drag flag unnecessarily refreshed grid");
             bodies.emplace_back(0, 0, 0, 0, 1, 1e12);
-            require(grid.updateGrid(bodies, camera), "Added body did not refresh grid");
+            require(grid.updateGrid(bodies, camera, now), "Added body did not refresh grid");
             bodies.clear();
-            require(grid.updateGrid(bodies, camera), "Removed bodies did not refresh grid");
-            require(!grid.updateGrid(bodies, camera), "Empty grid was not cached");
+            require(grid.updateGrid(bodies, camera, now), "Removed bodies did not refresh grid");
+            require(!grid.updateGrid(bodies, camera, now), "Empty grid was not cached");
 
             std::cout << "Grid cache invalidation and vertex equivalence passed.\n";
         } catch (const std::exception& error) {

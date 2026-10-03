@@ -5,6 +5,7 @@
 #include <SFML/Graphics/Vertex.hpp>
 #include <limits>
 #include <vector>
+#include <chrono>
 
 class Grid {
 
@@ -32,6 +33,7 @@ private:
     std::vector<GravityWell> wells;
     Camera lastCamera;
     bool ready = false;
+    std::chrono::steady_clock::time_point lastRefresh{};
 
     sf::Vector2f distortPoints(float x, float y, const Camera& camera) const {
 
@@ -74,10 +76,24 @@ public:
           horizontalLines(12, std::vector<sf::Vertex>(160)),
           lineVertices(2 * (16 * 119 + 12 * 159)) {}
 
-    bool updateGrid(const std::vector<Planet>& planets, const Camera& camera) {
-        bool changed = !ready || wells.size() != planets.size()
+    bool updateGrid(const std::vector<Planet>& planets, const Camera& camera,
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now()) {
+        bool immediate = !ready || wells.size() != planets.size()
             || camera.x != lastCamera.x || camera.y != lastCamera.y
             || camera.zoom != lastCamera.zoom;
+        bool moved = false;
+
+        for (std::size_t i = 0; i < planets.size() && i < wells.size(); ++i) {
+            const auto& body = planets[i];
+            const auto& well = wells[i];
+            moved |= well.x != body.getX() || well.y != body.getY();
+            immediate |= well.mass != body.getMass() || well.blackHole != body.isBlackHole();
+        }
+
+        // Reuse full-resolution geometry between motion refreshes. Camera
+        // input and structural changes remain immediate, including while paused.
+        constexpr auto refreshInterval = std::chrono::microseconds(33333);
+        if (!immediate && (!moved || now - lastRefresh < refreshInterval)) return false;
 
         wells.resize(planets.size());
 
@@ -85,7 +101,6 @@ public:
             const auto& body = planets[i];
             auto& well = wells[i];
 
-            changed |= well.x != body.getX() || well.y != body.getY();
             well.x = body.getX();
             well.y = body.getY();
 
@@ -98,12 +113,8 @@ public:
                 well.depth = 15.0 * SCALE * massFactor / (1.0 + massFactor);
                 if (well.blackHole) well.depth *= 10.0;
 
-                changed = true;
             }
         }
-
-        // Aiming and selecting do not affect the grid. Reuse its vertices.
-        if (!changed) return false;
 
         for (std::size_t line = 0; line < verticalLines.size(); ++line) {
 
@@ -136,6 +147,7 @@ public:
 
         lastCamera = camera;
         ready = true;
+        lastRefresh = now;
         return true;
     }
 
