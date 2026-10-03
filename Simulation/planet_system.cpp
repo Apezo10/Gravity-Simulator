@@ -97,23 +97,19 @@ void PlanetSystem::mergeOverlaps(vector<pair<size_t, size_t>>& merges) {
         merged = false;
 
 
-        for (size_t i = 0; i < planets.size() && !merged; ++i) {
-
-
-            for (size_t j = i + 1; j < planets.size(); ++j) {
-                const Planet& a = planets[i];
-                const Planet& b = planets[j];
-
-
-                if (hypot(b.getX() - a.getX(), b.getY() - a.getY()) >
-                    a.getRadius() + b.getRadius()) {
-                    continue;
-                }
-
-                mergePair(i, j, merges);
-                merged = true;
-                break;
+        optional<pair<size_t, size_t>> overlap;
+        collisionCandidates.visit(planets, 0, [&](size_t i, size_t j) {
+            const Planet& a = planets[i];
+            const Planet& b = planets[j];
+            const pair candidate{i, j};
+            if ((!overlap || candidate < *overlap) &&
+                hypot(b.getX() - a.getX(), b.getY() - a.getY()) <= a.getRadius() + b.getRadius()) {
+                overlap = candidate;
             }
+        });
+        if (overlap) {
+            mergePair(overlap->first, overlap->second, merges);
+            merged = true;
         }
     } while (merged);
 }
@@ -124,16 +120,15 @@ void PlanetSystem::advancePositions(double dt, vector<pair<size_t, size_t>>& mer
         optional<pair<size_t, size_t>> nextPair;
 
         // Resolve the earliest contact first, regardless of body storage order.
-        for (size_t i = 0; i < planets.size(); ++i) {
-            for (size_t j = i + 1; j < planets.size(); ++j) {
+        collisionCandidates.visit(planets, dt, [&](size_t i, size_t j) {
                 const auto time = collisionTime(planets[i], planets[j], nextTime);
-
-                if (time && (!nextPair || *time < nextTime)) {
+                const pair candidate{i, j};
+                if (time && (!nextPair || *time < nextTime ||
+                    (*time == nextTime && candidate < *nextPair))) {
                     nextTime = *time;
-                    nextPair = pair{i, j};
+                    nextPair = candidate;
                 }
-            }
-        }
+        });
 
         for (Planet& planet : planets) {
             planet.advancePosition(nextTime);

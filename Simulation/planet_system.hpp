@@ -1,5 +1,6 @@
 #pragma once
 #include "planet.hpp"
+#include "collision_candidates.hpp"
 #include <cstddef>
 #include <utility>
 #include <vector>
@@ -8,6 +9,7 @@ inline constexpr double G = 6.67430e-11;
 
 class PlanetSystem {
     std::vector<Planet> planets;
+    CollisionCandidates collisionCandidates;
     int asteroidCount = 0;
     bool accelerationsReady = false;
     double collisionKineticLoss = 0;

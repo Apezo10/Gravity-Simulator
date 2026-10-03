@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <random>
+#include <set>
 
 using namespace std;
 #include <stdexcept>
@@ -94,11 +96,58 @@ void checkSweptCollisions() {
         "Asteroid tunneled through a target during a 30-minute step");
 }
 
+void checkCollisionCandidates() {
+    CollisionCandidates candidates;
+    std::vector<Planet> bodies;
+    for (int i = 0; i < 512; ++i) bodies.emplace_back(i * 1e6, i * 1e6, 0, 0, 1, 1);
+    std::size_t visits = 0;
+    candidates.visit(bodies, 1800, [&](size_t, size_t) { ++visits; });
+    require(visits == 0, "Sparse population retained unnecessary collision pairs");
+    std::mt19937 random(42);
+    std::uniform_real_distribution<double> position(-100, 100), velocity(-200, 200);
+    for (int scene = 0; scene < 20; ++scene) {
+        bodies.clear();
+        for (int i = 0; i < 64; ++i)
+            bodies.emplace_back(position(random), position(random), velocity(random), velocity(random), 2, 1);
+        std::set<std::pair<size_t, size_t>> pairs;
+        candidates.visit(bodies, 1, [&](size_t i, size_t j) {
+            require(pairs.emplace(i, j).second, "Duplicate collision candidate");
+        });
+        for (size_t i = 0; i < bodies.size(); ++i) {
+            for (size_t j = i + 1; j < bodies.size(); ++j) {
+                const double dx = bodies[j].getX() - bodies[i].getX();
+                const double dy = bodies[j].getY() - bodies[i].getY();
+                const double vx = bodies[j].getXVelocity() - bodies[i].getXVelocity();
+                const double vy = bodies[j].getYVelocity() - bodies[i].getYVelocity();
+                const double speedSquared = vx * vx + vy * vy;
+                const double time = speedSquared == 0 ? 0 : std::clamp(-(dx * vx + dy * vy) / speedSquared, 0.0, 1.0);
+                if (std::hypot(dx + time * vx, dy + time * vy) <= 4)
+                    require(pairs.count({i, j}) == 1, "Swept broad phase discarded a real contact");
+            }
+        }
+    }
+    bodies = {Planet(30, 0, 0, 0, 1, 1), Planet(10, 0, 0, 0, 1, 1),
+        Planet(-10, 0, 100, 0, 1, 1)};
+    for (int i = 0; i < 64; ++i) bodies.emplace_back(1e15 + i * 1e10, 1e15, 0, 0, 1, 1);
+    PlanetSystem chain;
+    chain.setBodies(bodies);
+    require(chain.update(1) == vector<pair<size_t, size_t>>{{1, 2}, {0, 1}},
+        "Broad-phase rebuild changed swept collision chain order");
+    bodies[0] = Planet(0, 0, 0, 0, 10, 1);
+    bodies[1] = Planet(1, 0, 0, 0, 10, 1);
+    bodies[2] = Planet(2, 0, 0, 0, 10, 1);
+    chain.setBodies(bodies);
+    require(chain.update(0) == vector<pair<size_t, size_t>>{{0, 1}, {0, 1}},
+        "Broad phase changed overlap merge ordering");
+    std::cout << "Sparse 512-body broad phase: " << visits << " of 130816 possible pairs.\n";
+}
+
 int main() {
 
 
     try {
         checkSweptCollisions();
+        checkCollisionCandidates();
 
         auto system = setup("2\n0\n0\n2\n-3\n2\n3\n2\n0\n-2\n5\n2\n1\n");
         auto merges = system.update(0);
