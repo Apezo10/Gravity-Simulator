@@ -90,17 +90,38 @@ int main() {
         system.setBodies({Planet(0, 0, 0, 0, 10, 1), Planet(1, 0, 0, 0, 10, 1)});
         preview.begin(system);
         finish(preview);
-        require(preview.paths[0].empty() && preview.paths[1].empty(),
-            "Forecast should stop at a collision");
+        require(preview.paths[0].size() == pointCount && preview.paths[1].size() == pointCount,
+            "Forecast did not continue after an initial overlap");
+        require(preview.paths[0].back().x == preview.paths[1].back().x,
+            "Merged progenitors did not follow the same survivor");
         require(system.getBodies().size() == 2, "Forecast merged real bodies");
 
         system.setBodies({Planet(-10, 0, 20, 0, 1, 1), Planet(10, 0, -20, 0, 1, 1)});
         preview.begin(system);
         finish(preview);
-        require(preview.paths[0].empty() && preview.paths[1].empty(),
-            "Forecast missed a collision between step endpoints");
+        require(preview.paths[0].size() == pointCount && preview.paths[1].size() == pointCount &&
+            std::abs(preview.paths[0].back().x) < 1e-8 &&
+            preview.paths[0].back().x == preview.paths[1].back().x,
+            "Swept forecast did not continue along merged trajectory");
         require(system.getBodies().size() == 2 && system.getBodies()[0].getX() == -10,
             "Swept forecast changed the real system");
+
+        system.setBodies({Planet(30, 0, 0, 0, 1, 1), Planet(10, 0, 0, 0, 1, 1),
+            Planet(-10, 0, 100, 0, 1, 1), Planet(0, 1e12, 0, 0, 1, 1)});
+        auto chainReference = system;
+        preview.begin(system);
+        finish(preview);
+        for (int step = 1; step <= TrajectoryPreview::steps; ++step) {
+            chainReference.update(PHYSICS_STEP_SECONDS);
+            if (step % 12 != 0) continue;
+            require(chainReference.getBodies().size() == 2, "Reference chain failed to merge");
+            for (std::size_t original = 0; original < 4; ++original) {
+                const auto& body = chainReference.getBodies()[original == 3 ? 1 : 0];
+                const auto& point = preview.paths[original].at(step / 12 - 1);
+                require(point.x == body.getX() && point.y == body.getY(),
+                    "Chained merges changed original path identity");
+            }
+        }
 
         system.setBodies({});
         preview.begin(system);

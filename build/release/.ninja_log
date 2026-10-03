@@ -304,3 +304,7 @@
 47	1990	8127307077544787	CMakeFiles/vectors.dir/main.cpp.obj	585d1a2a8350e33e
 59	2586	8127307077544787	CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj	bcd154e15ead905b
 2586	2965	8127307102939904	vectors.exe	efec4279ab42dc24
+79	1847	8127308244350762	CMakeFiles/trajectory_preview_tests.dir/tests/trajectory_preview.cpp.obj	64caf2f4e5a64e5f
+1848	2105	8127308262094002	trajectory_preview_tests.exe	398d7a08cbab487c
+66	3073	8127308244282164	CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj	bcd154e15ead905b
+3074	3457	8127308274241631	vectors.exe	efec4279ab42dc24

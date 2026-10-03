@@ -13,6 +13,9 @@ class TrajectoryPreview {
     PlanetSystem forecast;
     int completedSteps = 0;
     bool complete = true;
+    // Original path indices are stable identities throughout this forecast.
+    // A merged body carries all of its progenitors' paths forward.
+    std::vector<std::vector<std::size_t>> pathOwners;
 
     static constexpr int sampleEvery = 12;
 
@@ -30,6 +33,9 @@ public:
 
         // Keep each path's storage between forecasts instead of reallocating it.
         paths.resize(system.getBodies().size());
+        pathOwners.clear();
+        pathOwners.reserve(paths.size());
+        for (std::size_t i = 0; i < paths.size(); ++i) pathOwners.push_back({i});
 
         for (auto& path : paths) {
             path.clear();
@@ -39,6 +45,11 @@ public:
 
     bool isComplete() const {
         return complete;
+    }
+
+    bool hasSamples() const {
+        for (const auto& path : paths) if (!path.empty()) return true;
+        return false;
     }
 
     void advance(std::chrono::microseconds budget = std::chrono::milliseconds(2),
@@ -52,10 +63,12 @@ public:
                 break;
             }
 
-            // End before a merge changes body indices or identities.
-            if (!forecast.update(PHYSICS_STEP_SECONDS).empty()) {
-                complete = true;
-                break;
+            // Replay merge events in order: each event uses the indices at
+            // that point in the update, including multiple chained merges.
+            for (const auto& [survivor, removed] : forecast.update(PHYSICS_STEP_SECONDS)) {
+                auto& owners = pathOwners[survivor];
+                owners.insert(owners.end(), pathOwners[removed].begin(), pathOwners[removed].end());
+                pathOwners.erase(pathOwners.begin() + removed);
             }
 
             ++completedSteps;
@@ -68,7 +81,9 @@ public:
             const auto& bodies = forecast.getBodies();
 
             for (std::size_t i = 0; i < bodies.size(); ++i) {
-                paths[i].push_back({bodies[i].getX(), bodies[i].getY()});
+                for (const auto owner : pathOwners[i]) {
+                    paths[owner].push_back({bodies[i].getX(), bodies[i].getY()});
+                }
             }
         }
     }

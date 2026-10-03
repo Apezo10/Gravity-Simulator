@@ -79,7 +79,7 @@ namespace {
             }
 
             if (session.paused || session.launch) {
-                contents += "Dotted forecast: up to 90 days / first collision\n";
+                contents += "Dotted forecast: up to 90 days, including merges\n";
             }
 
             if (session.launch) {
@@ -118,6 +118,7 @@ struct Renderer::Impl {
     sf::CircleShape planet;
     TrajectoryPreview preview;
     vector<Planet> previewBodies;
+    vector<vector<PredictedPoint>> retainedPreviewPaths;
     bool previewReady = false;
     std::uint64_t previewRevision = 0;
     sf::Clock previewRefresh;
@@ -248,6 +249,7 @@ struct Renderer::Impl {
         const Camera& camera) {
         if (!session.paused && !session.launch) {
             previewReady = false;
+            retainedPreviewPaths.clear();
             return;
         }
 
@@ -256,7 +258,7 @@ struct Renderer::Impl {
         const bool stateChanged = previewRevision != session.stateRevision();
 
         // Replace outdated forecasts at most ten times a second while aiming.
-        // Each new forecast clears the old path and grows over subsequent frames.
+        // Keep the previous aiming path until replacement samples are ready.
         const bool refreshDue = !launching || previewRefresh.getElapsedTime().asMilliseconds() >= 100;
 
         if (!previewReady || modeChanged || (stateChanged && refreshDue)) {
@@ -267,6 +269,12 @@ struct Renderer::Impl {
                 forecast.addAsteroid(launch.x, launch.y, launch.vx, launch.vy);
             }
 
+            if (previewReady && launching && !modeChanged &&
+                forecast.getBodies().size() == previewBodies.size()) {
+                if (preview.hasSamples()) retainedPreviewPaths = preview.paths;
+            } else {
+                retainedPreviewPaths.clear();
+            }
             previewBodies = forecast.getBodies();
             preview.begin(forecast);
             previewRevision = session.stateRevision();
@@ -276,8 +284,10 @@ struct Renderer::Impl {
         }
 
         preview.advance();
+        if (preview.hasSamples()) retainedPreviewPaths.clear();
 
         const auto& bodies = previewBodies;
+        const auto& visiblePaths = retainedPreviewPaths.empty() ? preview.paths : retainedPreviewPaths;
 
         // Keep the allocated storage between frames and batch all visible dots.
         previewVertices.clear();
@@ -288,7 +298,7 @@ struct Renderer::Impl {
                 continue;
             }
 
-            const auto& path = preview.paths[i];
+            const auto& path = visiblePaths[i];
             auto color = bodies[i].isBlackHole()
                 ? sf::Color(180, 120, 255) : toColor(bodies[i].getColor());
             auto lastDot = camera.toScreen(bodies[i].getX(), bodies[i].getY());
