@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <optional>
+#include <limits>
 
 using namespace std;
 
@@ -182,8 +183,56 @@ void PlanetSystem::calculateAccelerations() {
     accelerationsReady = true;
 }
 
+double PlanetSystem::encounterStepLimit() const {
+    double limit = numeric_limits<double>::infinity();
+    for (size_t i = 0; i < planets.size(); ++i) {
+        for (size_t j = i + 1; j < planets.size(); ++j) {
+            const auto& a = planets[i];
+            const auto& b = planets[j];
+            const double distance = hypot(b.getX() - a.getX(), b.getY() - a.getY());
+            const double speed = hypot(b.getXVelocity() - a.getXVelocity(),
+                b.getYVelocity() - a.getYVelocity());
+            // Resolve both gravitational curvature and fast flybys. Using
+            // separation rather than the surface gap avoids vanishing steps
+            // at contact; swept collision detection still handles the impact.
+            const double dynamicalTime = distance / sqrt(G * (a.getMass() + b.getMass()) / distance);
+            limit = min(limit, 0.05 * dynamicalTime);
+            if (speed > 0) limit = min(limit, 0.05 * distance / speed);
+        }
+    }
+    return limit;
+}
+
 vector<pair<size_t, size_t>> PlanetSystem::update(double dt) {
     vector<pair<size_t, size_t>> merges;
+    mergeOverlaps(merges);
+    if (!(dt > 0) || !isfinite(dt)) {
+        // Preserve zero-time overlap resolution without entering subdivision.
+        if (dt == 0) updateStep(0, merges);
+        return merges;
+    }
+
+    // Dyadic subdivisions sum to the original interval, keeping the external
+    // simulation clock and trail sampling unchanged. Bound pathological work
+    // to 4096 substeps per update, including inside trajectory forecasts.
+    constexpr int maxSubsteps = 4096;
+    const double minimumStep = dt / maxSubsteps;
+    double remaining = dt;
+    while (remaining > 0) {
+        mergeOverlaps(merges);
+        const double limit = encounterStepLimit();
+        double step = dt;
+        while (step > minimumStep && (step > limit || step > remaining)) {
+            step *= 0.5;
+        }
+        step = min(step, remaining);
+        updateStep(step, merges);
+        remaining -= step;
+    }
+    return merges;
+}
+
+void PlanetSystem::updateStep(double dt, vector<pair<size_t, size_t>>& merges) {
     mergeOverlaps(merges);
 
     // The previous step already calculated gravity at these positions.
@@ -212,7 +261,6 @@ vector<pair<size_t, size_t>> PlanetSystem::update(double dt) {
         planet.advanceVelocity(dt * 0.5);
     }
 
-    return merges;
 }
 
 void PlanetSystem::addAsteroid(double x, double y, double vx, double vy) {

@@ -133,16 +133,8 @@ struct Renderer::Impl {
         grid.updateGrid(bodies, camera);
 
 
-        // Draw the vertical lines.
-        for (const auto& line : grid.getVerticalLines()) {
-            window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
-        }
-
-
-        // Draw the horizontal lines.
-        for (const auto& line : grid.getHorizontalLines()) {
-            window.draw(line.data(), line.size(), sf::PrimitiveType::LineStrip);
-        }
+        const auto& vertices = grid.getLineVertices();
+        window.draw(vertices.data(), vertices.size(), sf::PrimitiveType::Lines);
 
 
     }

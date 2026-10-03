@@ -17,6 +17,8 @@ class PlanetSystem {
     void advancePositions(double dt,
         std::vector<std::pair<std::size_t, std::size_t>>& merges);
     void calculateAccelerations();
+    double encounterStepLimit() const;
+    void updateStep(double dt, std::vector<std::pair<std::size_t, std::size_t>>& merges);
 
 public:
     void addAsteroid(double x, double y, double vx = 0, double vy = 0);

@@ -110,11 +110,46 @@ void checkAccelerationCache() {
     }
 }
 
+void checkCloseEncounters() {
+    const double mass = 1e24;
+    const double period = 3600;
+    const double separation = cbrt(G * (2 * mass) * pow(period / (2 * acos(-1.0)), 2));
+    const double speed = acos(-1.0) * separation / period;
+    PlanetSystem tight;
+    tight.setBodies({Planet(-separation / 2, 0, 0, -speed, 1000, mass),
+        Planet(separation / 2, 0, 0, speed, 1000, mass)});
+    const double initialEnergy = energy(tight.getBodies());
+    for (int i = 0; i < 40; ++i) {
+        require(tight.update(PHYSICS_STEP_SECONDS).empty(), "Tight orbit spuriously collided");
+        require(abs((energy(tight.getBodies()) - initialEnergy) / initialEnergy) < 1e-4,
+            "Substeps did not preserve tight-orbit energy");
+        const auto& bodies = tight.getBodies();
+        require(abs(hypot(bodies[1].getX() - bodies[0].getX(),
+            bodies[1].getY() - bodies[0].getY()) / separation - 1) < 0.005,
+            "Tight orbit expanded despite encounter substeps");
+    }
+
+    PlanetSystem flyby;
+    flyby.setBodies({Planet(0, 0, 0, 0, 1000, mass),
+        Planet(-5e7, 1e7, 60000, 0, 1000, 1e12)});
+    auto reference = flyby;
+    require(flyby.update(PHYSICS_STEP_SECONDS).empty(), "Flyby spuriously collided");
+    for (int i = 0; i < 18000; ++i) reference.update(0.1);
+    const auto& actual = flyby.getBodies()[1];
+    const auto& expected = reference.getBodies()[1];
+    require(hypot(actual.getX() - expected.getX(), actual.getY() - expected.getY()) < 1e4,
+        "Fast flyby differs too far from fine-step reference");
+    require(hypot(actual.getXVelocity() - expected.getXVelocity(),
+        actual.getYVelocity() - expected.getYVelocity()) < 10,
+        "Fast flyby velocity differs too far from fine-step reference");
+}
+
 int main() {
 
 
     try {
         checkAccelerationCache();
+        checkCloseEncounters();
 
         Planet body(0, 0, 2, -3, 1, 1);
         body.setAcceleration(4, -2);

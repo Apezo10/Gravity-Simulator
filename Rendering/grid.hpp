@@ -3,6 +3,7 @@
 #include "camera.hpp"
 #include "planet.hpp"
 #include <SFML/Graphics/Vertex.hpp>
+#include <limits>
 #include <vector>
 
 class Grid {
@@ -10,6 +11,17 @@ class Grid {
 private:
     std::vector<std::vector<sf::Vertex>> verticalLines;
     std::vector<std::vector<sf::Vertex>> horizontalLines;
+    std::vector<sf::Vertex> lineVertices;
+
+    static double length(double x, double y) {
+        const double squared = x * x + y * y;
+        // Use the cheaper square root at ordinary simulation distances, while
+        // retaining hypot's overflow/underflow protection for extreme inputs.
+        if (std::isfinite(squared) && squared >= std::numeric_limits<double>::min()) {
+            return std::sqrt(squared);
+        }
+        return std::hypot(x, y);
+    }
 
     struct GravityWell {
         double x = 0, y = 0;
@@ -34,16 +46,17 @@ private:
 
             const double dx = well.x - worldX;
             const double dy = well.y - worldY;
-            const double distance = std::max(std::hypot(dx, dy), 10.0 * SCALE);
+            const double distance = std::max(length(dx, dy), 10.0 * SCALE);
 
             const double strength = std::min(well.depth / (1.0 + distance / (80.0 * SCALE)),
                 0.9 * distance);
 
-            dxTotal += strength * dx / distance;
-            dyTotal += strength * dy / distance;
+            const double weight = strength / distance;
+            dxTotal += weight * dx;
+            dyTotal += weight * dy;
         }
 
-        const double displacement = std::hypot(dxTotal, dyTotal);
+        const double displacement = length(dxTotal, dyTotal);
         const double limit = 150.0 * SCALE;
 
         if (displacement > limit) {
@@ -58,7 +71,8 @@ private:
 public:
     Grid()
         : verticalLines(16, std::vector<sf::Vertex>(120)),
-          horizontalLines(12, std::vector<sf::Vertex>(160)) {}
+          horizontalLines(12, std::vector<sf::Vertex>(160)),
+          lineVertices(2 * (16 * 119 + 12 * 159)) {}
 
     bool updateGrid(const std::vector<Planet>& planets, const Camera& camera) {
         bool changed = !ready || wells.size() != planets.size()
@@ -103,7 +117,20 @@ public:
 
             for (std::size_t point = 0; point < horizontalLines[line].size(); ++point) {
                 horizontalLines[line][point].position =
-                    distortPoints(point * 5.0f, line * 50.0f, camera);
+                    point % 10 == 0 ? verticalLines[point / 10][line * 10].position
+                                   : distortPoints(point * 5.0f, line * 50.0f, camera);
+            }
+        }
+
+        // Independent segments let every grid line share one draw call without
+        // connecting the end of one line to the beginning of the next.
+        std::size_t vertex = 0;
+        for (const auto* lines : {&verticalLines, &horizontalLines}) {
+            for (const auto& line : *lines) {
+                for (std::size_t point = 1; point < line.size(); ++point) {
+                    lineVertices[vertex++] = line[point - 1];
+                    lineVertices[vertex++] = line[point];
+                }
             }
         }
 
@@ -114,6 +141,10 @@ public:
 
     const std::vector<std::vector<sf::Vertex>>& getVerticalLines() const {
         return verticalLines;
+    }
+
+    const std::vector<sf::Vertex>& getLineVertices() const {
+        return lineVertices;
     }
 
     const std::vector<std::vector<sf::Vertex>>& getHorizontalLines() const {
