@@ -36,6 +36,9 @@ namespace {
 
 
         switch (key) {
+            case sf::Keyboard::Key::F4:
+            session.showAccuracy = !session.showAccuracy;
+            break;
             case sf::Keyboard::Key::F3:
             session.showPerformance = !session.showPerformance;
             break;

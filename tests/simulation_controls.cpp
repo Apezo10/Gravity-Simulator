@@ -130,6 +130,28 @@ int main() {
         merging.selected = 2;
         merging.advance(20000);
         require(merging.selected == 1, "Selection index did not track removal");
+        PlanetSystem diagnosticSystem;
+        diagnosticSystem.setBodies({Planet(-1, 0, 3, 0, 2, 2), Planet(1, 0, -1, 0, 2, 2)});
+        SimulationSession diagnostics(diagnosticSystem);
+        const auto before = measureAccuracy(diagnostics.system.getBodies());
+        require(std::abs(before.energy - (10 - 2 * G)) < 1e-12 && before.momentumX == 4,
+            "Energy or momentum diagnostics incorrect");
+        diagnostics.advance(20000);
+        require(diagnostics.system.getCollisionKineticLoss() == 8,
+            "Inelastic collision kinetic loss incorrect");
+        require(diagnostics.getAccuracyBaseline().energy == measureAccuracy(diagnostics.system.getBodies()).energy,
+            "Merge energy jump was counted as numerical drift");
+        diagnostics.addAsteroid(1e12, 0, 100, 0);
+        require(diagnostics.getAccuracyBaseline().energy == measureAccuracy(diagnostics.system.getBodies()).energy,
+            "Launch energy was counted as numerical drift");
+        diagnostics.reset();
+        require(diagnostics.system.getCollisionKineticLoss() == 0,
+            "Reset retained collision energy loss");
+        require(measureAccuracy({}).energy == 0 && measureAccuracy({}).energyScale == 0,
+            "Empty system diagnostics invalid");
+        require(!measureAccuracy({Planet(0, 0, 0, 0, 1, 1), Planet(0, 0, 0, 0, 1, 1)}).energyDefined,
+            "Coincident point-mass energy was reported as defined");
+
         PerformanceStats stats;
         stats.add({250, 2, 4, 6, 8});
         require(stats.fps == 0, "Performance averages published before window completed");

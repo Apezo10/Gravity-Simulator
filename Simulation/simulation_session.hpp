@@ -3,6 +3,7 @@
 #include "orbit_trail.hpp"
 #include "simulation_timing.hpp"
 #include <optional>
+#include "accuracy_stats.hpp"
 
 struct AsteroidLaunch {
     static constexpr double speedPerPixel = 300.0;
@@ -16,6 +17,7 @@ class SimulationSession {
     SimulationTiming timing;
     int stepsSinceTrailSample = 0;
     std::uint64_t revision = 0;
+    AccuracyStats accuracyBaseline;
 
     // Integer quarter-speed units represent 0.25x through 4x exactly.
     int speedQuarters = 4;
@@ -43,9 +45,13 @@ class SimulationSession {
         ++revision;
 
 
-        for (const auto& [survivorIndex, removedIndex] : system.update(seconds)) {
+        const auto merges = system.update(seconds);
+        for (const auto& [survivorIndex, removedIndex] : merges) {
             applyMerge(survivorIndex, removedIndex);
         }
+        // A merge changes both kinetic and point-mass potential energy.
+        // Start a new conservation interval rather than label that jump drift.
+        if (!merges.empty()) accuracyBaseline = measureAccuracy(system.getBodies());
 
         elapsedSeconds += seconds;
         ++stepsSinceTrailSample;
@@ -69,6 +75,7 @@ public:
     bool paused = false;
     bool following = false;
     bool showPerformance = false;
+    bool showAccuracy = false;
     std::optional<std::size_t> selected;
     double elapsedSeconds = 0;
     std::optional<AsteroidLaunch> launch;
@@ -80,6 +87,7 @@ public:
     double speed() const {
         return speedQuarters / 4.0;
     }
+    const AccuracyStats& getAccuracyBaseline() const { return accuracyBaseline; }
 
     std::uint64_t stateRevision() const {
         return revision;
@@ -97,6 +105,7 @@ public:
         ++revision;
         launch.reset();
         system.setBodies(initialBodies);
+        accuracyBaseline = measureAccuracy(system.getBodies());
         timing = SimulationTiming{
         };
         stepsSinceTrailSample = 0;
@@ -117,6 +126,7 @@ public:
     void addAsteroid(double x, double y, double vx = 0, double vy = 0) {
         ++revision;
         system.addAsteroid(x, y, vx, vy);
+        accuracyBaseline = measureAccuracy(system.getBodies());
         trails.emplace_back();
         trails.back().add(system.getBodies().back());
     }

@@ -45,6 +45,11 @@ namespace {
         sf::Text text;
         sf::RectangleShape background;
         string contents;
+        sf::Clock accuracyRefresh;
+        AccuracyStats accuracy;
+        AccuracyStats displayedBaseline;
+        bool accuracyVisible = false;
+        double displayedCollisionLoss = 0;
 
     public:
         explicit StatusDisplay(const sf::Font& font) : text(font, "", 14) {
@@ -67,7 +72,32 @@ namespace {
             contents += "Space: pause | Up/Down: speed | R: reset\n"
             "Shift-click: select | F: follow | Esc: deselect\n"
             "Left-drag: launch asteroid | Right-drag: pan | Wheel: zoom\n"
-            "F3: performance overlay\n";
+            "F3: performance | F4: accuracy\n";
+
+            if (session.showAccuracy) {
+                if (!accuracyVisible || accuracyRefresh.getElapsedTime().asMilliseconds() >= 500) {
+                    accuracy = measureAccuracy(session.system.getBodies());
+                    displayedBaseline = session.getAccuracyBaseline();
+                    displayedCollisionLoss = session.system.getCollisionKineticLoss();
+                    accuracyRefresh.restart();
+                }
+                const auto& baseline = displayedBaseline;
+                contents += "Accuracy: since last reset, launch or merge\n";
+                if (accuracy.energyDefined && baseline.energyDefined) {
+                    const double drift = accuracy.energy - baseline.energy;
+                    snprintf(row, sizeof(row), "Energy: %.3e J | Drift: %+.3e J\n", accuracy.energy, drift);
+                    contents += row;
+                    if (baseline.energyScale > 0) {
+                        snprintf(row, sizeof(row), "Relative drift: %+.3e (K + |U| scale)\n", drift / baseline.energyScale);
+                        contents += row;
+                    }
+                } else contents += "Energy: undefined for coincident/extreme bodies\n";
+                snprintf(row, sizeof(row), "Momentum: (%.3e, %.3e) kg m/s\n"
+                    "Merge kinetic loss: %.3e J\n", accuracy.momentumX, accuracy.momentumY,
+                    displayedCollisionLoss);
+                contents += row;
+            }
+            accuracyVisible = session.showAccuracy;
 
             if (session.showPerformance) {
                 const auto& p = performance.average;

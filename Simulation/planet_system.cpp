@@ -74,6 +74,12 @@ namespace {
 
 void PlanetSystem::mergePair(size_t first, size_t second,
     vector<pair<size_t, size_t>>& merges) {
+    const auto& a = planets[first];
+    const auto& b = planets[second];
+    const double relativeSpeed = hypot(b.getXVelocity() - a.getXVelocity(),
+        b.getYVelocity() - a.getYVelocity());
+    const double reducedMass = a.getMass() * (b.getMass() / (a.getMass() + b.getMass()));
+    collisionKineticLoss += 0.5 * reducedMass * relativeSpeed * relativeSpeed;
     planets[first] = mergeBodies(planets[first], planets[second]);
     planets.erase(planets.begin() + second);
 

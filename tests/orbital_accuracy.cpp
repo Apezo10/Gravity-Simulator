@@ -1,6 +1,7 @@
 #include "setup.hpp"
 #include "simulation_timing.hpp"
 #include "orbit_trail.hpp"
+#include "accuracy_stats.hpp"
 #include <cmath>
 #include <iostream>
 #include <sstream>
@@ -161,6 +162,8 @@ int main() {
         auto system = circularSystem();
         const auto& bodies = system.getBodies();
         const double initialEnergy = energy(bodies);
+        require(abs((measureAccuracy(bodies).energy - initialEnergy) / initialEnergy) < 1e-14,
+            "Displayed orbital energy differs from accuracy reference");
         const double separation = bodies[1].getX() - bodies[0].getX();
         const double momentumScale = bodies[1].getMass() * abs(bodies[1].getYVelocity());
         double maxEnergyError = 0, maxRadiusError = 0;

@@ -10,6 +10,7 @@ class PlanetSystem {
     std::vector<Planet> planets;
     int asteroidCount = 0;
     bool accelerationsReady = false;
+    double collisionKineticLoss = 0;
 
     void mergePair(std::size_t first, std::size_t second,
         std::vector<std::pair<std::size_t, std::size_t>>& merges);
@@ -25,6 +26,7 @@ public:
     void setBodies(std::vector<Planet> bodies) {
         planets = std::move(bodies);
         asteroidCount = 0;
+        collisionKineticLoss = 0;
         accelerationsReady = false;
     }
 
@@ -32,4 +34,5 @@ public:
     const std::vector<Planet>& getBodies() const {
         return planets;
     }
+    double getCollisionKineticLoss() const { return collisionKineticLoss; }
 };
