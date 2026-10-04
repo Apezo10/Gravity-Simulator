@@ -36,6 +36,13 @@ namespace {
 
 
         switch (key) {
+            case sf::Keyboard::Key::Home:
+            if (camera.fitBodies(session.system.getBodies())) {
+                session.following = false;
+                session.cancelLaunch();
+                frameClock.restart();
+            }
+            break;
             case sf::Keyboard::Key::Q:
             session.setLaunchProperties(session.asteroidMass() / 10, session.asteroidRadius());
             break;

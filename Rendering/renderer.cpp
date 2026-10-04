@@ -72,7 +72,7 @@ namespace {
             contents += "Space: pause | Up/Down: speed | R: reset\n"
             "Shift-click: select | F: follow | Esc: deselect\n"
             "Left-drag: launch asteroid | Right-drag: pan | Wheel: zoom\n"
-            "F3: performance | F4: accuracy\n"
+            "F3: performance | F4: accuracy | Home: fit all bodies\n"
             "Q/E: mass /10 or x10 | Z/X: radius /2 or x2\n";
             snprintf(row, sizeof(row), "Next launch: %.3e kg | Radius: %.3e m\n",
                 session.asteroidMass(), session.asteroidRadius());

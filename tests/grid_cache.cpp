@@ -142,6 +142,46 @@ int main() {
                 require(camera.viewport == size, "Zero-size resize discarded valid viewport");
             }
 
+            // Fit both axes across window shapes, including systems beyond manual zoom's old limit.
+            for (const sf::Vector2u size : {sf::Vector2u{800, 600}, sf::Vector2u{1600, 500},
+                                           sf::Vector2u{400, 900}}) {
+                camera.resize(size);
+                for (double distance : {1e8, 1e12, 1e18, 1e308}) {
+                    std::vector<Planet> spread = {
+                        Planet(-distance, -distance * 0.25, 0, 0, 1, 1),
+                        Planet(distance, distance * 0.5, 0, 0, 1, 1),
+                        Planet(0, 0, 0, 0, 1, 1)};
+                    camera.dragging = true;
+                    require(camera.fitBodies(spread), "Valid system did not fit");
+                    require(!camera.dragging && std::isfinite(camera.zoom) && camera.zoom > 0,
+                        "Fit retained drag or invalid zoom");
+                    for (const auto& body : spread) {
+                        const auto point = camera.toScreen(body.getX(), body.getY());
+                        require(point.x >= 39 && point.x <= size.x - 39 &&
+                                point.y >= 39 && point.y <= size.y - 39,
+                            "Fitted body lies outside padded viewport");
+                    }
+                }
+            }
+            camera.resize({800, 600});
+            require(camera.fitBodies({Planet(1e12, -2e12, 0, 0, 1, 1)}), "Single body did not fit");
+            require(camera.toScreen(1e12, -2e12) == sf::Vector2f(400, 300) && camera.zoom == 1,
+                "Single body was not centered at a useful scale");
+            const Camera beforeEmpty = camera;
+            require(!camera.fitBodies({}) && camera.x == beforeEmpty.x && camera.zoom == beforeEmpty.zoom,
+                "Empty fit changed camera");
+            const double nan = std::numeric_limits<double>::quiet_NaN();
+            require(!camera.fitBodies({Planet(nan, 0, 0, 0, 1, 1)}),
+                "Invalid body poisoned fit");
+            require(camera.fitBodies({Planet(5, 10, 0, 0, 1, 1), Planet(5, 10, 0, 0, 1, 1)}),
+                "Coincident bodies did not fit");
+            require(camera.zoom == 1, "Coincident fit produced excessive zoom");
+            camera.fitBodies({Planet(-1e18, 0, 0, 0, 1, 1), Planet(1e18, 0, 0, 0, 1, 1)});
+            const double fittedZoom = camera.zoom;
+            camera.scroll(1, {400, 300});
+            require(std::abs(camera.zoom / fittedZoom - 1.25) < 1e-12,
+                "Manual zoom jumped after fitting a distant system");
+
             std::cout << "Grid cache invalidation and vertex equivalence passed.\n";
         } catch (const std::exception& error) {
             std::cerr << error.what() << '\n';
