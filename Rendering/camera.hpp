@@ -5,17 +5,30 @@
 inline constexpr double SCALE = 2.0e9;
 struct Camera {
     double x = 0, y = 0, zoom = 1;
+    sf::Vector2u viewport{800, 600};
     bool dragging = false;
     sf::Vector2f lastMouse;
 
+    void resize(sf::Vector2u size) {
+        if (size.x == 0 || size.y == 0) return;
+        viewport = size;
+        dragging = false;
+    }
+
+    void reset() {
+        x = y = 0;
+        zoom = 1;
+        dragging = false;
+    }
+
     sf::Vector2f toScreen(double px, double py) const {
-        return {400.0f + static_cast<float>((px - x) * zoom / SCALE),
-            300.0f - static_cast<float>((py - y) * zoom / SCALE)};
+        return {viewport.x * 0.5f + static_cast<float>((px - x) * zoom / SCALE),
+            viewport.y * 0.5f - static_cast<float>((py - y) * zoom / SCALE)};
     }
 
     sf::Vector2<double> toWorld(sf::Vector2f mouse) const {
-        return {x + (mouse.x - 400.0) * SCALE / zoom,
-            y - (mouse.y - 300.0) * SCALE / zoom};
+        return {x + (mouse.x - viewport.x * 0.5) * SCALE / zoom,
+            y - (mouse.y - viewport.y * 0.5) * SCALE / zoom};
     }
 
     void drag(sf::Vector2f mouse) {
@@ -30,7 +43,7 @@ struct Camera {
         double newScale = SCALE / zoom;
 
         // Keep the world point under the cursor stationary while zooming.
-        x += (mouse.x - 400) * (oldScale - newScale);
-        y -= (mouse.y - 300) * (oldScale - newScale);
+        x += (mouse.x - viewport.x * 0.5) * (oldScale - newScale);
+        y -= (mouse.y - viewport.y * 0.5) * (oldScale - newScale);
     }
 };

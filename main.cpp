@@ -53,8 +53,7 @@ namespace {
             break;
             case sf::Keyboard::Key::R:
             session.reset();
-            camera = Camera{
-            };
+            camera.reset();
             frameClock.restart();
             break;
             case sf::Keyboard::Key::F:
@@ -85,6 +84,17 @@ namespace {
         SimulationSession& session, Camera& camera,
         const Renderer& renderer, sf::Clock& frameClock) {
 
+
+        if (const auto* resized = event.getIf<sf::Event::Resized>()) {
+            if (resized->size.x > 0 && resized->size.y > 0) {
+                camera.resize(resized->size);
+                window.setView(sf::View(sf::FloatRect(
+                    {0.f, 0.f},
+                    {static_cast<float>(resized->size.x), static_cast<float>(resized->size.y)})));
+                session.cancelLaunch();
+                frameClock.restart();
+            }
+        }
 
         if (const auto* key = event.getIf<sf::Event::KeyPressed>()) {
             handleKey(key->code, session, camera, frameClock);

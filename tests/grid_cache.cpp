@@ -108,6 +108,40 @@ int main() {
             require(grid.updateGrid(bodies, camera, now), "Removed bodies did not refresh grid");
             require(!grid.updateGrid(bodies, camera, now), "Empty grid was not cached");
 
+            for (const sf::Vector2u size : {sf::Vector2u{1280, 720},
+                    sf::Vector2u{603, 901}, sf::Vector2u{1, 1}, sf::Vector2u{800, 600}}) {
+                camera.resize(size);
+                require(grid.updateGrid(bodies, camera, now), "Resize did not refresh paused grid");
+                require(!grid.updateGrid(bodies, camera, now), "Resized grid was not cached");
+                const auto center = camera.toScreen(camera.x, camera.y);
+                require(center == sf::Vector2f(size.x * 0.5f, size.y * 0.5f),
+                    "Camera target is not centered after resize");
+                const sf::Vector2f cursor(size.x * 0.25f, size.y * 0.75f);
+                const auto before = camera.toWorld(cursor);
+                camera.scroll(1, cursor);
+                const auto after = camera.toWorld(cursor);
+                require(std::hypot(before.x - after.x, before.y - after.y) < 0.01,
+                    "Zoom moved the world point under the cursor");
+                const auto projected = camera.toScreen(after.x, after.y);
+                require(std::hypot(projected.x - cursor.x, projected.y - cursor.y) < 0.001,
+                    "Screen/world conversion changed after resize");
+                camera.reset();
+                require(camera.viewport == size, "Reset discarded window size");
+                require(camera.toScreen(SCALE, 0).x - camera.toScreen(0, 0).x == 1.f &&
+                    camera.toScreen(0, 0).y - camera.toScreen(0, SCALE).y == 1.f,
+                    "Resize changed pixel scale or aspect ratio");
+                grid.updateGrid(bodies, camera, now);
+                require(grid.getVerticalLines().front().back().position.y >= size.y &&
+                    grid.getHorizontalLines().front().back().position.x >= size.x,
+                    "Grid does not cover resized window");
+                for (const auto& vertex : grid.getLineVertices()) {
+                    require(std::isfinite(vertex.position.x) && std::isfinite(vertex.position.y),
+                        "Resized grid contains invalid vertices");
+                }
+                camera.resize({0, 0});
+                require(camera.viewport == size, "Zero-size resize discarded valid viewport");
+            }
+
             std::cout << "Grid cache invalidation and vertex equivalence passed.\n";
         } catch (const std::exception& error) {
             std::cerr << error.what() << '\n';

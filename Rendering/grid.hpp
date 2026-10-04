@@ -80,7 +80,7 @@ public:
         std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now()) {
         bool immediate = !ready || wells.size() != planets.size()
             || camera.x != lastCamera.x || camera.y != lastCamera.y
-            || camera.zoom != lastCamera.zoom;
+            || camera.zoom != lastCamera.zoom || camera.viewport != lastCamera.viewport;
         bool moved = false;
 
         for (std::size_t i = 0; i < planets.size() && i < wells.size(); ++i) {
@@ -94,6 +94,18 @@ public:
         // input and structural changes remain immediate, including while paused.
         constexpr auto refreshInterval = std::chrono::microseconds(33333);
         if (!immediate && (!moved || now - lastRefresh < refreshInterval)) return false;
+
+        // Keep 50-pixel line spacing and 5-pixel samples across the entire viewport.
+        // Include a sample beyond partial cells so the right/bottom edges are covered.
+        const std::size_t columns = (camera.viewport.x + 49) / 50 + 1;
+        const std::size_t rows = (camera.viewport.y + 49) / 50 + 1;
+        const std::size_t xSamples = (camera.viewport.x + 4) / 5 + 1;
+        const std::size_t ySamples = (camera.viewport.y + 4) / 5 + 1;
+        verticalLines.resize(columns);
+        for (auto& line : verticalLines) line.resize(ySamples);
+        horizontalLines.resize(rows);
+        for (auto& line : horizontalLines) line.resize(xSamples);
+        lineVertices.resize(2 * (columns * (ySamples - 1) + rows * (xSamples - 1)));
 
         wells.resize(planets.size());
 
@@ -128,7 +140,8 @@ public:
 
             for (std::size_t point = 0; point < horizontalLines[line].size(); ++point) {
                 horizontalLines[line][point].position =
-                    point % 10 == 0 ? verticalLines[point / 10][line * 10].position
+                    point % 10 == 0 && line * 10 < ySamples
+                        ? verticalLines[point / 10][line * 10].position
                                    : distortPoints(point * 5.0f, line * 50.0f, camera);
             }
         }
