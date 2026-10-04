@@ -24,7 +24,8 @@ class PlanetSystem {
     void updateStep(double dt, std::vector<std::pair<std::size_t, std::size_t>>& merges);
 
 public:
-    void addAsteroid(double x, double y, double vx = 0, double vy = 0);
+    void addAsteroid(double x, double y, double vx = 0, double vy = 0,
+        double radius = 1000.0, double mass = 1.0e12);
     void setBodies(std::vector<Planet> bodies) {
         planets = std::move(bodies);
         asteroidCount = 0;

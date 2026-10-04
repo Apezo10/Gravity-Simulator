@@ -72,7 +72,11 @@ namespace {
             contents += "Space: pause | Up/Down: speed | R: reset\n"
             "Shift-click: select | F: follow | Esc: deselect\n"
             "Left-drag: launch asteroid | Right-drag: pan | Wheel: zoom\n"
-            "F3: performance | F4: accuracy\n";
+            "F3: performance | F4: accuracy\n"
+            "Q/E: mass /10 or x10 | Z/X: radius /2 or x2\n";
+            snprintf(row, sizeof(row), "Next launch: %.3e kg | Radius: %.3e m\n",
+                session.asteroidMass(), session.asteroidRadius());
+            contents += row;
 
             if (session.showAccuracy) {
                 if (!accuracyVisible || accuracyRefresh.getElapsedTime().asMilliseconds() >= 500) {
@@ -289,17 +293,21 @@ struct Renderer::Impl {
 
         // Replace outdated forecasts at most ten times a second while aiming.
         // Keep the previous aiming path until replacement samples are ready.
-        const bool refreshDue = !launching || previewRefresh.getElapsedTime().asMilliseconds() >= 100;
+        const bool propertiesChanged = launching && !previewBodies.empty() &&
+            (previewBodies.back().getMass() != session.launch->mass ||
+             previewBodies.back().getRadius() != session.launch->radius);
+        const bool refreshDue = propertiesChanged || !launching ||
+            previewRefresh.getElapsedTime().asMilliseconds() >= 100;
 
         if (!previewReady || modeChanged || (stateChanged && refreshDue)) {
             PlanetSystem forecast = session.system;
 
             if (session.launch) {
                 const auto& launch = *session.launch;
-                forecast.addAsteroid(launch.x, launch.y, launch.vx, launch.vy);
+                launch.addTo(forecast);
             }
 
-            if (previewReady && launching && !modeChanged &&
+            if (previewReady && launching && !modeChanged && !propertiesChanged &&
                 forecast.getBodies().size() == previewBodies.size()) {
                 if (preview.hasSamples()) retainedPreviewPaths = preview.paths;
             } else {
@@ -369,6 +377,19 @@ struct Renderer::Impl {
             static_cast<float>(-launch.vy / AsteroidLaunch::speedPerPixel));
         const auto end = start + direction;
         const sf::Color color(255, 190, 100);
+
+        const double radiusPixels = launch.radius * camera.zoom / SCALE;
+        // Avoid building a huge off-screen outline when zoomed far into a body.
+        if (radiusPixels >= 6 && radiusPixels <= 2.0 * std::max(camera.viewport.x, camera.viewport.y)) {
+            const float radius = static_cast<float>(radiusPixels);
+            sf::CircleShape footprint(radius, 96);
+            footprint.setOrigin({radius, radius});
+            footprint.setPosition(start);
+            footprint.setFillColor(sf::Color::Transparent);
+            footprint.setOutlineColor(sf::Color(255, 190, 100, 110));
+            footprint.setOutlineThickness(1.f);
+            window.draw(footprint);
+        }
 
         sf::CircleShape marker(5.0f, 24);
         marker.setOrigin({5.0f, 5.0f});

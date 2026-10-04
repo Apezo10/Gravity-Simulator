@@ -264,9 +264,8 @@ void PlanetSystem::updateStep(double dt, vector<pair<size_t, size_t>>& merges) {
 
 }
 
-void PlanetSystem::addAsteroid(double x, double y, double vx, double vy) {
-    double radius = 1000.0;
-    double mass = 1.0e12;
+void PlanetSystem::addAsteroid(double x, double y, double vx, double vy,
+    double radius, double mass) {
 
     asteroidCount++;
     string name = "Asteroid " + to_string(asteroidCount);

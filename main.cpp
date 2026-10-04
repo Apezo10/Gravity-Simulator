@@ -36,6 +36,18 @@ namespace {
 
 
         switch (key) {
+            case sf::Keyboard::Key::Q:
+            session.setLaunchProperties(session.asteroidMass() / 10, session.asteroidRadius());
+            break;
+            case sf::Keyboard::Key::E:
+            session.setLaunchProperties(session.asteroidMass() * 10, session.asteroidRadius());
+            break;
+            case sf::Keyboard::Key::Z:
+            session.setLaunchProperties(session.asteroidMass(), session.asteroidRadius() / 2);
+            break;
+            case sf::Keyboard::Key::X:
+            session.setLaunchProperties(session.asteroidMass(), session.asteroidRadius() * 2);
+            break;
             case sf::Keyboard::Key::F4:
             session.showAccuracy = !session.showAccuracy;
             break;

@@ -1,5 +1,7 @@
 #include "simulation_session.hpp"
 #include "performance_stats.hpp"
+#include "trajectory_preview.hpp"
+#include <limits>
 #include <iostream>
 #include <stdexcept>
 
@@ -80,6 +82,70 @@ int main() {
         session.beginLaunch(4e12, 0);
         session.reset();
         require(!session.launch, "Reset left an unfinished launch");
+
+        {
+            SimulationSession configured(initial);
+            require(configured.asteroidMass() == 1e12 && configured.asteroidRadius() == 1000,
+                "Default launch properties changed");
+            configured.setLaunchProperties(5.972e24, 6.371e6);
+            configured.beginLaunch(1e12, 2e12);
+            configured.aimLaunch(100, -50);
+            const auto revision = configured.stateRevision();
+            configured.setLaunchProperties(1e26, 1e7);
+            require(configured.stateRevision() > revision &&
+                configured.launch->mass == 1e26 && configured.launch->radius == 1e7,
+                "Aiming property change did not invalidate the forecast");
+            require(configured.launch->vx == 30000 && configured.launch->vy == 15000,
+                "Changing properties altered aim");
+            const auto unchangedRevision = configured.stateRevision();
+            configured.setLaunchProperties(0, 1);
+            configured.setLaunchProperties(1, -1);
+            configured.setLaunchProperties(std::numeric_limits<double>::infinity(), 1);
+            configured.setLaunchProperties(1, std::numeric_limits<double>::quiet_NaN());
+            require(configured.stateRevision() == unchangedRevision,
+                "Invalid properties changed launch state");
+
+            PlanetSystem forecastSystem = configured.system;
+            configured.launch->addTo(forecastSystem);
+            TrajectoryPreview preview;
+            preview.begin(forecastSystem);
+            configured.finishLaunch();
+            const auto& body = configured.system.getBodies().back();
+            require(body.getMass() == 1e26 && body.getRadius() == 1e7,
+                "Launched body ignored configured properties");
+            require(configured.trails.size() == configured.system.getBodies().size(),
+                "Configured launch lost trail alignment");
+            preview.advance(std::chrono::seconds(1), 12);
+            require(preview.paths.back().size() == 1, "Configured forecast did not generate a sample");
+            for (int i = 0; i < 12; ++i) configured.system.update(PHYSICS_STEP_SECONDS);
+            const auto& actual = configured.system.getBodies().back();
+            require(preview.paths.back()[0].x == actual.getX() &&
+                preview.paths.back()[0].y == actual.getY(),
+                "Configured launch diverged from its forecast");
+
+            configured.beginLaunch(3e12, 0);
+            require(configured.launch->mass == 1e26 && configured.launch->radius == 1e7,
+                "Next launch lost settings");
+            configured.cancelLaunch();
+            configured.reset();
+            require(configured.asteroidMass() == 1e26 && configured.asteroidRadius() == 1e7,
+                "Reset discarded launch preferences");
+            configured.setLaunchProperties(1e100, 1e100);
+            require(configured.asteroidMass() == 1e30 && configured.asteroidRadius() == 1e9,
+                "Upper launch bounds failed");
+            configured.setLaunchProperties(1e-100, 1e-100);
+            require(configured.asteroidMass() == 1 && configured.asteroidRadius() == 1,
+                "Lower launch bounds failed");
+
+            // A larger physical radius must change collision behavior, not just appearance.
+            PlanetSystem small, large;
+            small.setBodies({Planet(0, 0, 0, 0, 1, 1)});
+            large = small;
+            small.addAsteroid(100, 0, 0, 0, 1, 1);
+            large.addAsteroid(100, 0, 0, 0, 100, 1);
+            require(small.update(0.01).empty(), "Small projectile collided unexpectedly");
+            require(large.update(0.01).size() == 1, "Configured radius did not affect collisions");
+        }
 
         // Partial tick survives pause.
         session.advance(10000);

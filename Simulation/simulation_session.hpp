@@ -9,6 +9,11 @@ struct AsteroidLaunch {
     static constexpr double speedPerPixel = 300.0;
     double x, y;
     double vx = 0, vy = 0;
+    double radius = 1000.0, mass = 1.0e12;
+
+    void addTo(PlanetSystem& system) const {
+        system.addAsteroid(x, y, vx, vy, radius, mass);
+    }
 };
 
 // Application state independent of the window and keyboard bindings.
@@ -21,6 +26,8 @@ class SimulationSession {
 
     // Integer quarter-speed units represent 0.25x through 4x exactly.
     int speedQuarters = 4;
+    double launchMass = 1.0e12;
+    double launchRadius = 1000.0;
 
     void applyMerge(std::size_t survivorIndex, std::size_t removedIndex) {
         trails[survivorIndex] = OrbitTrail{
@@ -101,6 +108,25 @@ public:
         speedQuarters = std::max(1, speedQuarters / 2);
     }
 
+    double asteroidMass() const { return launchMass; }
+    double asteroidRadius() const { return launchRadius; }
+
+    // Bounded controls cover small projectiles through star-mass experiments.
+    // Reject nonfinite inputs before clamping to keep invalid physics out.
+    void setLaunchProperties(double mass, double radius) {
+        if (!std::isfinite(mass) || !std::isfinite(radius) || mass <= 0 || radius <= 0) return;
+        mass = std::clamp(mass, 1.0, 1.0e30);
+        radius = std::clamp(radius, 1.0, 1.0e9);
+        if (mass == launchMass && radius == launchRadius) return;
+        launchMass = mass;
+        launchRadius = radius;
+        if (launch) {
+            launch->mass = mass;
+            launch->radius = radius;
+        }
+        ++revision;
+    }
+
     void reset() {
         ++revision;
         launch.reset();
@@ -125,14 +151,14 @@ public:
 
     void addAsteroid(double x, double y, double vx = 0, double vy = 0) {
         ++revision;
-        system.addAsteroid(x, y, vx, vy);
+        system.addAsteroid(x, y, vx, vy, launchRadius, launchMass);
         accuracyBaseline = measureAccuracy(system.getBodies());
         trails.emplace_back();
         trails.back().add(system.getBodies().back());
     }
 
     void beginLaunch(double x, double y) {
-        launch = AsteroidLaunch{x, y};
+        launch = AsteroidLaunch{x, y, 0, 0, launchRadius, launchMass};
         ++revision;
     }
 
@@ -153,7 +179,10 @@ public:
     void finishLaunch() {
         if (!launch) return;
 
-        addAsteroid(launch->x, launch->y, launch->vx, launch->vy);
+        launch->addTo(system);
+        accuracyBaseline = measureAccuracy(system.getBodies());
+        trails.emplace_back();
+        trails.back().add(system.getBodies().back());
         cancelLaunch();
     }
 
