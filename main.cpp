@@ -1,5 +1,5 @@
 #include "renderer.hpp"
-#include "setup.hpp"
+#include "setup_menu.hpp"
 #include "simulation_timing.hpp"
 #include <iostream>
 #include <array>
@@ -190,14 +190,6 @@ int main() {
     Camera camera;
 
 
-    if (!chooseSetup(initialSystem)) {
-        return 0;
-    }
-
-    printPlanets(initialSystem);
-    cout << "Space: pause | Up/Down: speed | R: reset | Shift-click: select | F: follow\n";
-    SimulationSession session(initialSystem);
-
     // Load the font before constructing the renderer that uses it.
     sf::RenderWindow window(sf::VideoMode({800, 600}), "Gravity Sim");
     window.setFramerateLimit(60);
@@ -209,6 +201,12 @@ int main() {
         cerr << "Could not load the font: " << SIM_FONT_PATH << '\n';
         return 1;
     }
+
+    if (!showSetupMenu(window, font, initialSystem)) return 0;
+    camera.resize(window.getSize());
+    window.setView(sf::View(sf::FloatRect({0.f, 0.f},
+        {static_cast<float>(camera.viewport.x), static_cast<float>(camera.viewport.y)})));
+    SimulationSession session(initialSystem);
 
     Renderer renderer(font);
 

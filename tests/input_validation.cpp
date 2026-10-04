@@ -1,5 +1,6 @@
 // Exercise the real implementation without starting the graphical application.
 #include "setup.hpp"
+#include "custom_setup.hpp"
 #include "simulation_timing.hpp"
 #include "orbit_trail.hpp"
 #include <cmath>
@@ -39,6 +40,44 @@ int main() {
 
 
     try {
+        {
+            CustomSetup draft;
+            PlanetSystem system;
+            require(!draft.finish(system), "Empty GUI setup accepted");
+            const std::array<std::string, 6> valid = {
+                "-1.5e11", "0", "0", "2.98e4", "6.371e6", "5.972e24"};
+            for (std::size_t field = 0; field < valid.size(); ++field) {
+                for (const std::string bad : {"", "abc", "12junk", "1 2", "nan", "inf", "1e999"}) {
+                    draft.fields = valid;
+                    draft.fields[field] = bad;
+                    require(!draft.addBody(), "Invalid GUI field accepted");
+                    require(draft.bodies.empty(), "Invalid GUI draft partially added");
+                    require(draft.activeField == field, "Invalid GUI field not focused");
+                }
+            }
+            for (std::size_t field : {4u, 5u}) {
+                for (const std::string bad : {"0", "-1"}) {
+                    draft.fields = valid;
+                    draft.fields[field] = bad;
+                    require(!draft.addBody(), "Nonpositive GUI radius/mass accepted");
+                }
+            }
+            draft.fields = valid;
+            require(draft.addBody(), "Valid GUI body rejected");
+            require(!draft.hasDraft(), "Added GUI draft was not cleared");
+            draft.fields[0] = "1";
+            require(!draft.finish(system), "Incomplete second GUI body accepted");
+            require(system.getBodies().empty(), "Incomplete GUI setup published");
+            draft.fields = valid;
+            require(draft.finish(system), "GUI start did not add pending valid body");
+            require(system.getBodies().size() == 2, "GUI setup lost a body");
+            require(system.getBodies()[0].getX() == -1.5e11 &&
+                system.getBodies()[0].getYVelocity() == 2.98e4, "GUI values changed");
+            draft.bodies.resize(1000);
+            draft.fields = valid;
+            require(!draft.addBody(), "GUI body limit exceeded");
+        }
+
         const string body = "-1.5e11\n0\n0\n2.98e4\n6.371e6\n5.972e24\n";
         {
             ConsoleInput io("no\nabc\n0\n-1\n1.5\n1001\n999999999999999999999\n1 junk\n1\n" + body);

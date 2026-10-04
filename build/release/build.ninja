@@ -141,6 +141,16 @@ build CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj: CXX_COMPILER__vectors_u
   OBJECT_FILE_DIR = CMakeFiles\vectors.dir\Rendering
   TARGET_SUPPORT_DIR = CMakeFiles\vectors.dir
 
+build CMakeFiles/vectors.dir/Rendering/setup_menu.cpp.obj: CXX_COMPILER__vectors_unscanned_Release C$:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity$ Sim/Gravity-Simulator/Rendering/setup_menu.cpp || cmake_object_order_depends_target_vectors
+  CONFIG = Release
+  DEFINES = -DSFML_STATIC -DSIM_FONT_PATH="\"C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/Rendering/tuffy.ttf\""
+  DEP_FILE = CMakeFiles\vectors.dir\Rendering\setup_menu.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG
+  INCLUDES = -I"C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/Simulation" -I"C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/Rendering" -I"C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/release/_deps/sfml-src/include"
+  OBJECT_DIR = CMakeFiles\vectors.dir
+  OBJECT_FILE_DIR = CMakeFiles\vectors.dir\Rendering
+  TARGET_SUPPORT_DIR = CMakeFiles\vectors.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target vectors
@@ -149,7 +159,7 @@ build CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj: CXX_COMPILER__vectors_u
 #############################################
 # Link the executable vectors.exe
 
-build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Release CMakeFiles/vectors.dir/main.cpp.obj CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj | libsimulation_setup.a _deps/sfml-build/lib/libsfml-graphics-s.a libsimulation.a _deps/sfml-build/lib/libsfml-window-s.a _deps/sfml-build/lib/libsfml-system-s.a _deps/sfml-build/lib/libfreetype.a || _deps/sfml-build/lib/libfreetype.a _deps/sfml-build/lib/libsfml-graphics-s.a _deps/sfml-build/lib/libsfml-system-s.a _deps/sfml-build/lib/libsfml-window-s.a libsimulation.a libsimulation_setup.a
+build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Release CMakeFiles/vectors.dir/main.cpp.obj CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj CMakeFiles/vectors.dir/Rendering/setup_menu.cpp.obj | libsimulation_setup.a _deps/sfml-build/lib/libsfml-graphics-s.a libsimulation.a _deps/sfml-build/lib/libsfml-window-s.a _deps/sfml-build/lib/libsfml-system-s.a _deps/sfml-build/lib/libfreetype.a || _deps/sfml-build/lib/libfreetype.a _deps/sfml-build/lib/libsfml-graphics-s.a _deps/sfml-build/lib/libsfml-system-s.a _deps/sfml-build/lib/libsfml-window-s.a libsimulation.a libsimulation_setup.a
   CONFIG = Release
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = libsimulation_setup.a  _deps/sfml-build/lib/libsfml-graphics-s.a  libsimulation.a  _deps/sfml-build/lib/libsfml-window-s.a  _deps/sfml-build/lib/libsfml-system-s.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-build/lib/libfreetype.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

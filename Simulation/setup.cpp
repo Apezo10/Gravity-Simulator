@@ -134,68 +134,7 @@ bool chooseSetup(PlanetSystem& system) {
         cout << "Please enter yes or no.\n";
     }
 
-    // Each preset stores a name and the bodies used to initialize the system.
-    struct StellarPreset {
-        string name;
-        vector<Planet> bodies;
-    };
-
-    const double sunMass = 1.9885e30;
-    const double earthMass = 5.972e24;
-    const double separation = 1.496e11;
-    const double orbitalSpeed = sqrt(G * (sunMass + earthMass) / separation);
-    const double earthFraction = earthMass / (sunMass + earthMass);
-    const double sunFraction = sunMass / (sunMass + earthMass);
-    const double earthX = separation * sunFraction;
-    const double earthSpeed = orbitalSpeed * sunFraction;
-    const double moonDistance = 3.844e8;
-    const double moonSpeed = sqrt(G * earthMass / moonDistance);
-
-    // Reuse these starting bodies in the solar presets.
-    const Planet sun(-separation * earthFraction, 0, 0,
-        -orbitalSpeed * earthFraction, 6.957e8, sunMass, BodyColor(255, 220, 80), false, "Sun");
-    const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass, BodyColor(80, 160, 255), false, "Earth");
-
-    // Equal stars are half the separation from their shared center.
-    const double binarySpeed = sqrt(G * sunMass / (2 * separation));
-
-    const double blackHoleMass = 10 * sunMass;
-    const double c = 299792458.0;
-    const double horizonRadius = 2 * G * blackHoleMass / (c * c);
-
-    // Planet arguments: x, y, x velocity, y velocity, radius, mass (SI units).
-    // Solar presets use approximate circular orbits, not date-specific positions.
-    const vector<StellarPreset> presets = {
-        {"Sun-Earth", {sun, earth}},
-        {"Sun-Earth-Moon", {
-                sun, earth,
-
-                // The Moon shares Earth's motion, plus its own orbital velocity.
-                Planet(earthX + moonDistance, 0, 0,
-                    earthSpeed + moonSpeed, 1.7374e6, 7.342e22, BodyColor(210, 210, 210), false, "Moon")
-        }},
-        {"Mini solar system (Sun, Mercury, Venus, Earth, Mars)", {
-                sun,
-
-                // Circular speed = sqrt(G * central mass / orbital distance).
-                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23, BodyColor(160, 150, 140), false, "Mercury"),
-                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24, BodyColor(235, 190, 100), false, "Venus"),
-                earth,
-                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23, BodyColor(225, 95, 65), false, "Mars")
-        }},
-        {"Binary stars (two Sun-like stars)", {
-                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass, BodyColor(255, 200, 90), false, "Star A"),
-                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass, BodyColor(255, 245, 190), false, "Star B")
-        }},
-        {"Black hole flyby (Newtonian approximation)", {
-
-                // This distant flyby stays well outside the relativistic region.
-                // The black disk is an enlarged marker, not the true horizon size.
-                Planet(0, 0, 0, 0, horizonRadius, blackHoleMass, BodyColor(0, 0, 0), true, "Black hole"),
-                Planet(-3.0e11, 1.5e11, 120000, 0, 6.371e6, earthMass,
-                    BodyColor(80, 220, 255), false, "Passing body")
-        }}
-    };
+    const auto& presets = stellarPresets();
 
     cout << "\nWhich preset would you like to use?\n";
 
@@ -237,4 +176,65 @@ void printPlanets(const PlanetSystem& system) {
         cout << "\n" << body.getName() << ":\n";
         printInfo(body);
     }
+}
+
+const std::vector<StellarPreset>& stellarPresets() {
+    const double sunMass = 1.9885e30;
+    const double earthMass = 5.972e24;
+    const double separation = 1.496e11;
+    const double orbitalSpeed = sqrt(G * (sunMass + earthMass) / separation);
+    const double earthFraction = earthMass / (sunMass + earthMass);
+    const double sunFraction = sunMass / (sunMass + earthMass);
+    const double earthX = separation * sunFraction;
+    const double earthSpeed = orbitalSpeed * sunFraction;
+    const double moonDistance = 3.844e8;
+    const double moonSpeed = sqrt(G * earthMass / moonDistance);
+
+    // Reuse these starting bodies in the solar presets.
+    const Planet sun(-separation * earthFraction, 0, 0,
+        -orbitalSpeed * earthFraction, 6.957e8, sunMass, BodyColor(255, 220, 80), false, "Sun");
+    const Planet earth(earthX, 0, 0, earthSpeed, 6.371e6, earthMass, BodyColor(80, 160, 255), false, "Earth");
+
+    // Equal stars are half the separation from their shared center.
+    const double binarySpeed = sqrt(G * sunMass / (2 * separation));
+
+    const double blackHoleMass = 10 * sunMass;
+    const double c = 299792458.0;
+    const double horizonRadius = 2 * G * blackHoleMass / (c * c);
+
+    // Planet arguments: x, y, x velocity, y velocity, radius, mass (SI units).
+    // Solar presets use approximate circular orbits, not date-specific positions.
+    static const vector<StellarPreset> presets = {
+        {"Sun-Earth", {sun, earth}},
+        {"Sun-Earth-Moon", {
+                sun, earth,
+
+                // The Moon shares Earth's motion, plus its own orbital velocity.
+                Planet(earthX + moonDistance, 0, 0,
+                    earthSpeed + moonSpeed, 1.7374e6, 7.342e22, BodyColor(210, 210, 210), false, "Moon")
+        }},
+        {"Mini solar system (Sun, Mercury, Venus, Earth, Mars)", {
+                sun,
+
+                // Circular speed = sqrt(G * central mass / orbital distance).
+                Planet(5.791e10, 0, 0, sqrt(G * sunMass / 5.791e10), 2.4397e6, 3.301e23, BodyColor(160, 150, 140), false, "Mercury"),
+                Planet(1.082e11, 0, 0, sqrt(G * sunMass / 1.082e11), 6.0518e6, 4.867e24, BodyColor(235, 190, 100), false, "Venus"),
+                earth,
+                Planet(2.279e11, 0, 0, sqrt(G * sunMass / 2.279e11), 3.3895e6, 6.417e23, BodyColor(225, 95, 65), false, "Mars")
+        }},
+        {"Binary stars (two Sun-like stars)", {
+                Planet(-separation / 2, 0, 0, -binarySpeed, 6.957e8, sunMass, BodyColor(255, 200, 90), false, "Star A"),
+                Planet( separation / 2, 0, 0,  binarySpeed, 6.957e8, sunMass, BodyColor(255, 245, 190), false, "Star B")
+        }},
+        {"Black hole flyby (Newtonian approximation)", {
+
+                // This distant flyby stays well outside the relativistic region.
+                // The black disk is an enlarged marker, not the true horizon size.
+                Planet(0, 0, 0, 0, horizonRadius, blackHoleMass, BodyColor(0, 0, 0), true, "Black hole"),
+                Planet(-3.0e11, 1.5e11, 120000, 0, 6.371e6, earthMass,
+                    BodyColor(80, 220, 255), false, "Passing body")
+        }}
+    };
+
+    return presets;
 }

@@ -21,7 +21,7 @@ target_include_directories(simulation PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Simula
 add_library(simulation_setup STATIC Simulation/setup.cpp)
 target_link_libraries(simulation_setup PUBLIC simulation)
 
-add_executable(vectors main.cpp Rendering/renderer.cpp)
+add_executable(vectors main.cpp Rendering/renderer.cpp Rendering/setup_menu.cpp)
 target_link_libraries(vectors PRIVATE simulation_setup SFML::Graphics)
 target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/Rendering/tuffy.ttf")
 

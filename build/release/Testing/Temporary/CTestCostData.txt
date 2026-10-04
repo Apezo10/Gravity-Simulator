@@ -1,8 +1,8 @@
-grid_cache 10 0.00315846
-trajectory_preview 10 0.00313399
-input_validation 10 0.00558356
-simulation_timing 10 0.00310688
-collisions 10 0.00361467
-orbital_accuracy 10 0.00464341
-simulation_controls 10 0.00301014
+grid_cache 11 0.00151595
+trajectory_preview 11 0.00140661
+input_validation 11 0.00441698
+simulation_timing 11 0.00353659
+collisions 11 0.00376095
+orbital_accuracy 11 0.00452286
+simulation_controls 11 0.00118292
 ---
