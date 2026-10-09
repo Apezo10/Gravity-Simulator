@@ -2,11 +2,11 @@
 # If you choose not to use CMake, this file may be hand configured, by
 # filling in the required variables.
 
-cmake_minimum_required(VERSION 4.3.1)
+cmake_minimum_required(VERSION 4.4.3)
 
 # CTest Start Step
-set(CTEST_SOURCE_DIRECTORY "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator")
-set(CTEST_BINARY_DIRECTORY "C:/Users/Adins/OneDrive/Documents/VScode_Projects/Gravity Sim/Gravity-Simulator/build/release")
+set(CTEST_SOURCE_DIRECTORY "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim")
+set(CTEST_BINARY_DIRECTORY "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/release")
 
 # CTest Update Step
 set(CTEST_UPDATE_COMMAND "C:/Program Files/Git/cmd/git.exe")
@@ -48,6 +48,7 @@ set(CTEST_USE_LAUNCHERS "")
 set(CTEST_RESOURCE_SPEC_FILE "")
 set(CTEST_TEST_LOAD "")
 set(CTEST_TEST_TIMEOUT "1500")
+set(CTEST_TEST_COVERAGE_TOOL "")
 
 # CTest Coverage Step
 set(CTEST_COVERAGE_COMMAND "C:/msys64/ucrt64/bin/gcov.exe")
@@ -61,7 +62,7 @@ set(CTEST_MEMORYCHECK_SANITIZER_OPTIONS "")
 set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE "")
 
 # CTest Submit Step
-set(CTEST_SITE "DESKTOP-UNQNOSA")
+set(CTEST_SITE "Adins-Laptop")
 set(CTEST_BUILD_NAME "Win32-ninja")
 set(CTEST_SUBMIT_URL "http://")
 set(CTEST_SUBMIT_INACTIVITY_TIMEOUT "")

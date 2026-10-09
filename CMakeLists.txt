@@ -27,6 +27,12 @@ target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(render_cache_tests tests/render_cache.cpp)
+    target_link_libraries(render_cache_tests PRIVATE simulation SFML::Graphics)
+    target_compile_definitions(render_cache_tests PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/Rendering/tuffy.ttf")
+    add_test(NAME render_cache COMMAND render_cache_tests)
+    set_tests_properties(render_cache PROPERTIES TIMEOUT 30)
+
     add_executable(grid_cache_tests tests/grid_cache.cpp)
     target_link_libraries(grid_cache_tests PRIVATE simulation SFML::Graphics)
     add_test(NAME grid_cache COMMAND grid_cache_tests)

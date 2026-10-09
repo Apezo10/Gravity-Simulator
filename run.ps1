@@ -8,7 +8,9 @@ Push-Location $PSScriptRoot
 try {
     $configureArgs = @('--preset', $Preset)
     $buildDirectory = Join-Path $PSScriptRoot "build\$Preset"
+    $executable = Join-Path $buildDirectory 'vectors.exe'
     $cacheFile = Join-Path $buildDirectory 'CMakeCache.txt'
+    $needsConfigure = $true
 
     if (Test-Path -LiteralPath $cacheFile) {
         $cachedPaths = @{}
@@ -26,16 +28,27 @@ try {
             $cachedPaths['CACHEFILE_DIR'] -ine $buildPath) {
             Write-Host 'Project location changed or cache is incomplete; refreshing CMake configuration.'
             $configureArgs += '--fresh'
+        } else {
+            $needsConfigure = !(Test-Path -LiteralPath (Join-Path $buildDirectory 'build.ninja'))
+            # Ninja tracks CMakeLists.txt, but preset changes require an explicit
+            # configure to apply their new compiler/options to this build.
+            if ((Get-Item -LiteralPath (Join-Path $PSScriptRoot 'CMakePresets.json')).LastWriteTimeUtc -gt
+                (Get-Item -LiteralPath $cacheFile).LastWriteTimeUtc) {
+                $needsConfigure = $true
+            }
         }
     }
 
-    cmake @configureArgs
+    if ($needsConfigure) {
+        cmake @configureArgs
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
+
+    # Build the app and its dependencies; tests remain available via CMake.
+    cmake --build --preset $Preset --target vectors
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    cmake --build --preset $Preset
-    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-    & ".\build\$Preset\vectors.exe"
+    & $executable
 } finally {
     Pop-Location
 }

@@ -5,4 +5,5 @@ simulation_timing 13 0.00106992
 collisions 13 0.00169509
 orbital_accuracy 13 0.00262395
 simulation_controls 13 0.000989285
+render_cache 1 1.02547
 ---

@@ -2,6 +2,7 @@
 #include "grid.hpp"
 #include "trajectory_preview.hpp"
 #include "performance_stats.hpp"
+#include "body_markers.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -13,32 +14,6 @@ namespace {
     sf::Color toColor(BodyColor color) {
         return {
             color.r, color.g, color.b};
-    }
-
-    float displayRadius(const Planet& body) {
-        const double mass = body.getMass();
-
-
-        if (mass > 1e29) {
-            return 30.0f;
-        }
-
-
-        if (mass > 1e26) {
-            return 16.0f;
-        }
-
-
-        if (mass > 1e24) {
-            return 10.0f;
-        }
-
-
-        if (mass > 1e23) {
-            return 6.0f;
-        }
-
-        return 3.0f;
     }
 
     class StatusDisplay {
@@ -162,7 +137,7 @@ struct Renderer::Impl {
     Grid grid;
     StatusDisplay statusDisplay;
     PerformanceStats performance;
-    sf::CircleShape planet;
+    BodyMarkers markers;
     TrajectoryPreview preview;
     vector<Planet> previewBodies;
     vector<vector<PredictedPoint>> retainedPreviewPaths;
@@ -433,16 +408,12 @@ struct Renderer::Impl {
         for (const Planet& body : bodies) {
 
             // Fixed pixel radii keep small bodies visible without changing physics.
-            float r = displayRadius(body);
+            auto& planet = markers.body(body);
             auto position = camera.toScreen(body.getX(), body.getY());
 
-            planet.setRadius(r);
-            planet.setOrigin({
-                    r,r});
             planet.setFillColor(toColor(body.getColor()));
 
             // Outline makes the black marker visible against the black background.
-            planet.setOutlineThickness(body.isBlackHole() ? 2.0f : 0.0f);
             planet.setOutlineColor(sf::Color(180, 120, 255));
 
             planet.setPosition(position);
@@ -459,14 +430,10 @@ struct Renderer::Impl {
 
         if (session.selected && *session.selected < bodies.size()) {
             const auto& body = bodies[*session.selected];
-            const float radius = displayRadius(body) + 5;
-            planet.setRadius(radius);
-            planet.setOrigin({
-                    radius, radius});
+            auto& planet = markers.selection(body);
             planet.setPosition(camera.toScreen(body.getX(), body.getY()));
             planet.setFillColor(sf::Color::Transparent);
             planet.setOutlineColor(sf::Color::White);
-            planet.setOutlineThickness(1.5f);
             window.draw(planet);
         }
 

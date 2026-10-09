@@ -1,5 +1,6 @@
 #include "setup_menu.hpp"
 #include "custom_setup.hpp"
+#include "menu_cache.hpp"
 #include <algorithm>
 
 namespace {
@@ -13,25 +14,6 @@ void resizeMenu(sf::RenderWindow& window) {
     const sf::Vector2f fraction(canvas.x * scale / size.x, canvas.y * scale / size.y);
     view.setViewport(sf::FloatRect({(1.f - fraction.x) / 2, (1.f - fraction.y) / 2}, fraction));
     window.setView(view);
-}
-
-void label(sf::RenderWindow& window, const sf::Font& font, const std::string& value,
-           sf::Vector2f position, unsigned size = 18, sf::Color color = sf::Color(225, 231, 242)) {
-    sf::Text text(font, value, size);
-    text.setPosition(position);
-    text.setFillColor(color);
-    window.draw(text);
-}
-
-void button(sf::RenderWindow& window, const sf::Font& font, const sf::FloatRect& bounds,
-            const std::string& value, bool selected = false) {
-    sf::RectangleShape box(bounds.size);
-    box.setPosition(bounds.position);
-    box.setFillColor(selected ? sf::Color(40, 79, 116) : sf::Color(29, 39, 57));
-    box.setOutlineThickness(1);
-    box.setOutlineColor(selected ? sf::Color(100, 193, 230) : sf::Color(57, 73, 97));
-    window.draw(box);
-    label(window, font, value, bounds.position + sf::Vector2f(12.f, 10.f));
 }
 
 sf::FloatRect presetRect(std::size_t i) {
@@ -49,6 +31,7 @@ const sf::FloatRect startRect({555.f, 475.f}, {205.f, 44.f});
 bool showSetupMenu(sf::RenderWindow& window, const sf::Font& font, PlanetSystem& system) {
     const auto& presets = stellarPresets();
     CustomSetup draft;
+    MenuCache cache;
     bool custom = false;
     std::size_t selected = 0;
     bool replaceField = true;
@@ -144,35 +127,36 @@ bool showSetupMenu(sf::RenderWindow& window, const sf::Font& font, PlanetSystem&
             }
         }
 
+        cache.beginFrame();
         window.clear(sf::Color(12, 18, 29));
-        label(window, font, "GRAVITY SIM", {40.f, 25.f}, 32);
+        cache.label(window, font, "GRAVITY SIM", {40.f, 25.f}, 32);
         if (!custom) {
-            label(window, font, "Choose a starting system", {40.f, 76.f}, 23);
-            label(window, font, "Click a scenario, or use Up / Down and Enter.", {40.f, 110.f}, 16);
+            cache.label(window, font, "Choose a starting system", {40.f, 76.f}, 23);
+            cache.label(window, font, "Click a scenario, or use Up / Down and Enter.", {40.f, 110.f}, 16);
             for (std::size_t i = 0; i <= presets.size(); ++i)
-                button(window, font, presetRect(i),
+                cache.button(window, font, presetRect(i),
                        i < presets.size() ? presets[i].name : "Custom system", selected == i);
-            label(window, font, "Solar presets use approximate circular orbits.", {40.f, 520.f}, 16);
+            cache.label(window, font, "Solar presets use approximate circular orbits.", {40.f, 520.f}, 16);
         } else {
-            label(window, font, "Custom system  |  " + std::to_string(draft.bodies.size()) + " bodies added",
+            cache.label(window, font, "Custom system  |  " + std::to_string(draft.bodies.size()) + " bodies added",
                   {40.f, 76.f}, 23);
-            label(window, font, "SI units. Example: 1.5e11. Click or Tab to replace a field.", {40.f, 110.f}, 16);
+            cache.label(window, font, "SI units. Example: 1.5e11. Click or Tab to replace a field.", {40.f, 110.f}, 16);
             const char* names[] = {"X position (m)", "Y position (m)", "X velocity (m/s)",
                                    "Y velocity (m/s)", "Radius (m)", "Mass (kg)"};
             for (std::size_t i = 0; i < 6; ++i) {
-                label(window, font, names[i], {40.f, 148.f + static_cast<float>(i) * 47.f});
+                cache.label(window, font, names[i], {40.f, 148.f + static_cast<float>(i) * 47.f});
                 const auto& value = draft.fields[i];
                 const std::string visible = value.size() > 30 ? "..." + value.substr(value.size() - 30) : value;
-                button(window, font, fieldRect(i), visible +
+                cache.button(window, font, fieldRect(i), visible +
                        (draft.activeField == i ? " |" : ""), draft.activeField == i);
             }
-            label(window, font, draft.error, {40.f, 437.f}, 15, sf::Color(255, 160, 145));
-            button(window, font, backRect, "Back");
-            button(window, font, undoRect, "Remove last");
-            button(window, font, addRect, "Add body");
-            button(window, font, startRect, "Start simulation");
-            label(window, font, "Enter: add body  |  Ctrl+Enter: start  |  Esc: back", {40.f, 536.f}, 16);
-            label(window, font, "Start also adds the current draft if it contains any values.", {40.f, 562.f}, 15);
+            cache.label(window, font, draft.error, {40.f, 437.f}, 15, sf::Color(255, 160, 145));
+            cache.button(window, font, backRect, "Back");
+            cache.button(window, font, undoRect, "Remove last");
+            cache.button(window, font, addRect, "Add body");
+            cache.button(window, font, startRect, "Start simulation");
+            cache.label(window, font, "Enter: add body  |  Ctrl+Enter: start  |  Esc: back", {40.f, 536.f}, 16);
+            cache.label(window, font, "Start also adds the current draft if it contains any values.", {40.f, 562.f}, 15);
         }
         window.display();
     }
