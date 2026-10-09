@@ -2,6 +2,19 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+#include <cstdlib>
+#include <new>
+
+// Count allocations only while restarting an already-warmed forecast.
+bool countAllocations = false;
+std::size_t allocationCount = 0;
+void* operator new(std::size_t size) {
+    if (countAllocations) ++allocationCount;
+    if (void* memory = std::malloc(size == 0 ? 1 : size)) return memory;
+    throw std::bad_alloc();
+}
+void operator delete(void* memory) noexcept { std::free(memory); }
+void operator delete(void* memory, std::size_t) noexcept { std::free(memory); }
 
 void require(bool condition, const char* message) {
     if (!condition) {
@@ -127,6 +140,18 @@ int main() {
         preview.begin(system);
         require(preview.isComplete() && preview.paths.empty(),
             "Empty systems should finish immediately without paths");
+
+        // Dragging repeatedly restarts forecasts with the same body count.
+        std::vector<Planet> population;
+        for (int i = 0; i < 128; ++i)
+            population.emplace_back(i * 1e9, 0, 0, 0, 1, 1);
+        system.setBodies(population);
+        preview.begin(system);
+        allocationCount = 0;
+        countAllocations = true;
+        for (int refresh = 0; refresh < 20; ++refresh) preview.begin(system);
+        countAllocations = false;
+        require(allocationCount == 0, "Warmed aiming refresh allocated per-body storage");
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';
         return 1;

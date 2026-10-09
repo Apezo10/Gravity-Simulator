@@ -15,7 +15,9 @@ class TrajectoryPreview {
     bool complete = true;
     // Original path indices are stable identities throughout this forecast.
     // A merged body carries all of its progenitors' paths forward.
-    std::vector<std::vector<std::size_t>> pathOwners;
+    struct OwnerChain { std::size_t first, last; };
+    std::vector<OwnerChain> pathOwners;
+    std::vector<std::size_t> nextOwner;
 
     static constexpr int sampleEvery = 12;
 
@@ -33,9 +35,14 @@ public:
 
         // Keep each path's storage between forecasts instead of reallocating it.
         paths.resize(system.getBodies().size());
-        pathOwners.clear();
-        pathOwners.reserve(paths.size());
-        for (std::size_t i = 0; i < paths.size(); ++i) pathOwners.push_back({i});
+        // Flat linked chains reuse storage on aiming refreshes and concatenate
+        // in constant time on merges. paths.size() is the end sentinel.
+        pathOwners.resize(paths.size());
+        nextOwner.resize(paths.size());
+        for (std::size_t i = 0; i < paths.size(); ++i) {
+            pathOwners[i] = {i, i};
+            nextOwner[i] = paths.size();
+        }
 
         for (auto& path : paths) {
             path.clear();
@@ -67,7 +74,8 @@ public:
             // that point in the update, including multiple chained merges.
             for (const auto& [survivor, removed] : forecast.update(PHYSICS_STEP_SECONDS)) {
                 auto& owners = pathOwners[survivor];
-                owners.insert(owners.end(), pathOwners[removed].begin(), pathOwners[removed].end());
+                nextOwner[owners.last] = pathOwners[removed].first;
+                owners.last = pathOwners[removed].last;
                 pathOwners.erase(pathOwners.begin() + removed);
             }
 
@@ -81,7 +89,8 @@ public:
             const auto& bodies = forecast.getBodies();
 
             for (std::size_t i = 0; i < bodies.size(); ++i) {
-                for (const auto owner : pathOwners[i]) {
+                for (std::size_t owner = pathOwners[i].first; owner != paths.size();
+                    owner = nextOwner[owner]) {
                     paths[owner].push_back({bodies[i].getX(), bodies[i].getY()});
                 }
             }
