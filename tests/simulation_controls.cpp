@@ -200,6 +200,23 @@ int main() {
         diagnosticSystem.setBodies({Planet(-1, 0, 3, 0, 2, 2), Planet(1, 0, -1, 0, 2, 2)});
         SimulationSession diagnostics(diagnosticSystem);
         const auto before = measureAccuracy(diagnostics.system.getBodies());
+        const auto balanced = measureAccuracy({Planet(-10, 0, 3, 4, 1, 2),
+            Planet(10, 0, -3, -4, 1, 2)});
+        require(balanced.momentumX == 0 && balanced.momentumY == 0 && balanced.momentumScale == 20,
+            "Balanced momentum normalization incorrect");
+        auto perturbed = balanced;
+        perturbed.momentumX = 3;
+        perturbed.momentumY = 4;
+        const auto drift = measureMomentumDrift(perturbed, balanced);
+        require(drift.defined && drift.relativeDefined && drift.magnitude == 5 && drift.relative == 0.25,
+            "Zero-net-momentum drift incorrect");
+        const auto stationaryDrift = measureMomentumDrift(perturbed, measureAccuracy({}));
+        require(stationaryDrift.defined && !stationaryDrift.relativeDefined,
+            "Zero momentum scale produced relative drift");
+        const auto extreme = measureAccuracy({Planet(0, 0, 1e200, 0, 1, 1e200)});
+        require(!extreme.momentumDefined && !measureMomentumDrift(extreme, balanced).defined &&
+            !measureMomentumDrift(balanced, extreme).defined,
+            "Nonfinite momentum was reported as valid drift");
         require(std::abs(before.energy - (10 - 2 * G)) < 1e-12 && before.momentumX == 4,
             "Energy or momentum diagnostics incorrect");
         diagnostics.advance(20000);
@@ -210,6 +227,9 @@ int main() {
         diagnostics.addAsteroid(1e12, 0, 100, 0);
         require(diagnostics.getAccuracyBaseline().energy == measureAccuracy(diagnostics.system.getBodies()).energy,
             "Launch energy was counted as numerical drift");
+        require(measureMomentumDrift(measureAccuracy(diagnostics.system.getBodies()),
+            diagnostics.getAccuracyBaseline()).magnitude == 0,
+            "Launch momentum was counted as numerical drift");
         diagnostics.reset();
         require(diagnostics.system.getCollisionKineticLoss() == 0,
             "Reset retained collision energy loss");

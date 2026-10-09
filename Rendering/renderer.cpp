@@ -96,9 +96,22 @@ namespace {
                         contents += row;
                     }
                 } else contents += "Energy: undefined for coincident/extreme bodies\n";
-                snprintf(row, sizeof(row), "Momentum: (%.3e, %.3e) kg m/s\n"
-                    "Merge kinetic loss: %.3e J\n", accuracy.momentumX, accuracy.momentumY,
-                    displayedCollisionLoss);
+                const auto momentumDrift = measureMomentumDrift(accuracy, baseline);
+                if (accuracy.momentumDefined) {
+                    snprintf(row, sizeof(row), "Momentum: (%.3e, %.3e) kg m/s\n",
+                        accuracy.momentumX, accuracy.momentumY);
+                    contents += row;
+                } else contents += "Momentum: undefined for extreme bodies\n";
+                if (momentumDrift.defined) {
+                    snprintf(row, sizeof(row), "Momentum drift: %.3e kg m/s\n", momentumDrift.magnitude);
+                    contents += row;
+                    if (momentumDrift.relativeDefined) {
+                        snprintf(row, sizeof(row), "Relative momentum drift: %.3e (sum |p| scale)\n",
+                            momentumDrift.relative);
+                        contents += row;
+                    }
+                } else contents += "Momentum drift: undefined for extreme bodies\n";
+                snprintf(row, sizeof(row), "Merge kinetic loss: %.3e J\n", displayedCollisionLoss);
                 contents += row;
             }
             accuracyVisible = session.showAccuracy;
