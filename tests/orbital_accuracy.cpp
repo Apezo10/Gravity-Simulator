@@ -145,12 +145,38 @@ void checkCloseEncounters() {
         "Fast flyby velocity differs too far from fine-step reference");
 }
 
+void checkExtremeGravityScales() {
+    // Both scenes use finite, positive inputs accepted by custom setup.
+    for (bool tiny : {true, false}) {
+        const double distance = tiny ? 1e-200 : 1e200;
+        const double mass = tiny ? 1e-300 : 1e300;
+        const double radius = tiny ? 1e-210 : 1;
+        const double dt = tiny ? 1e-300 : 1;
+        const double expectedVelocity = tiny ? G * 1e-200 : G * 1e-100;
+        PlanetSystem system;
+        system.setBodies({Planet(0, 0, 0, 0, radius, mass),
+            Planet(distance, 0, 0, 0, radius, mass)});
+        require(system.update(dt).empty(), "Extreme-scale separated bodies merged");
+        for (const auto& body : system.getBodies()) {
+            require(isfinite(body.getX()) && isfinite(body.getY()) &&
+                isfinite(body.getXVelocity()) && isfinite(body.getYVelocity()),
+                "Representable extreme-scale gravity produced nonfinite motion");
+            require(abs(abs(body.getXVelocity()) / expectedVelocity - 1) < 1e-12,
+                "Representable extreme-scale gravity was lost or miscalculated");
+            require(body.getYVelocity() == 0, "Axial gravity introduced sideways motion");
+        }
+        require(system.getBodies()[0].getXVelocity() > 0 &&
+            system.getBodies()[1].getXVelocity() < 0, "Gravity is not attractive");
+    }
+}
+
 int main() {
 
 
     try {
         checkAccelerationCache();
         checkCloseEncounters();
+        checkExtremeGravityScales();
 
         Planet body(0, 0, 2, -3, 1, 1);
         body.setAcceleration(4, -2);

@@ -8,6 +8,19 @@ using namespace std;
 
 namespace {
 
+    double gravityAcceleration(double gravity, double mass, double distance) {
+        const double acceleration = gravity * mass;
+        if (isfinite(acceleration) && acceleration > 0) return acceleration;
+
+        // G / distance^2 can overflow or underflow even when G * mass /
+        // distance^2 is representable. Scale exponents only at the end.
+        int massExponent, distanceExponent;
+        const double massFraction = frexp(mass, &massExponent);
+        const double distanceFraction = frexp(distance, &distanceExponent);
+        return ldexp(G * massFraction / distanceFraction / distanceFraction,
+            massExponent - 2 * distanceExponent);
+    }
+
     optional<double> collisionTime(const Planet& a, const Planet& b, double dt) {
         const double dx = b.getX() - a.getX();
         const double dy = b.getY() - a.getY();
@@ -172,12 +185,14 @@ void PlanetSystem::calculateAccelerations() {
             }
 
             const double gravity = G / distance / distance;
-            const double gx = gravity * (dx / distance);
-            const double gy = gravity * (dy / distance);
+            const double ux = dx / distance;
+            const double uy = dy / distance;
+            const double accelerationA = gravityAcceleration(gravity, b.getMass(), distance);
+            const double accelerationB = gravityAcceleration(gravity, a.getMass(), distance);
 
             // Acceleration depends on the other body's mass, not its own.
-            a.addAcceleration(gx * b.getMass(), gy * b.getMass());
-            b.addAcceleration(-gx * a.getMass(), -gy * a.getMass());
+            a.addAcceleration(accelerationA * ux, accelerationA * uy);
+            b.addAcceleration(-accelerationB * ux, -accelerationB * uy);
         }
     }
 
