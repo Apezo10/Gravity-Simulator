@@ -141,6 +141,16 @@ build CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj: CXX_COMPILER__vectors_u
   OBJECT_FILE_DIR = CMakeFiles\vectors.dir\Rendering
   TARGET_SUPPORT_DIR = CMakeFiles\vectors.dir
 
+build CMakeFiles/vectors.dir/Rendering/setup_menu.cpp.obj: CXX_COMPILER__vectors_unscanned_Debug C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/Rendering/setup_menu.cpp || cmake_object_order_depends_target_vectors
+  CONFIG = Debug
+  DEFINES = -DSFML_STATIC -DSIM_FONT_PATH="\"C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/Rendering/tuffy.ttf\""
+  DEP_FILE = CMakeFiles\vectors.dir\Rendering\setup_menu.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -I"C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/Simulation" -I"C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/Rendering" -I"C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/local/_deps/sfml-src/include"
+  OBJECT_DIR = CMakeFiles\vectors.dir
+  OBJECT_FILE_DIR = CMakeFiles\vectors.dir\Rendering
+  TARGET_SUPPORT_DIR = CMakeFiles\vectors.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target vectors
@@ -149,7 +159,7 @@ build CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj: CXX_COMPILER__vectors_u
 #############################################
 # Link the executable vectors.exe
 
-build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Debug CMakeFiles/vectors.dir/main.cpp.obj CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj | libsimulation_setup.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-graphics-s-d.a libsimulation.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-window-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-system-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libfreetyped.a || C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libfreetyped.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-graphics-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-system-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-window-s-d.a libsimulation.a libsimulation_setup.a
+build vectors.exe: CXX_EXECUTABLE_LINKER__vectors_Debug CMakeFiles/vectors.dir/main.cpp.obj CMakeFiles/vectors.dir/Rendering/renderer.cpp.obj CMakeFiles/vectors.dir/Rendering/setup_menu.cpp.obj | libsimulation_setup.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-graphics-s-d.a libsimulation.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-window-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-system-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libfreetyped.a || C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libfreetyped.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-graphics-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-system-s-d.a C$:/Users/Adins/OneDrive/Documents/VScode$ Projects/Gravity$ Sim/build/dependencies/sfml-build/lib/libsfml-window-s-d.a libsimulation.a libsimulation_setup.a
   CONFIG = Debug
   FLAGS = -g
   LINK_LIBRARIES = libsimulation_setup.a  "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-graphics-s-d.a"  libsimulation.a  "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-window-s-d.a"  "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libsfml-system-s-d.a"  -lopengl32  -lwinmm  -lgdi32  "C:/Users/Adins/OneDrive/Documents/VScode Projects/Gravity Sim/build/dependencies/sfml-build/lib/libfreetyped.a"  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
