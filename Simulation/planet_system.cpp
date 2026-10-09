@@ -8,6 +8,16 @@ using namespace std;
 
 namespace {
 
+    double vectorLength(double x, double y) {
+        // Pair scans dominate large scenes. Ordinary distances need only
+        // sqrt; retain hypot's scaling for overflow and subnormal inputs.
+        const double squared = x * x + y * y;
+        if (isfinite(squared) && squared >= numeric_limits<double>::min()) {
+            return sqrt(squared);
+        }
+        return hypot(x, y);
+    }
+
     double gravityAcceleration(double gravity, double mass, double distance) {
         const double acceleration = gravity * mass;
         if (isfinite(acceleration) && acceleration > 0) return acceleration;
@@ -177,7 +187,7 @@ void PlanetSystem::calculateAccelerations() {
             Planet& b = planets[j];
             const double dx = b.getX() - a.getX();
             const double dy = b.getY() - a.getY();
-            const double distance = hypot(dx, dy);
+            const double distance = vectorLength(dx, dy);
 
 
             if (distance == 0.0) {
@@ -205,8 +215,8 @@ double PlanetSystem::encounterStepLimit() const {
         for (size_t j = i + 1; j < planets.size(); ++j) {
             const auto& a = planets[i];
             const auto& b = planets[j];
-            const double distance = hypot(b.getX() - a.getX(), b.getY() - a.getY());
-            const double speed = hypot(b.getXVelocity() - a.getXVelocity(),
+            const double distance = vectorLength(b.getX() - a.getX(), b.getY() - a.getY());
+            const double speed = vectorLength(b.getXVelocity() - a.getXVelocity(),
                 b.getYVelocity() - a.getYVelocity());
             // Resolve both gravitational curvature and fast flybys. Using
             // separation rather than the surface gap avoids vanishing steps

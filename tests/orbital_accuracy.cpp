@@ -170,6 +170,37 @@ void checkExtremeGravityScales() {
     }
 }
 
+void checkLargeSceneForces() {
+    // Stationary bodies move by less than one coordinate ULP in one second,
+    // so an independent hypot-based sum gives the expected final velocities.
+    std::vector<Planet> bodies;
+    for (int i = 0; i < 512; ++i) {
+        bodies.emplace_back(1e12 + (i % 32) * 1e9, 1e12 + (i / 32) * 1e9,
+            0, 0, 1000, 1e12 + (i % 7) * 1e11);
+    }
+    PlanetSystem system;
+    system.setBodies(bodies);
+    require(system.update(1).empty(), "Sparse large scene spuriously merged");
+    for (std::size_t i = 0; i < bodies.size(); ++i) {
+        double ax = 0, ay = 0;
+        for (std::size_t j = 0; j < bodies.size(); ++j) {
+            if (i == j) continue;
+            const double dx = bodies[j].getX() - bodies[i].getX();
+            const double dy = bodies[j].getY() - bodies[i].getY();
+            const double distance = std::hypot(dx, dy);
+            const double acceleration = G / distance / distance * bodies[j].getMass();
+            ax += acceleration * (dx / distance);
+            ay += acceleration * (dy / distance);
+        }
+        const auto& actual = system.getBodies()[i];
+        require(actual.getX() == bodies[i].getX() && actual.getY() == bodies[i].getY(),
+            "Force reference assumes stationary coordinates");
+        require(std::hypot(actual.getXVelocity() - ax, actual.getYVelocity() - ay) /
+            std::hypot(ax, ay) < 1e-12,
+            "Large-scene acceleration differs from direct Newtonian reference");
+    }
+}
+
 int main() {
 
 
@@ -177,6 +208,7 @@ int main() {
         checkAccelerationCache();
         checkCloseEncounters();
         checkExtremeGravityScales();
+        checkLargeSceneForces();
 
         Planet body(0, 0, 2, -3, 1, 1);
         body.setAcceleration(4, -2);
