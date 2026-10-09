@@ -239,16 +239,18 @@ int main() {
             "Coincident point-mass energy was reported as defined");
 
         PerformanceStats stats;
-        stats.add({250, 2, 4, 6, 8});
+        stats.add({250, 2, 4, 6, 8, 25});
         require(stats.fps == 0, "Performance averages published before window completed");
-        stats.add({250, 4, 6, 8, 10});
+        stats.add({250, 4, 6, 8, 10, 35});
         require(stats.fps == 4 && stats.average.frameMs == 250 &&
             stats.average.physicsMs == 3 && stats.average.gridMs == 5 &&
-            stats.average.trailsMs == 7 && stats.average.previewMs == 9,
+            stats.average.trailsMs == 7 && stats.average.previewMs == 9 && stats.average.renderMs == 30,
             "Performance averages or FPS incorrect");
-        stats.add({500, 1, 0, 0, 0});
+        stats.add({500, 1, 0, 0, 0, 2});
         require(stats.fps == 2 && stats.average.physicsMs == 1 && stats.average.gridMs == 0,
             "Performance window retained previous samples");
+        require(stats.average.renderMs == 2,
+            "Render timer retained samples from the previous averaging window");
         std::cout << "Speed, pause, reset, trail, selection and performance checks passed.\n";
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';

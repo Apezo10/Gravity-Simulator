@@ -5,6 +5,7 @@
 // CPU elapsed times include submission to SFML, not GPU execution time.
 struct PerformanceSample {
     double frameMs = 0, physicsMs = 0, gridMs = 0, trailsMs = 0, previewMs = 0;
+    double renderMs = 0;
 };
 
 class PerformanceStats {
@@ -19,11 +20,13 @@ public:
         total.gridMs += sample.gridMs;
         total.trailsMs += sample.trailsMs;
         total.previewMs += sample.previewMs;
+        total.renderMs += sample.renderMs;
         ++frames;
         if (total.frameMs < 500) return;
         const double count = static_cast<double>(frames);
         average = {total.frameMs / count, total.physicsMs / count,
-            total.gridMs / count, total.trailsMs / count, total.previewMs / count};
+            total.gridMs / count, total.trailsMs / count, total.previewMs / count,
+            total.renderMs / count};
         fps = 1000 * count / total.frameMs;
         total = {};
         frames = 0;

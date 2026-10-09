@@ -119,9 +119,9 @@ namespace {
             if (session.showPerformance) {
                 const auto& p = performance.average;
                 snprintf(row, sizeof(row), "%.1f FPS | Frame: %.2f ms (0.5 s average)\n"
-                    "CPU ms: Physics %.3f | Grid %.3f\n"
-                    "Trails %.3f | Preview %.3f\n",
-                    performance.fps, p.frameMs, p.physicsMs, p.gridMs, p.trailsMs, p.previewMs);
+                    "CPU ms: Physics %.3f | Render submission %.3f\n"
+                    "Render breakdown: Grid %.3f | Trails %.3f | Preview %.3f\n",
+                    performance.fps, p.frameMs, p.physicsMs, p.renderMs, p.gridMs, p.trailsMs, p.previewMs);
                 contents += row;
             }
 
@@ -474,6 +474,7 @@ struct Renderer::Impl {
 
     void draw(sf::RenderWindow& window, const SimulationSession& session, const Camera& camera,
         double frameMs, double physicsMs) {
+        const auto renderStart = std::chrono::steady_clock::now();
         const auto& bodies = session.system.getBodies();
         PerformanceSample sample;
         sample.frameMs = frameMs;
@@ -481,11 +482,16 @@ struct Renderer::Impl {
         sample.gridMs = measureMilliseconds([&] { drawGrid(window, bodies, camera); });
         sample.trailsMs = measureMilliseconds([&] { drawTrails(window, bodies, session.trails, camera); });
         sample.previewMs = measureMilliseconds([&] { drawPreview(window, session, camera); });
-        performance.add(sample);
         drawBodies(window, bodies, camera);
         drawSelection(window, session, camera);
         drawLaunch(window, session, camera);
         statusDisplay.draw(window, session, performance);
+        // Include markers and HUD (including accuracy calculations), which
+        // are absent from the component timers. Presentation and frame-cap
+        // waiting happen in main, outside this render-submission measurement.
+        sample.renderMs = std::chrono::duration<double, std::milli>(
+            std::chrono::steady_clock::now() - renderStart).count();
+        performance.add(sample);
     }
 };
 Renderer::Renderer(const sf::Font& font) : impl(std::make_unique<Impl>(font)) {}
