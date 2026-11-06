@@ -182,6 +182,34 @@ int main() {
             require(std::abs(camera.zoom / fittedZoom - 1.25) < 1e-12,
                 "Manual zoom jumped after fitting a distant system");
 
+            camera.reset();
+            const sf::Vector2f cursor{200, 450};
+            const auto anchored = camera.toWorld(cursor);
+            for (int i = 0; i < 100; ++i) camera.scroll(-100, cursor);
+            require(camera.zoom == 1e-6 && std::isfinite(camera.x) && std::isfinite(camera.y),
+                "Repeated zoom-out exceeded safe limits");
+            const auto atLimit = camera.toWorld(cursor);
+            require(std::hypot(atLimit.x - anchored.x, atLimit.y - anchored.y) < 1,
+                "Zoom limit moved the world point under the cursor");
+            camera.scroll(1, cursor);
+            require(camera.zoom > 1e-6, "Camera cannot zoom back in from lower limit");
+            const Camera beforeInvalid = camera;
+            camera.scroll(std::numeric_limits<float>::quiet_NaN(), cursor);
+            camera.scroll(1, {std::numeric_limits<float>::infinity(), 0});
+            require(camera.zoom == beforeInvalid.zoom && camera.x == beforeInvalid.x &&
+                    camera.y == beforeInvalid.y, "Invalid scroll input changed camera");
+
+            camera.zoom = 1e-298;
+            camera.x = camera.y = 0;
+            const float huge = std::numeric_limits<float>::max();
+            camera.scroll(1, {huge, 0});
+            require(camera.zoom == 1e-298 && camera.x == 0 && camera.y == 0,
+                "Overflowing scroll partially changed camera");
+            camera.lastMouse = {0, 0};
+            camera.drag({huge, 0});
+            require(camera.x == 0 && camera.y == 0 && camera.lastMouse == sf::Vector2f(0, 0),
+                "Overflowing drag changed camera");
+
             std::cout << "Grid cache invalidation and vertex equivalence passed.\n";
         } catch (const std::exception& error) {
             std::cerr << error.what() << '\n';

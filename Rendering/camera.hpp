@@ -79,18 +79,28 @@ struct Camera {
     }
 
     void drag(sf::Vector2f mouse) {
-        x -= (mouse.x - lastMouse.x) * SCALE / zoom;
-        y += (mouse.y - lastMouse.y) * SCALE / zoom;
+        const double nextX = x - (mouse.x - lastMouse.x) * SCALE / zoom;
+        const double nextY = y + (mouse.y - lastMouse.y) * SCALE / zoom;
+        if (!std::isfinite(nextX) || !std::isfinite(nextY)) return;
+        x = nextX;
+        y = nextY;
         lastMouse = mouse;
     }
 
     void scroll(float delta, sf::Vector2f mouse) {
-        double oldScale = SCALE / zoom;
-        zoom = std::clamp(zoom * std::pow(1.25, delta), 1.0e-300, 10000.0);
-        double newScale = SCALE / zoom;
+        if (!std::isfinite(delta) || !std::isfinite(mouse.x) || !std::isfinite(mouse.y)) return;
+        // Preserve smaller scales created by fitBodies without allowing further zoom-out.
+        const double minimumZoom = std::min(1.0e-6, zoom);
+        const double nextZoom = std::clamp(zoom * std::pow(1.25, delta), minimumZoom, 10000.0);
+        const double oldScale = SCALE / zoom;
+        const double newScale = SCALE / nextZoom;
 
         // Keep the world point under the cursor stationary while zooming.
-        x += (mouse.x - viewport.x * 0.5) * (oldScale - newScale);
-        y -= (mouse.y - viewport.y * 0.5) * (oldScale - newScale);
+        const double nextX = x + (mouse.x - viewport.x * 0.5) * (oldScale - newScale);
+        const double nextY = y - (mouse.y - viewport.y * 0.5) * (oldScale - newScale);
+        if (!std::isfinite(nextZoom) || !std::isfinite(nextX) || !std::isfinite(nextY)) return;
+        zoom = nextZoom;
+        x = nextX;
+        y = nextY;
     }
 };
