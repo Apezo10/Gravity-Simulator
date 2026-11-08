@@ -211,7 +211,7 @@ int main() {
 
     // Load the font before constructing the renderer that uses it.
     sf::RenderWindow window(sf::VideoMode({800, 600}), "Gravity Sim");
-    window.setFramerateLimit(60);
+    window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
     sf::Font font;
 
