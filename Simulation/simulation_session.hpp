@@ -86,6 +86,18 @@ public:
     std::optional<std::size_t> selected;
     double elapsedSeconds = 0;
     std::optional<AsteroidLaunch> launch;
+    std::string fileStatus;
+
+    // Loaded bodies become the reset point; rebuild transient state and caches.
+    void restore(const std::vector<Planet>& bodies, double elapsed, int quarters,
+        double mass, double radius) {
+        initialBodies = bodies;
+        reset();
+        elapsedSeconds = elapsed;
+        speedQuarters = quarters;
+        setLaunchProperties(mass, radius);
+        paused = true;
+    }
 
     explicit SimulationSession(const PlanetSystem& initial) : initialBodies(initial.getBodies()) {
         reset();

@@ -31,6 +31,7 @@ class Planet {
     std::string name;
 
 public:
+    const std::string& storedName() const { return name; }
     Planet() = default;
 
     Planet(double x, double y, double vx, double vy, double r, double m,

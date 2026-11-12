@@ -14,19 +14,34 @@ FetchContent_Declare(SFML
 )
 FetchContent_MakeAvailable(SFML)
 
+set(JSON_BuildTests OFF CACHE BOOL "Build JSON tests")
+FetchContent_Declare(nlohmann_json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
+    URL_HASH SHA256=d6c65aca6b1ed68e7a182f4757257b107ae403032760ed6ef121c9d55e81757d
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
 add_library(simulation STATIC Simulation/planet_system.cpp)
 target_compile_features(simulation PUBLIC cxx_std_17)
 target_include_directories(simulation PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Simulation" "${CMAKE_CURRENT_SOURCE_DIR}/Rendering")
+
+add_library(simulation_save STATIC Simulation/simulation_save.cpp)
+target_link_libraries(simulation_save PUBLIC simulation PRIVATE nlohmann_json::nlohmann_json)
 
 add_library(simulation_setup STATIC Simulation/setup.cpp)
 target_link_libraries(simulation_setup PUBLIC simulation)
 
 add_executable(vectors main.cpp Rendering/renderer.cpp Rendering/setup_menu.cpp)
-target_link_libraries(vectors PRIVATE simulation_setup SFML::Graphics)
+target_link_libraries(vectors PRIVATE simulation_setup simulation_save SFML::Graphics)
 target_compile_definitions(vectors PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/Rendering/tuffy.ttf")
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(simulation_save_tests tests/simulation_save.cpp)
+    target_link_libraries(simulation_save_tests PRIVATE simulation_save)
+    add_test(NAME simulation_save COMMAND simulation_save_tests)
+    set_tests_properties(simulation_save PROPERTIES TIMEOUT 15)
     add_executable(render_cache_tests tests/render_cache.cpp)
     target_link_libraries(render_cache_tests PRIVATE simulation SFML::Graphics)
     target_compile_definitions(render_cache_tests PRIVATE SIM_FONT_PATH="${CMAKE_CURRENT_SOURCE_DIR}/Rendering/tuffy.ttf")

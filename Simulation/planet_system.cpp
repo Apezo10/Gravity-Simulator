@@ -292,8 +292,13 @@ void PlanetSystem::updateStep(double dt, vector<pair<size_t, size_t>>& merges) {
 void PlanetSystem::addAsteroid(double x, double y, double vx, double vy,
     double radius, double mass) {
 
-    asteroidCount++;
-    string name = "Asteroid " + to_string(asteroidCount);
+    // Loaded scenes can already contain names from an earlier session.
+    string name;
+    do {
+        name = "Asteroid " + to_string(++asteroidCount);
+    } while (any_of(planets.begin(), planets.end(), [&](const Planet& body) {
+        return body.storedName() == name;
+    }));
     BodyColor color(255, 165, 0);
 
     // The existing drawing code keeps small bodies visible at a 3-pixel radius.

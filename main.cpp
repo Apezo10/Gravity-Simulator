@@ -1,6 +1,7 @@
 #include "renderer.hpp"
 #include "setup_menu.hpp"
 #include "simulation_timing.hpp"
+#include "simulation_save.hpp"
 #include <iostream>
 #include <array>
 #include "performance_stats.hpp"
@@ -36,6 +37,24 @@ namespace {
 
 
         switch (key) {
+            case sf::Keyboard::Key::F5: {
+                std::string error;
+                session.fileStatus = saveSimulation(session, "simulation.json", error)
+                    ? "Saved simulation.json" : "Save failed: " + error;
+                frameClock.restart();
+                break;
+            }
+            case sf::Keyboard::Key::F9: {
+                std::string error;
+                if (loadSimulation(session, "simulation.json", error)) {
+                    camera.reset();
+                    camera.dragging = false;
+                    camera.fitBodies(session.system.getBodies());
+                    session.fileStatus = "Loaded simulation.json (paused)";
+                } else session.fileStatus = "Load failed: " + error;
+                frameClock.restart();
+                break;
+            }
             case sf::Keyboard::Key::Home:
             if (camera.fitBodies(session.system.getBodies())) {
                 session.following = false;
