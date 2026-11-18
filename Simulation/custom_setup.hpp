@@ -1,5 +1,6 @@
 #pragma once
 #include "planet_system.hpp"
+#include "input_limits.hpp"
 #include <array>
 #include <cmath>
 #include <sstream>
@@ -25,11 +26,9 @@ struct CustomSetup {
         std::array<double, 6> values{};
         for (std::size_t i = 0; i < fields.size(); ++i) {
             std::istringstream input(fields[i]);
-            if (!(input >> values[i]) || !std::isfinite(values[i]) ||
-                (i >= 4 && values[i] <= 0)) {
+            if (!(input >> values[i]) || !InputLimits::valid(i, values[i])) {
                 activeField = i;
-                error = i >= 4 ? "Radius and mass must be positive finite numbers."
-                               : "Enter a finite number in each position and velocity field.";
+                error = InputLimits::error(i);
                 return false;
             }
             input >> std::ws;

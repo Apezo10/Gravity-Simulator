@@ -47,7 +47,7 @@ int main() {
             const std::array<std::string, 6> valid = {
                 "-1.5e11", "0", "0", "2.98e4", "6.371e6", "5.972e24"};
             for (std::size_t field = 0; field < valid.size(); ++field) {
-                for (const std::string bad : {"", "abc", "12junk", "1 2", "nan", "inf", "1e999"}) {
+                for (const std::string bad : {"", "abc", "12junk", "1 2", "nan", "inf", "1e999", "1e308", "-1e308"}) {
                     draft.fields = valid;
                     draft.fields[field] = bad;
                     require(!draft.addBody(), "Invalid GUI field accepted");
@@ -56,7 +56,7 @@ int main() {
                 }
             }
             for (std::size_t field : {4u, 5u}) {
-                for (const std::string bad : {"0", "-1"}) {
+                for (const std::string bad : {"0", "-1", "1e-300"}) {
                     draft.fields = valid;
                     draft.fields[field] = bad;
                     require(!draft.addBody(), "Nonpositive GUI radius/mass accepted");
@@ -76,6 +76,35 @@ int main() {
             draft.bodies.resize(1000);
             draft.fields = valid;
             require(!draft.addBody(), "GUI body limit exceeded");
+        }
+
+        // Inclusive bounds and adjacent rejected values share one policy across UIs.
+        const double lower[] = {-InputLimits::maxPosition, -InputLimits::maxPosition,
+            -InputLimits::maxVelocity, -InputLimits::maxVelocity,
+            InputLimits::minRadius, InputLimits::minMass};
+        const double upper[] = {InputLimits::maxPosition, InputLimits::maxPosition,
+            InputLimits::maxVelocity, InputLimits::maxVelocity,
+            InputLimits::maxRadius, InputLimits::maxMass};
+        for (size_t field = 0; field < 6; ++field) {
+            require(InputLimits::valid(field, lower[field]) && InputLimits::valid(field, upper[field]),
+                "Supported boundary rejected");
+            require(!InputLimits::valid(field, nextafter(lower[field], -INFINITY)) &&
+                !InputLimits::valid(field, nextafter(upper[field], INFINITY)),
+                "Out-of-range boundary accepted");
+        }
+        {
+            CustomSetup draft;
+            PlanetSystem system;
+            draft.fields = {"0", "0", "1e308", "0", "1", "1"};
+            require(!draft.finish(system) && system.getBodies().empty(),
+                "Overflowing velocity published to simulation");
+            draft.fields = {"1e20", "-1e20", "1e8", "-1e8", "1e-3", "1e40"};
+            require(draft.finish(system), "Supported extreme setup rejected");
+            system.update(PHYSICS_STEP_SECONDS);
+            const auto& body = system.getBodies().front();
+            require(isfinite(body.getX()) && isfinite(body.getY()) &&
+                isfinite(body.getXVelocity()) && isfinite(body.getYVelocity()),
+                "Supported extreme setup became nonfinite");
         }
 
         const string body = "-1.5e11\n0\n0\n2.98e4\n6.371e6\n5.972e24\n";
@@ -100,11 +129,11 @@ int main() {
 
 
                 if (i == field) {
-                    input += "\nabc\n12junk\n1 2\nnan\ninf\n-inf\n1e999\n";
+                    input += "\nabc\n12junk\n1 2\nnan\ninf\n-inf\n1e999\n1e308\n-1e308\n";
 
 
                     if (i >= 4) {
-                        input += "0\n-1\n";
+                        input += "0\n-1\n1e-300\n";
                     }
                 }
 

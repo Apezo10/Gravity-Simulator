@@ -1,4 +1,5 @@
 #include "setup.hpp"
+#include "input_limits.hpp"
 #include <cmath>
 #include <iostream>
 #include <sstream>
@@ -41,12 +42,6 @@ namespace {
     }
 
     bool getInfo(Planet& body) {
-        const auto finite = [](double v) {
-            return isfinite(v);
-        };
-        const auto positive = [](double v) {
-            return isfinite(v) && v > 0;
-        };
         double xPos{
         }, yPos{
         }, xVel{
@@ -56,14 +51,14 @@ namespace {
         };
 
 
-        if (!readNumber("Initial X position (m): ", xPos, finite, "Enter a finite number.") ||
-            !readNumber("Initial Y position (m): ", yPos, finite, "Enter a finite number.") ||
-            !readNumber("Initial X velocity (m/s): ", xVel, finite, "Enter a finite number.") ||
-            !readNumber("Initial Y velocity (m/s): ", yVel, finite, "Enter a finite number.") ||
-            !readNumber("Planet radius (m): ", radius, positive, "Enter a finite number greater than zero.") ||
-            !readNumber("Planet mass (kg): ", mass, positive, "Enter a finite number greater than zero."))
-        {
-            return false;
+        double* values[] = {&xPos, &yPos, &xVel, &yVel, &radius, &mass};
+        const char* prompts[] = {"Initial X position (m): ", "Initial Y position (m): ",
+            "Initial X velocity (m/s): ", "Initial Y velocity (m/s): ",
+            "Planet radius (m): ", "Planet mass (kg): "};
+        for (std::size_t field = 0; field < 6; ++field) {
+            if (!readNumber(prompts[field], *values[field],
+                [field](double value) { return InputLimits::valid(field, value); },
+                InputLimits::error(field))) return false;
         }
 
         body = Planet(xPos, yPos, xVel, yVel, radius, mass);
